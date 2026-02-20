@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adam Spain | Personal Projects</title>
+  <meta name="description" content="Personal software portfolio for Adam Spain featuring selected engineering projects and demos." />
+  <meta name="theme-color" content="#031733" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Adam Spain | Personal Projects" />
+  <meta property="og:description" content="Personal software portfolio for Adam Spain featuring selected engineering projects and demos." />
+  <meta property="og:image" content="images/git-sweaty-overview.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=20260223-3" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <div id="moon" aria-hidden="true">
+    <div class="moon-face">
+      <span class="track-eye moon-eye moon-eye-left"><span class="track-pupil moon-pupil"></span></span>
+      <span class="track-eye moon-eye moon-eye-right"><span class="track-pupil moon-pupil"></span></span>
+    </div>
+  </div>
+
+  <main class="content" aria-label="Portfolio">
+    <div class="header-stack">
+      <h1 class="name-sign">Adam Spain&apos;s</h1>
+      <h2 class="projects-sign">Personal Projects</h2>
+    </div>
+    <section class="cards" aria-label="Featured projects">
+      <article class="card">
+        <h2 class="project-heading">
+          <a class="title-link" href="https://github.com/aspain/git-sweaty" target="_blank" rel="noreferrer">git-sweaty</a>
+          <a
+            class="repo-stars"
+            href="https://github.com/aspain/git-sweaty"
+            target="_blank"
+            rel="noreferrer"
+            data-repo="aspain/git-sweaty"
+            aria-label="Open git-sweaty repository on GitHub"
+          >
+            <svg class="repo-star-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.28l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.79L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.192L.819 6.375a.75.75 0 0 1 .416-1.28l4.21-.612L7.327.668A.75.75 0 0 1 8 .25Z"/>
+            </svg>
+            <span class="repo-star-count" data-star-count aria-label="Repository star count">—</span>
+          </a>
+        </h2>
+        <p>Turn your Strava and Garmin activities into interactive GitHub-style contribution graphs.</p>
+        <div
+          class="carousel"
+          data-carousel
+          data-images="images/git-sweaty-overview.png|images/git-sweaty-tooltip.png|images/git-sweaty-metrics.png"
+        >
+          <button class="carousel-btn carousel-prev" type="button" aria-label="Previous image">‹</button>
+          <a class="thumb-link carousel-link" href="images/git-sweaty-overview.png">
+            <img
+              class="card-thumb carousel-image"
+              src="images/git-sweaty-overview.png"
+              alt="git-sweaty preview"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <button class="carousel-btn carousel-next" type="button" aria-label="Next image">›</button>
+          <span class="carousel-indicator" aria-live="polite">1 / 3</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn" href="https://github.com/aspain/git-sweaty" target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2 class="project-heading">
+          <a class="title-link" href="https://github.com/aspain/spainify" target="_blank" rel="noreferrer">spainify</a>
+          <a
+            class="repo-stars"
+            href="https://github.com/aspain/spainify"
+            target="_blank"
+            rel="noreferrer"
+            data-repo="aspain/spainify"
+            aria-label="Open spainify repository on GitHub"
+          >
+            <svg class="repo-star-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.28l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.79L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.192L.819 6.375a.75.75 0 0 1 .416-1.28l4.21-.612L7.327.668A.75.75 0 0 1 8 .25Z"/>
+            </svg>
+            <span class="repo-star-count" data-star-count aria-label="Repository star count">—</span>
+          </a>
+        </h2>
+        <p>A home media hub for Spotify/Sonos now-playing display, Sonos controls, local weather at a glance, and more.</p>
+        <div
+          class="carousel"
+          data-carousel
+          data-images="images/spainify-main-view.jpeg|images/spainify-now-playing.jpeg|images/spainify-weather-dashboard.jpeg"
+          data-positions="center center|center top|center top"
+        >
+          <button class="carousel-btn carousel-prev" type="button" aria-label="Previous image">‹</button>
+          <a class="thumb-link carousel-link" href="images/spainify-main-view.jpeg">
+            <img
+              class="card-thumb carousel-image"
+              src="images/spainify-main-view.jpeg"
+              alt="spainify preview"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <button class="carousel-btn carousel-next" type="button" aria-label="Next image">›</button>
+          <span class="carousel-indicator" aria-live="polite">1 / 3</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn" href="https://github.com/aspain/spainify" target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="corner-links" aria-label="Profile and contact links">
+    <a
+      class="corner-link corner-linkedin"
+      href="https://www.linkedin.com/in/adamrspain/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open LinkedIn profile"
+    >
+      <img src="images/linkedin-logo.png" alt="LinkedIn" />
+    </a>
+    <a
+      class="corner-link corner-github"
+      href="https://github.com/aspain/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open GitHub profile"
+    >
+      <img src="images/github-logo.png" alt="GitHub" />
+    </a>
+    <a
+      class="corner-link corner-email"
+      href="mailto:adam.r.spain@gmail.com"
+      aria-label="Send email to adam.r.spain@gmail.com"
+    >
+      <img src="images/email-icon.svg" alt="Email" />
+    </a>
+  </div>
+
+  <footer class="site-copyright" aria-label="Copyright notice">
+    &copy; <span id="copyright-year"></span> Adam Spain
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true" tabindex="-1">
+    <button class="lightbox-close" type="button" aria-label="Close image preview">Close</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous lightbox image">‹</button>
+    <img class="lightbox-image" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next lightbox image">›</button>
+    <span class="lightbox-indicator" aria-live="polite"></span>
+  </div>
+
+  <div class="vignette" aria-hidden="true"></div>
+  <script src="script.js?v=20260223-2"></script>
+</body>
+</html>
