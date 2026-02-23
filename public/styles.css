@@ -264,7 +264,7 @@ body.lightbox-open{
 }
 
 .carousel .thumb-link{
-  margin: 0;
+  margin: 0 auto;
 }
 
 .carousel-btn{
