@@ -397,6 +397,9 @@
       link.href = src;
       image.src = src;
       image.style.objectPosition = positions[index] || 'center center';
+      image.style.transition = '';
+      image.style.transform = '';
+      image.style.opacity = '';
       if (indicator) indicator.textContent = `${index + 1} / ${total}`;
     }
 
@@ -648,6 +651,7 @@
     if (!lightboxImage || !(lightboxImage instanceof HTMLElement)) return;
     lightboxImage.style.transition = '';
     lightboxImage.style.transform = '';
+    lightboxImage.style.opacity = '';
     if (lightboxPeekImage instanceof HTMLElement) {
       lightboxPeekImage.style.transition = '';
       lightboxPeekImage.style.transform = '';
