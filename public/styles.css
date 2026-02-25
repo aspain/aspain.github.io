@@ -324,6 +324,11 @@ body.lightbox-open{
   box-shadow: 0 6px 14px rgba(0,0,0,0.24);
 }
 
+.carousel-link,
+.carousel-image{
+  touch-action: pan-y;
+}
+
 @media (hover: hover){
   .carousel-btn:hover{
     background: rgba(18, 36, 70, 0.88);
@@ -454,6 +459,7 @@ body.lightbox-open{
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 20px 48px rgba(0,0,0,0.52);
+  touch-action: none;
 }
 
 .lightbox-close{

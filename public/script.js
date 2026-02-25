@@ -309,6 +309,10 @@
   window.addEventListener('mousemove', (e) => updateTrackEyes(e.clientX, e.clientY), { passive: true });
   window.addEventListener('mouseleave', resetTrackEyes, { passive: true });
 
+  const CAROUSEL_SWIPE_THRESHOLD = 44;
+  const CAROUSEL_SWIPE_MAX_VERTICAL = 42;
+  const LIGHTBOX_CLOSE_SWIPE_THRESHOLD = 96;
+
   // Project carousels
   const carouselControllers = new Map();
   const carousels = Array.from(document.querySelectorAll('[data-carousel]'));
@@ -353,6 +357,23 @@
       return index;
     }
 
+    const swipeState = {
+      active: false,
+      startX: 0,
+      startY: 0,
+      lastX: 0,
+      lastY: 0
+    };
+
+    function handleCarouselSwipe(deltaX, deltaY) {
+      if (Math.abs(deltaX) < CAROUSEL_SWIPE_THRESHOLD) return false;
+      if (Math.abs(deltaY) > CAROUSEL_SWIPE_MAX_VERTICAL) return false;
+      if (Math.abs(deltaX) <= Math.abs(deltaY) * 1.1) return false;
+      rotate(deltaX < 0 ? 1 : -1);
+      carousel.dataset.suppressLightboxUntil = String(Date.now() + 500);
+      return true;
+    }
+
     if (total === 1) {
       if (prevButton) prevButton.style.display = 'none';
       if (nextButton) nextButton.style.display = 'none';
@@ -370,6 +391,41 @@
           rotate(1);
         });
       }
+    }
+
+    if (total > 1 && link instanceof HTMLElement) {
+      link.addEventListener('touchstart', (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        swipeState.active = true;
+        swipeState.startX = touch.clientX;
+        swipeState.startY = touch.clientY;
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+      }, { passive: true });
+
+      link.addEventListener('touchmove', (event) => {
+        if (!swipeState.active) return;
+        const touch = event.touches[0];
+        if (!touch) return;
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+      }, { passive: true });
+
+      link.addEventListener('touchend', (event) => {
+        if (!swipeState.active) return;
+        const touch = event.changedTouches[0];
+        const endX = touch ? touch.clientX : swipeState.lastX;
+        const endY = touch ? touch.clientY : swipeState.lastY;
+        const deltaX = endX - swipeState.startX;
+        const deltaY = endY - swipeState.startY;
+        swipeState.active = false;
+        handleCarouselSwipe(deltaX, deltaY);
+      }, { passive: true });
+
+      link.addEventListener('touchcancel', () => {
+        swipeState.active = false;
+      }, { passive: true });
     }
 
     renderCarousel();
@@ -397,8 +453,19 @@
     index: 0,
     src: '',
     alt: '',
-    previouslyFocused: null
+    previouslyFocused: null,
+    touchActive: false,
+    touchStartX: 0,
+    touchStartY: 0,
+    touchLastX: 0,
+    touchLastY: 0
   };
+
+  function clearLightboxSwipeStyles() {
+    if (!lightboxImage || !(lightboxImage instanceof HTMLElement)) return;
+    lightboxImage.style.transition = '';
+    lightboxImage.style.transform = '';
+  }
 
   function getLightboxFocusableElements() {
     if (!lightbox) return [];
@@ -461,12 +528,18 @@
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
+    clearLightboxSwipeStyles();
     lightboxImage.removeAttribute('src');
     lightboxImage.removeAttribute('alt');
     lightboxState.controller = null;
     lightboxState.index = 0;
     lightboxState.src = '';
     lightboxState.alt = '';
+    lightboxState.touchActive = false;
+    lightboxState.touchStartX = 0;
+    lightboxState.touchStartY = 0;
+    lightboxState.touchLastX = 0;
+    lightboxState.touchLastY = 0;
     if (lightboxState.previouslyFocused && typeof lightboxState.previouslyFocused.focus === 'function') {
       lightboxState.previouslyFocused.focus();
     }
@@ -493,9 +566,17 @@
     const thumbLink = e.target.closest('.thumb-link');
     if (!thumbLink || !(thumbLink instanceof HTMLAnchorElement)) return;
 
+    const carousel = thumbLink.closest('[data-carousel]');
+    if (carousel) {
+      const suppressUntil = Number(carousel.getAttribute('data-suppress-lightbox-until') || 0);
+      if (Number.isFinite(suppressUntil) && suppressUntil > Date.now()) {
+        e.preventDefault();
+        return;
+      }
+    }
+
     e.preventDefault();
     const preview = thumbLink.querySelector('img');
-    const carousel = thumbLink.closest('[data-carousel]');
     const controller = carousel ? carouselControllers.get(carousel) : null;
     const currentIndex = controller ? controller.getIndex() : 0;
     openLightbox(thumbLink.href, preview ? preview.alt : '', controller || null, currentIndex);
@@ -523,6 +604,68 @@
       e.preventDefault();
       stepLightbox(1);
     });
+  }
+
+  if (lightbox && lightboxImage instanceof HTMLElement) {
+    lightboxImage.addEventListener('touchstart', (event) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      lightboxState.touchActive = true;
+      lightboxState.touchStartX = touch.clientX;
+      lightboxState.touchStartY = touch.clientY;
+      lightboxState.touchLastX = touch.clientX;
+      lightboxState.touchLastY = touch.clientY;
+      lightboxImage.style.transition = 'none';
+    }, { passive: true });
+
+    lightboxImage.addEventListener('touchmove', (event) => {
+      if (!lightboxState.touchActive) return;
+      const touch = event.touches[0];
+      if (!touch) return;
+      lightboxState.touchLastX = touch.clientX;
+      lightboxState.touchLastY = touch.clientY;
+      const deltaX = touch.clientX - lightboxState.touchStartX;
+      const deltaY = touch.clientY - lightboxState.touchStartY;
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.1) {
+        event.preventDefault();
+        const absY = Math.abs(deltaY);
+        const scale = Math.max(0.92, 1 - (absY / 1200));
+        lightboxImage.style.transform = `translate3d(0, ${deltaY}px, 0) scale(${scale.toFixed(3)})`;
+      }
+    }, { passive: false });
+
+    lightboxImage.addEventListener('touchend', (event) => {
+      if (!lightboxState.touchActive) return;
+      const touch = event.changedTouches[0];
+      const endX = touch ? touch.clientX : lightboxState.touchLastX;
+      const endY = touch ? touch.clientY : lightboxState.touchLastY;
+      const deltaX = endX - lightboxState.touchStartX;
+      const deltaY = endY - lightboxState.touchStartY;
+      lightboxState.touchActive = false;
+
+      const isCloseSwipe = (
+        Math.abs(deltaY) >= LIGHTBOX_CLOSE_SWIPE_THRESHOLD
+        && Math.abs(deltaY) > Math.abs(deltaX) * 1.1
+      );
+
+      if (isCloseSwipe) {
+        closeLightbox();
+        return;
+      }
+
+      lightboxImage.style.transition = 'transform 180ms ease';
+      lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      window.setTimeout(clearLightboxSwipeStyles, 220);
+    }, { passive: true });
+
+    lightboxImage.addEventListener('touchcancel', () => {
+      if (!lightboxState.touchActive) return;
+      lightboxState.touchActive = false;
+      lightboxImage.style.transition = 'transform 180ms ease';
+      lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      window.setTimeout(clearLightboxSwipeStyles, 220);
+    }, { passive: true });
   }
 
   window.addEventListener('keydown', (e) => {
