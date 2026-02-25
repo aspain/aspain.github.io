@@ -312,6 +312,8 @@
   const CAROUSEL_SWIPE_THRESHOLD = 44;
   const CAROUSEL_SWIPE_MAX_VERTICAL = 42;
   const LIGHTBOX_CLOSE_SWIPE_THRESHOLD = 96;
+  const SWIPE_DIRECTION_LOCK_PX = 10;
+  const LIGHTBOX_NAV_SWIPE_THRESHOLD = 56;
 
   // Project carousels
   const carouselControllers = new Map();
@@ -362,7 +364,8 @@
       startX: 0,
       startY: 0,
       lastX: 0,
-      lastY: 0
+      lastY: 0,
+      gesture: null
     };
 
     function handleCarouselSwipe(deltaX, deltaY) {
@@ -402,6 +405,7 @@
         swipeState.startY = touch.clientY;
         swipeState.lastX = touch.clientX;
         swipeState.lastY = touch.clientY;
+        swipeState.gesture = null;
       }, { passive: true });
 
       link.addEventListener('touchmove', (event) => {
@@ -410,7 +414,20 @@
         if (!touch) return;
         swipeState.lastX = touch.clientX;
         swipeState.lastY = touch.clientY;
-      }, { passive: true });
+
+        const deltaX = touch.clientX - swipeState.startX;
+        const deltaY = touch.clientY - swipeState.startY;
+
+        if (!swipeState.gesture) {
+          if (Math.abs(deltaX) < SWIPE_DIRECTION_LOCK_PX && Math.abs(deltaY) < SWIPE_DIRECTION_LOCK_PX) return;
+          swipeState.gesture = Math.abs(deltaX) > Math.abs(deltaY) * 1.1 ? 'horizontal' : 'vertical';
+        }
+
+        if (swipeState.gesture === 'horizontal') {
+          // Prevent page scroll while actively swiping carousel thumbnails.
+          event.preventDefault();
+        }
+      }, { passive: false });
 
       link.addEventListener('touchend', (event) => {
         if (!swipeState.active) return;
@@ -419,12 +436,15 @@
         const endY = touch ? touch.clientY : swipeState.lastY;
         const deltaX = endX - swipeState.startX;
         const deltaY = endY - swipeState.startY;
+        const isHorizontalGesture = swipeState.gesture === 'horizontal';
         swipeState.active = false;
-        handleCarouselSwipe(deltaX, deltaY);
+        swipeState.gesture = null;
+        if (isHorizontalGesture) handleCarouselSwipe(deltaX, deltaY);
       }, { passive: true });
 
       link.addEventListener('touchcancel', () => {
         swipeState.active = false;
+        swipeState.gesture = null;
       }, { passive: true });
     }
 
@@ -458,13 +478,23 @@
     touchStartX: 0,
     touchStartY: 0,
     touchLastX: 0,
-    touchLastY: 0
+    touchLastY: 0,
+    touchGesture: null
   };
 
   function clearLightboxSwipeStyles() {
     if (!lightboxImage || !(lightboxImage instanceof HTMLElement)) return;
     lightboxImage.style.transition = '';
     lightboxImage.style.transform = '';
+  }
+
+  function resetLightboxGestureState() {
+    lightboxState.touchActive = false;
+    lightboxState.touchStartX = 0;
+    lightboxState.touchStartY = 0;
+    lightboxState.touchLastX = 0;
+    lightboxState.touchLastY = 0;
+    lightboxState.touchGesture = null;
   }
 
   function getLightboxFocusableElements() {
@@ -535,11 +565,7 @@
     lightboxState.index = 0;
     lightboxState.src = '';
     lightboxState.alt = '';
-    lightboxState.touchActive = false;
-    lightboxState.touchStartX = 0;
-    lightboxState.touchStartY = 0;
-    lightboxState.touchLastX = 0;
-    lightboxState.touchLastY = 0;
+    resetLightboxGestureState();
     if (lightboxState.previouslyFocused && typeof lightboxState.previouslyFocused.focus === 'function') {
       lightboxState.previouslyFocused.focus();
     }
@@ -616,6 +642,7 @@
       lightboxState.touchStartY = touch.clientY;
       lightboxState.touchLastX = touch.clientX;
       lightboxState.touchLastY = touch.clientY;
+      lightboxState.touchGesture = null;
       lightboxImage.style.transition = 'none';
     }, { passive: true });
 
@@ -627,12 +654,23 @@
       lightboxState.touchLastY = touch.clientY;
       const deltaX = touch.clientX - lightboxState.touchStartX;
       const deltaY = touch.clientY - lightboxState.touchStartY;
-      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.1) {
-        event.preventDefault();
-        const absY = Math.abs(deltaY);
-        const scale = Math.max(0.92, 1 - (absY / 1200));
-        lightboxImage.style.transform = `translate3d(0, ${deltaY}px, 0) scale(${scale.toFixed(3)})`;
+
+      if (!lightboxState.touchGesture) {
+        if (Math.abs(deltaX) < SWIPE_DIRECTION_LOCK_PX && Math.abs(deltaY) < SWIPE_DIRECTION_LOCK_PX) return;
+        lightboxState.touchGesture = Math.abs(deltaX) > Math.abs(deltaY) * 1.1 ? 'horizontal' : 'vertical';
       }
+
+      if (lightboxState.touchGesture === 'horizontal') {
+        event.preventDefault();
+        const scale = Math.max(0.95, 1 - (Math.abs(deltaX) / 2400));
+        lightboxImage.style.transform = `translate3d(${deltaX}px, 0, 0) scale(${scale.toFixed(3)})`;
+        return;
+      }
+
+      event.preventDefault();
+      const absY = Math.abs(deltaY);
+      const scale = Math.max(0.92, 1 - (absY / 1200));
+      lightboxImage.style.transform = `translate3d(0, ${deltaY}px, 0) scale(${scale.toFixed(3)})`;
     }, { passive: false });
 
     lightboxImage.addEventListener('touchend', (event) => {
@@ -642,7 +680,19 @@
       const endY = touch ? touch.clientY : lightboxState.touchLastY;
       const deltaX = endX - lightboxState.touchStartX;
       const deltaY = endY - lightboxState.touchStartY;
-      lightboxState.touchActive = false;
+      const gesture = lightboxState.touchGesture;
+      resetLightboxGestureState();
+
+      if (gesture === 'horizontal') {
+        const hasCarousel = !!(lightboxState.controller && lightboxState.controller.total > 1);
+        if (hasCarousel && Math.abs(deltaX) >= LIGHTBOX_NAV_SWIPE_THRESHOLD) {
+          stepLightbox(deltaX < 0 ? 1 : -1);
+        }
+        lightboxImage.style.transition = 'transform 180ms ease';
+        lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        window.setTimeout(clearLightboxSwipeStyles, 220);
+        return;
+      }
 
       const isCloseSwipe = (
         Math.abs(deltaY) >= LIGHTBOX_CLOSE_SWIPE_THRESHOLD
@@ -661,7 +711,7 @@
 
     lightboxImage.addEventListener('touchcancel', () => {
       if (!lightboxState.touchActive) return;
-      lightboxState.touchActive = false;
+      resetLightboxGestureState();
       lightboxImage.style.transition = 'transform 180ms ease';
       lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
       window.setTimeout(clearLightboxSwipeStyles, 220);
