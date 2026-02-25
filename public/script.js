@@ -356,6 +356,7 @@
   const LIGHTBOX_NAV_SWIPE_THRESHOLD = 56;
   const CAROUSEL_SWIPE_OUT_MS = 150;
   const CAROUSEL_SWIPE_IN_MS = 180;
+  const LIGHTBOX_SWIPE_MS = 180;
 
   // Project carousels
   const carouselControllers = new Map();
@@ -377,6 +378,16 @@
     const nextButton = carousel.querySelector('.carousel-next');
     const indicator = carousel.querySelector('.carousel-indicator');
     if (!link || !image) continue;
+
+    const peekImage = document.createElement('img');
+    peekImage.className = 'card-thumb carousel-image carousel-peek-image';
+    peekImage.alt = '';
+    peekImage.decoding = 'async';
+    peekImage.loading = 'eager';
+    peekImage.draggable = false;
+    peekImage.hidden = true;
+    peekImage.setAttribute('aria-hidden', 'true');
+    link.append(peekImage);
 
     let index = 0;
     const total = images.length;
@@ -408,16 +419,60 @@
       lastX: 0,
       lastY: 0,
       gesture: null,
-      animating: false
+      animating: false,
+      previewIndex: -1
     };
+
+    function setCarouselPreviewImage(previewIndex) {
+      if (swipeState.previewIndex === previewIndex && !peekImage.hidden) return;
+      swipeState.previewIndex = previewIndex;
+      peekImage.src = images[previewIndex];
+      peekImage.style.objectPosition = positions[previewIndex] || 'center center';
+      peekImage.hidden = false;
+    }
+
+    function hideCarouselPreviewImage() {
+      swipeState.previewIndex = -1;
+      peekImage.hidden = true;
+      peekImage.style.transition = '';
+      peekImage.style.transform = '';
+      peekImage.style.opacity = '';
+    }
 
     function clearCarouselDragStyles() {
       image.style.transition = '';
       image.style.transform = '';
       image.style.opacity = '';
+      hideCarouselPreviewImage();
     }
 
-    function animateCarouselSnapBack() {
+    function applyCarouselDragPreview(deltaX) {
+      const width = link.clientWidth || image.clientWidth || 220;
+      const swipeSign = deltaX < 0 ? -1 : 1;
+      const direction = swipeSign < 0 ? 1 : -1;
+      const previewIndex = ((index + direction) % total + total) % total;
+      setCarouselPreviewImage(previewIndex);
+
+      const scale = Math.max(0.98, 1 - (Math.abs(deltaX) / 1800));
+      const opacity = Math.max(0.72, 1 - (Math.abs(deltaX) / 420));
+      image.style.transition = 'none';
+      image.style.transform = `translate3d(${deltaX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(3)})`;
+      image.style.opacity = opacity.toFixed(3);
+
+      const previewX = deltaX - (swipeSign * width);
+      peekImage.style.transition = 'none';
+      peekImage.style.transform = `translate3d(${previewX.toFixed(2)}px, 0, 0) scale(1)`;
+      peekImage.style.opacity = '0.98';
+    }
+
+    function animateCarouselSnapBack(deltaX = 0) {
+      const width = link.clientWidth || image.clientWidth || 220;
+      const swipeSign = deltaX < 0 ? -1 : 1;
+      if (!peekImage.hidden) {
+        peekImage.style.transition = `transform ${CAROUSEL_SWIPE_IN_MS}ms ease, opacity ${CAROUSEL_SWIPE_IN_MS}ms ease`;
+        peekImage.style.transform = `translate3d(${Math.round(-swipeSign * width)}px, 0, 0) scale(1)`;
+        peekImage.style.opacity = '0';
+      }
       image.style.transition = `transform ${CAROUSEL_SWIPE_IN_MS}ms ease, opacity ${CAROUSEL_SWIPE_IN_MS}ms ease`;
       image.style.transform = 'translate3d(0, 0, 0) scale(1)';
       image.style.opacity = '1';
@@ -430,32 +485,26 @@
       if (Math.abs(deltaY) > CAROUSEL_SWIPE_MAX_VERTICAL) return false;
       if (Math.abs(deltaX) <= Math.abs(deltaY) * 1.1) return false;
       const width = link.clientWidth || image.clientWidth || 220;
-      const travel = Math.max(90, Math.min(width * 0.62, 240));
       const swipeSign = deltaX < 0 ? -1 : 1;
+      const direction = swipeSign < 0 ? 1 : -1;
+
+      if (peekImage.hidden) {
+        setCarouselPreviewImage(((index + direction) % total + total) % total);
+      }
 
       swipeState.animating = true;
       image.style.transition = `transform ${CAROUSEL_SWIPE_OUT_MS}ms ease, opacity ${CAROUSEL_SWIPE_OUT_MS}ms ease`;
-      image.style.transform = `translate3d(${Math.round(swipeSign * travel)}px, 0, 0) scale(0.98)`;
+      image.style.transform = `translate3d(${Math.round(swipeSign * width)}px, 0, 0) scale(0.98)`;
       image.style.opacity = '0.58';
+      peekImage.style.transition = `transform ${CAROUSEL_SWIPE_OUT_MS}ms ease, opacity ${CAROUSEL_SWIPE_OUT_MS}ms ease`;
+      peekImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      peekImage.style.opacity = '1';
 
       window.setTimeout(() => {
-        rotate(deltaX < 0 ? 1 : -1);
-
-        image.style.transition = 'none';
-        image.style.transform = `translate3d(${Math.round(-swipeSign * travel * 0.34)}px, 0, 0) scale(0.985)`;
-        image.style.opacity = '0.72';
-        // Force style flush before animating the incoming frame.
-        void image.offsetWidth;
-
-        image.style.transition = `transform ${CAROUSEL_SWIPE_IN_MS}ms ease, opacity ${CAROUSEL_SWIPE_IN_MS}ms ease`;
-        image.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        image.style.opacity = '1';
-
-        window.setTimeout(() => {
-          swipeState.animating = false;
-          clearCarouselDragStyles();
-        }, CAROUSEL_SWIPE_IN_MS + 25);
-      }, CAROUSEL_SWIPE_OUT_MS);
+        rotate(direction);
+        swipeState.animating = false;
+        clearCarouselDragStyles();
+      }, CAROUSEL_SWIPE_OUT_MS + 10);
 
       carousel.dataset.suppressLightboxUntil = String(Date.now() + 500);
       return true;
@@ -511,12 +560,7 @@
         if (swipeState.gesture === 'horizontal') {
           // Prevent page scroll while actively swiping carousel thumbnails.
           event.preventDefault();
-          const dragX = deltaX * 0.96;
-          const scale = Math.max(0.98, 1 - (Math.abs(dragX) / 1800));
-          const opacity = Math.max(0.72, 1 - (Math.abs(dragX) / 420));
-          image.style.transition = 'none';
-          image.style.transform = `translate3d(${dragX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(3)})`;
-          image.style.opacity = opacity.toFixed(3);
+          applyCarouselDragPreview(deltaX * 0.96);
         }
       }, { passive: false });
 
@@ -538,7 +582,7 @@
         const didCommit = handleCarouselSwipe(deltaX, deltaY);
         if (!didCommit) {
           carousel.dataset.suppressLightboxUntil = String(Date.now() + 320);
-          animateCarouselSnapBack();
+          animateCarouselSnapBack(deltaX);
         }
       }, { passive: true });
 
@@ -546,7 +590,7 @@
         if (swipeState.animating) return;
         swipeState.active = false;
         swipeState.gesture = null;
-        animateCarouselSnapBack();
+        animateCarouselSnapBack(swipeState.lastX - swipeState.startX);
       }, { passive: true });
     }
 
@@ -569,6 +613,20 @@
   const lightboxPrev = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
   const lightboxNext = lightbox ? lightbox.querySelector('.lightbox-next') : null;
   const lightboxIndicator = lightbox ? lightbox.querySelector('.lightbox-indicator') : null;
+  const lightboxPeekImage = (lightbox && lightboxImage instanceof HTMLElement)
+    ? (() => {
+      const preview = document.createElement('img');
+      preview.className = 'lightbox-image lightbox-peek-image';
+      preview.alt = '';
+      preview.decoding = 'async';
+      preview.loading = 'eager';
+      preview.draggable = false;
+      preview.hidden = true;
+      preview.setAttribute('aria-hidden', 'true');
+      lightbox.append(preview);
+      return preview;
+    })()
+    : null;
 
   const lightboxState = {
     controller: null,
@@ -581,13 +639,22 @@
     touchStartY: 0,
     touchLastX: 0,
     touchLastY: 0,
-    touchGesture: null
+    touchGesture: null,
+    touchPreviewIndex: -1
   };
 
   function clearLightboxSwipeStyles() {
     if (!lightboxImage || !(lightboxImage instanceof HTMLElement)) return;
     lightboxImage.style.transition = '';
     lightboxImage.style.transform = '';
+    if (lightboxPeekImage instanceof HTMLElement) {
+      lightboxPeekImage.style.transition = '';
+      lightboxPeekImage.style.transform = '';
+      lightboxPeekImage.style.opacity = '';
+      lightboxPeekImage.hidden = true;
+      lightboxPeekImage.removeAttribute('src');
+      lightboxState.touchPreviewIndex = -1;
+    }
   }
 
   function resetLightboxGestureState() {
@@ -597,6 +664,49 @@
     lightboxState.touchLastX = 0;
     lightboxState.touchLastY = 0;
     lightboxState.touchGesture = null;
+    lightboxState.touchPreviewIndex = -1;
+  }
+
+  function setLightboxPreviewImage(previewIndex) {
+    if (!lightboxPeekImage || !lightboxState.controller) return;
+    if (lightboxState.touchPreviewIndex === previewIndex && !lightboxPeekImage.hidden) return;
+    lightboxState.touchPreviewIndex = previewIndex;
+    lightboxPeekImage.src = lightboxState.controller.images[previewIndex];
+    lightboxPeekImage.alt = lightboxState.alt || lightboxState.controller.getAlt();
+    lightboxPeekImage.hidden = false;
+  }
+
+  function applyLightboxHorizontalPreview(deltaX) {
+    if (!lightboxPeekImage || !lightboxState.controller || !lightboxImage) return;
+    if (lightboxState.controller.total <= 1) return;
+
+    const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
+    const swipeSign = deltaX < 0 ? -1 : 1;
+    const direction = swipeSign < 0 ? 1 : -1;
+    const previewIndex = ((lightboxState.index + direction) % lightboxState.controller.total + lightboxState.controller.total) % lightboxState.controller.total;
+    setLightboxPreviewImage(previewIndex);
+
+    const scale = Math.max(0.95, 1 - (Math.abs(deltaX) / 2400));
+    lightboxImage.style.transform = `translate3d(${deltaX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(3)})`;
+    lightboxPeekImage.style.transition = 'none';
+    lightboxPeekImage.style.transform = `translate3d(${(deltaX - (swipeSign * width)).toFixed(2)}px, 0, 0) scale(1)`;
+    lightboxPeekImage.style.opacity = '1';
+  }
+
+  function animateLightboxSnapBack(deltaX = 0) {
+    if (!lightboxImage) return;
+    const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
+    const swipeSign = deltaX < 0 ? -1 : 1;
+
+    if (lightboxPeekImage && !lightboxPeekImage.hidden) {
+      lightboxPeekImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
+      lightboxPeekImage.style.transform = `translate3d(${Math.round(-swipeSign * width)}px, 0, 0) scale(1)`;
+      lightboxPeekImage.style.opacity = '0';
+    }
+
+    lightboxImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease`;
+    lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+    window.setTimeout(clearLightboxSwipeStyles, LIGHTBOX_SWIPE_MS + 25);
   }
 
   function getLightboxFocusableElements() {
@@ -612,6 +722,7 @@
 
   function syncLightbox() {
     if (!lightbox || !lightboxImage) return;
+    clearLightboxSwipeStyles();
 
     if (lightboxState.controller) {
       const total = lightboxState.controller.total;
@@ -764,8 +875,7 @@
 
       if (lightboxState.touchGesture === 'horizontal') {
         event.preventDefault();
-        const scale = Math.max(0.95, 1 - (Math.abs(deltaX) / 2400));
-        lightboxImage.style.transform = `translate3d(${deltaX}px, 0, 0) scale(${scale.toFixed(3)})`;
+        applyLightboxHorizontalPreview(deltaX);
         return;
       }
 
@@ -788,11 +898,30 @@
       if (gesture === 'horizontal') {
         const hasCarousel = !!(lightboxState.controller && lightboxState.controller.total > 1);
         if (hasCarousel && Math.abs(deltaX) >= LIGHTBOX_NAV_SWIPE_THRESHOLD) {
-          stepLightbox(deltaX < 0 ? 1 : -1);
+          const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
+          const swipeSign = deltaX < 0 ? -1 : 1;
+          if (lightboxPeekImage && lightboxPeekImage.hidden) {
+            applyLightboxHorizontalPreview(deltaX);
+          }
+
+          lightboxImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
+          lightboxImage.style.transform = `translate3d(${Math.round(swipeSign * width)}px, 0, 0) scale(0.98)`;
+          lightboxImage.style.opacity = '0.6';
+
+          if (lightboxPeekImage && !lightboxPeekImage.hidden) {
+            lightboxPeekImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
+            lightboxPeekImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+            lightboxPeekImage.style.opacity = '1';
+          }
+
+          window.setTimeout(() => {
+            stepLightbox(deltaX < 0 ? 1 : -1);
+            clearLightboxSwipeStyles();
+          }, LIGHTBOX_SWIPE_MS + 10);
+          return;
         }
-        lightboxImage.style.transition = 'transform 180ms ease';
-        lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        window.setTimeout(clearLightboxSwipeStyles, 220);
+
+        animateLightboxSnapBack(deltaX);
         return;
       }
 
@@ -813,10 +942,9 @@
 
     lightboxImage.addEventListener('touchcancel', () => {
       if (!lightboxState.touchActive) return;
+      const deltaX = lightboxState.touchLastX - lightboxState.touchStartX;
       resetLightboxGestureState();
-      lightboxImage.style.transition = 'transform 180ms ease';
-      lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
-      window.setTimeout(clearLightboxSwipeStyles, 220);
+      animateLightboxSnapBack(deltaX);
     }, { passive: true });
   }
 

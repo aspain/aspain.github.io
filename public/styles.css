@@ -267,6 +267,11 @@ body.lightbox-open{
   margin: 0 auto;
 }
 
+.carousel-link{
+  position: relative;
+  overflow: hidden;
+}
+
 .carousel-btn{
   position: absolute;
   top: 50%;
@@ -327,6 +332,12 @@ body.lightbox-open{
 .carousel-link,
 .carousel-image{
   touch-action: pan-y;
+}
+
+.carousel-peek-image{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 @media (hover: hover){
@@ -460,6 +471,11 @@ body.lightbox-open{
   border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 20px 48px rgba(0,0,0,0.52);
   touch-action: none;
+  grid-area: 1 / 1;
+}
+
+.lightbox-peek-image{
+  pointer-events: none;
 }
 
 .lightbox-close{
