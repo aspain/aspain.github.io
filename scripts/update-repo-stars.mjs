@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -42,6 +42,35 @@ async function fetchRepoStars(repo, headers) {
   return stars;
 }
 
+async function readExistingSnapshot() {
+  try {
+    const raw = await readFile(OUTPUT_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return null;
+    const repos = parsed.repos && typeof parsed.repos === 'object' ? parsed.repos : {};
+    const normalizedRepos = {};
+    for (const [repo, stars] of Object.entries(repos)) {
+      const value = Number(stars);
+      if (!Number.isFinite(value)) continue;
+      normalizedRepos[repo] = value;
+    }
+    const updatedAt = typeof parsed.updatedAt === 'string' ? parsed.updatedAt : '';
+    return { updatedAt, repos: normalizedRepos };
+  } catch (_error) {
+    return null;
+  }
+}
+
+function hasSameRepoStars(a, b) {
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+  if (aKeys.length !== bKeys.length) return false;
+  for (const key of aKeys) {
+    if (a[key] !== b[key]) return false;
+  }
+  return true;
+}
+
 async function main() {
   const headers = buildHeaders();
   const repos = {};
@@ -50,8 +79,14 @@ async function main() {
     repos[repo] = await fetchRepoStars(repo, headers);
   }
 
+  const existing = await readExistingSnapshot();
+  const shouldPreserveTimestamp =
+    existing &&
+    existing.updatedAt &&
+    hasSameRepoStars(existing.repos, repos);
+
   const output = {
-    updatedAt: new Date().toISOString(),
+    updatedAt: shouldPreserveTimestamp ? existing.updatedAt : new Date().toISOString(),
     repos
   };
 
