@@ -423,7 +423,8 @@
       lastY: 0,
       gesture: null,
       animating: false,
-      previewIndex: -1
+      previewIndex: -1,
+      intentDirection: 0
     };
 
     function setCarouselPreviewImage(previewIndex) {
@@ -483,14 +484,11 @@
       window.setTimeout(clearCarouselDragStyles, CAROUSEL_SWIPE_IN_MS + 25);
     }
 
-    function handleCarouselSwipe(deltaX, deltaY) {
+    function commitCarouselSwipe(direction) {
       if (swipeState.animating) return false;
-      if (Math.abs(deltaX) < CAROUSEL_SWIPE_THRESHOLD) return false;
-      if (Math.abs(deltaY) > CAROUSEL_SWIPE_MAX_VERTICAL) return false;
-      if (Math.abs(deltaX) <= Math.abs(deltaY) * 1.1) return false;
+      if (direction !== 1 && direction !== -1) return false;
       const width = link.clientWidth || image.clientWidth || 220;
-      const swipeSign = deltaX < 0 ? -1 : 1;
-      const direction = swipeSign < 0 ? 1 : -1;
+      const swipeSign = direction === 1 ? -1 : 1;
 
       if (peekImage.hidden) {
         setCarouselPreviewImage(((index + direction) % total + total) % total);
@@ -512,6 +510,20 @@
 
       carousel.dataset.suppressLightboxUntil = String(Date.now() + 500);
       return true;
+    }
+
+    function handleCarouselSwipe(deltaX, deltaY, options = {}) {
+      const { ignoreVertical = false, preferDirection = 0 } = options;
+      if (preferDirection === 1 || preferDirection === -1) {
+        return commitCarouselSwipe(preferDirection);
+      }
+
+      if (Math.abs(deltaX) < CAROUSEL_SWIPE_THRESHOLD) return false;
+      if (!ignoreVertical) {
+        if (Math.abs(deltaY) > CAROUSEL_SWIPE_MAX_VERTICAL) return false;
+        if (Math.abs(deltaX) <= Math.abs(deltaY) * 1.1) return false;
+      }
+      return commitCarouselSwipe(deltaX < 0 ? 1 : -1);
     }
 
     if (total === 1) {
@@ -544,6 +556,7 @@
         swipeState.lastX = touch.clientX;
         swipeState.lastY = touch.clientY;
         swipeState.gesture = null;
+        swipeState.intentDirection = 0;
       }, { passive: true });
 
       link.addEventListener('touchmove', (event) => {
@@ -565,6 +578,9 @@
           // Prevent page scroll while actively swiping carousel thumbnails.
           event.preventDefault();
           applyCarouselDragPreview(deltaX * 0.96);
+          if (Math.abs(deltaX) >= CAROUSEL_SWIPE_THRESHOLD) {
+            swipeState.intentDirection = deltaX < 0 ? 1 : -1;
+          }
         }
       }, { passive: false });
 
@@ -576,14 +592,19 @@
         const deltaX = endX - swipeState.startX;
         const deltaY = endY - swipeState.startY;
         const isHorizontalGesture = swipeState.gesture === 'horizontal';
+        const intentDirection = swipeState.intentDirection;
         swipeState.active = false;
         swipeState.gesture = null;
+        swipeState.intentDirection = 0;
         if (!isHorizontalGesture) {
           clearCarouselDragStyles();
           return;
         }
 
-        const didCommit = handleCarouselSwipe(deltaX, deltaY);
+        let didCommit = handleCarouselSwipe(deltaX, deltaY, { ignoreVertical: true });
+        if (!didCommit && (intentDirection === 1 || intentDirection === -1)) {
+          didCommit = handleCarouselSwipe(deltaX, deltaY, { preferDirection: intentDirection });
+        }
         if (!didCommit) {
           carousel.dataset.suppressLightboxUntil = String(Date.now() + 320);
           animateCarouselSnapBack(deltaX);
@@ -594,6 +615,7 @@
         if (swipeState.animating) return;
         swipeState.active = false;
         swipeState.gesture = null;
+        swipeState.intentDirection = 0;
         animateCarouselSnapBack(swipeState.lastX - swipeState.startX);
       }, { passive: true });
     }
