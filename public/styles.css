@@ -338,6 +338,14 @@ body.lightbox-open{
   position: absolute;
   inset: 0;
   pointer-events: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  opacity: 0;
+}
+
+.carousel-peek-image[hidden]{
+  display: none !important;
 }
 
 @media (hover: hover){
@@ -476,6 +484,14 @@ body.lightbox-open{
 
 .lightbox-peek-image{
   pointer-events: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  opacity: 0;
+}
+
+.lightbox-peek-image[hidden]{
+  display: none !important;
 }
 
 .lightbox-close{

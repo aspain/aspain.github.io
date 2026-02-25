@@ -434,6 +434,7 @@
     function hideCarouselPreviewImage() {
       swipeState.previewIndex = -1;
       peekImage.hidden = true;
+      peekImage.removeAttribute('src');
       peekImage.style.transition = '';
       peekImage.style.transform = '';
       peekImage.style.opacity = '';
@@ -672,7 +673,7 @@
     if (lightboxState.touchPreviewIndex === previewIndex && !lightboxPeekImage.hidden) return;
     lightboxState.touchPreviewIndex = previewIndex;
     lightboxPeekImage.src = lightboxState.controller.images[previewIndex];
-    lightboxPeekImage.alt = lightboxState.alt || lightboxState.controller.getAlt();
+    lightboxPeekImage.alt = '';
     lightboxPeekImage.hidden = false;
   }
 
