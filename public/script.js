@@ -14,9 +14,11 @@
   }
 
   const starCountFormatter = new Intl.NumberFormat('en-US');
-  const STAR_CACHE_KEY = 'portfolio.repo-stars.v1';
-  const STAR_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+  const STAR_CACHE_KEY = 'portfolio.repo-stars.v2';
+  const STAR_CACHE_TTL_MS = 60 * 60 * 1000;
   const STAR_REFRESH_MS = STAR_CACHE_TTL_MS;
+  const STAR_SNAPSHOT_URL = 'repo-stars.json';
+  const STAR_SNAPSHOT_CACHE_BUSTER_MS = 60 * 60 * 1000;
   let starRefreshTimer = null;
   let repoStarCache = readRepoStarCache();
 
@@ -68,40 +70,74 @@
     for (const node of nodes) node.textContent = text;
   }
 
-  async function refreshRepoStarCounts({ force = false } = {}) {
-    if (!repoStarGroups.size) return;
-    if (!force && hasFreshRepoStarCache()) return;
+  function normalizeRepoStarValues(values) {
+    if (!values || typeof values !== 'object') return {};
+    const normalized = {};
+    for (const repo of repoStarGroups.keys()) {
+      const stars = Number(values[repo]);
+      if (Number.isFinite(stars)) normalized[repo] = stars;
+    }
+    return normalized;
+  }
 
+  async function fetchRepoStarsFromSnapshot() {
+    try {
+      const cacheBuster = Math.floor(Date.now() / STAR_SNAPSHOT_CACHE_BUSTER_MS);
+      const response = await fetch(`${STAR_SNAPSHOT_URL}?v=${cacheBuster}`, {
+        cache: 'no-store',
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) return {};
+      const payload = await response.json();
+      return normalizeRepoStarValues(payload && payload.repos);
+    } catch (_error) {
+      return {};
+    }
+  }
+
+  async function fetchRepoStarsFromGitHubApi() {
     const nextValues = {};
-    let hasUpdates = false;
-
     await Promise.all(Array.from(repoStarGroups.keys()).map(async (repo) => {
       try {
         const response = await fetch(`https://api.github.com/repos/${repo}`, {
+          cache: 'no-store',
           headers: { Accept: 'application/vnd.github+json' }
         });
         if (!response.ok) return;
         const payload = await response.json();
         const stars = Number(payload.stargazers_count);
         if (!Number.isFinite(stars)) return;
-        setRepoStarCount(repo, stars);
         nextValues[repo] = stars;
-        hasUpdates = true;
       } catch (_error) {
         // Keep the last rendered value when network/API calls fail.
       }
     }));
+    return nextValues;
+  }
 
-    if (hasUpdates) {
-      repoStarCache = {
-        timestamp: Date.now(),
-        values: {
-          ...(repoStarCache ? repoStarCache.values : {}),
-          ...nextValues
-        }
-      };
-      writeRepoStarCache(repoStarCache.values);
+  async function refreshRepoStarCounts({ force = false } = {}) {
+    if (!repoStarGroups.size) return;
+    if (!force && hasFreshRepoStarCache()) return;
+
+    const snapshotValues = await fetchRepoStarsFromSnapshot();
+    const nextValues = Object.keys(snapshotValues).length
+      ? snapshotValues
+      : await fetchRepoStarsFromGitHubApi();
+
+    if (!Object.keys(nextValues).length) return;
+
+    for (const [repo, stars] of Object.entries(nextValues)) {
+      setRepoStarCount(repo, stars);
     }
+
+    repoStarCache = {
+      timestamp: Date.now(),
+      values: {
+        ...(repoStarCache ? repoStarCache.values : {}),
+        ...nextValues
+      }
+    };
+    writeRepoStarCache(repoStarCache.values);
   }
 
   function clearStarRefreshTimer() {
@@ -132,6 +168,10 @@
         refreshRepoStarCounts();
         scheduleStarRefresh();
       }
+    }, { passive: true });
+    window.addEventListener('pageshow', () => {
+      refreshRepoStarCounts({ force: true });
+      scheduleStarRefresh();
     }, { passive: true });
   }
 
