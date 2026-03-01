@@ -18,7 +18,6 @@
   const STAR_CACHE_TTL_MS = 60 * 60 * 1000;
   const STAR_REFRESH_MS = STAR_CACHE_TTL_MS;
   const STAR_SNAPSHOT_URL = 'repo-stars.json';
-  const STAR_SNAPSHOT_CACHE_BUSTER_MS = 60 * 60 * 1000;
   let starRefreshTimer = null;
   let repoStarCache = readRepoStarCache();
 
@@ -82,7 +81,7 @@
 
   async function fetchRepoStarsFromSnapshot() {
     try {
-      const cacheBuster = Math.floor(Date.now() / STAR_SNAPSHOT_CACHE_BUSTER_MS);
+      const cacheBuster = Date.now();
       const response = await fetch(`${STAR_SNAPSHOT_URL}?v=${cacheBuster}`, {
         cache: 'no-store',
         headers: { Accept: 'application/json' }
@@ -159,13 +158,13 @@
   }
 
   if (repoStarGroups.size) {
-    refreshRepoStarCounts();
+    refreshRepoStarCounts({ force: true });
     scheduleStarRefresh();
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         clearStarRefreshTimer();
       } else {
-        refreshRepoStarCounts();
+        refreshRepoStarCounts({ force: true });
         scheduleStarRefresh();
       }
     }, { passive: true });
