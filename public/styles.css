@@ -4,7 +4,9 @@ html, body { height: 100%; }
   --moon-size: clamp(96px, 11vw, 160px);
   --name-sign-size: clamp(24px, 3.3vw, 38px);
   --projects-sign-size: clamp(26px, 3.8vw, 42px);
+  --desktop-content-max: clamp(920px, 84vw, 1160px);
   --header-stack-height: calc(var(--name-sign-size) + var(--projects-sign-size) + 16px);
+  --header-cards-gap: clamp(6px, 0.7vw, 10px);
   --stack-side-pad: clamp(22px, 4.5vw, 56px);
   --footer-link-gap: clamp(8px, 1vw, 12px);
 }
@@ -117,18 +119,18 @@ body.lightbox-open{
 .content{
   position: relative;
   z-index: 2;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   width: 100%;
   box-sizing: border-box;
   min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: var(--header-cards-gap);
   padding: var(--stack-side-pad);
   padding-top: calc(var(--moon-top) + var(--moon-size) - var(--name-sign-size) - 22px);
   padding-bottom: clamp(6px, 1vw, 12px);
-  max-width: 980px;
+  max-width: var(--desktop-content-max);
   margin: 0 auto;
 }
 
@@ -235,7 +237,7 @@ body.lightbox-open{
 .cards{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: clamp(14px, 1.6vw, 24px);
 }
 
 .card{
@@ -405,6 +407,19 @@ body.lightbox-open{
   line-height: 1.35;
   font-size: 14px;
   min-height: 2.7em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.card p a{
+  color: #89deff;
+  font-weight: 600;
+  text-decoration-color: rgba(137, 222, 255, 0.88);
+  text-underline-offset: 2px;
+}
+
+.card p a:visited{
+  color: #9be6ff;
 }
 
 /* Hide top-right card labels/badges if present in future card content. */
@@ -559,20 +574,32 @@ body.lightbox-open{
   .lightbox-nav:hover{
     background: rgba(16, 30, 58, 0.84);
   }
+
+  .card p a:hover{
+    color: #c5f2ff;
+  }
 }
 
-/* Snap straight from desktop layout to final stacked card form. */
-@media (max-width: 980px){
+@media (min-width: 1201px){
+  .content{
+    padding-top: calc(var(--moon-top) + var(--moon-size) - var(--name-sign-size) - 46px);
+    padding-bottom: 4px;
+  }
+}
+
+/* Tablet and down: stacked cards with wider card width than mobile. */
+@media (max-width: 1200px){
   :root{
-    --stack-side-pad: 12px;
-    --stack-width: min(calc(100% - (var(--stack-side-pad) * 2)), 310px);
+    --stack-side-pad: clamp(14px, 2.6vw, 24px);
+    --stack-width: min(calc(100% - (var(--stack-side-pad) * 2)), 760px);
+    --header-cards-gap: clamp(14px, 1.8vw, 20px);
   }
 
   .content{
     min-height: 0;
-    padding-top: clamp(28px, 3.6vw, 34px);
+    padding-top: clamp(24px, 3.2vw, 34px);
     padding-bottom: 4px;
-    gap: 12px;
+    gap: var(--header-cards-gap);
   }
 
   #moon{
@@ -661,6 +688,7 @@ body.lightbox-open{
     --stack-width: min(calc(100% - (var(--stack-side-pad) * 2)), 310px);
     --name-sign-size: clamp(17px, 6.6vw, 23px);
     --projects-sign-size: clamp(19px, 7.4vw, 26px);
+    --header-cards-gap: clamp(10px, 3vw, 14px);
   }
 
   .carousel-btn{
@@ -694,6 +722,15 @@ body.lightbox-open{
 
   .cards{
     margin-top: 8px;
+  }
+
+  .card p{
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: initial;
+    overflow: visible;
+    font-size: 11.5px;
+    line-height: 1.32;
   }
 }
 
