@@ -421,12 +421,20 @@ body.lightbox-open{
   align-items: center;
   gap: 4px;
   flex-shrink: 0;
-  padding: 0;
+  padding: 6px 10px;
+  border: 1px solid rgba(180, 215, 255, 0.3);
+  background: rgba(8, 23, 48, 0.72);
+  border-radius: 999px;
   color: rgba(255,255,255,0.93);
   text-decoration: none;
   line-height: 1;
   white-space: nowrap;
   transform: translateY(1px);
+}
+
+.repo-stars:focus-visible{
+  outline: 2px solid rgba(173, 230, 255, 0.72);
+  outline-offset: 2px;
 }
 
 .repo-star-icon{
@@ -649,6 +657,10 @@ body.lightbox-open{
     background: rgba(16, 30, 58, 0.84);
   }
 
+  .repo-stars:hover{
+    background: rgba(210, 235, 255, 0.16);
+  }
+
   .card p a:hover{
     color: #c5f2ff;
   }
@@ -722,6 +734,7 @@ body.lightbox-open{
 
   .repo-stars{
     gap: 4px;
+    padding: 5px 8px;
   }
 
   .repo-star-count{
