@@ -89,7 +89,8 @@
   const STAR_CACHE_KEY = 'portfolio.repo-stars.v2';
   const STAR_CACHE_TTL_MS = 60 * 60 * 1000;
   const STAR_REFRESH_MS = STAR_CACHE_TTL_MS;
-  const STAR_SNAPSHOT_URL = 'repo-stars.json';
+  // Use root-relative path so all routes (/ and /projects/*) read the same daily snapshot.
+  const STAR_SNAPSHOT_URL = '/repo-stars.json';
   let starRefreshTimer = null;
   let repoStarCache = readRepoStarCache();
 
