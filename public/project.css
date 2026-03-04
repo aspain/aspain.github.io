@@ -428,6 +428,14 @@ body.lightbox-open {
   font-size: 15px;
 }
 
+.section p.list-intro-tight {
+  margin-bottom: 0;
+}
+
+.section p.list-intro-tight + ul {
+  margin-top: 0;
+}
+
 .section ul {
   margin: 10px 0 0;
   padding-left: 18px;
@@ -511,9 +519,14 @@ body.lightbox-open {
   display: none;
 }
 
-.links-heading {
+.section h2.links-heading {
   margin-top: 0;
-  padding-top: 40px;
+  margin-bottom: 4px;
+  padding-top: 28px;
+}
+
+.section h2.links-heading + .quick-links {
+  margin-top: 6px;
 }
 
 .gallery {

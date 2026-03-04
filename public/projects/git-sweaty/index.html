@@ -155,21 +155,18 @@
       <section class="section glass">
         <h2>What git-sweaty Does</h2>
         <p>
-          This project is built for people who track workouts and want a public activity dashboard without building their own data pipeline.
-          It supports Strava and Garmin as data sources, fetches activity history, normalizes activity types, and publishes a static dashboard to GitHub Pages.
-          The result is an indexable activity site that works on desktop and mobile with rich tooltip details and activity-level metrics.
+          This project is built for people who track workouts and want an interactive activity dashboard without building their own data pipeline.
+          It supports both Strava and Garmin as data sources, fetches activity history, normalizes activity types, and publishes an interactive dashboard to GitHub Pages.
+          The dashboard contains many clickable filter options, and hovering over the graphs displays tooltips with additional activity detail.
         </p>
         <p>
-          The README workflow supports a recommended setup mode that can create or reuse a GitHub fork, configure repository variables,
-          and guide credentials for provider authorization. You can switch providers later, rerun setup, and optionally force a one-time full backfill.
+          The quick start workflow supports a recommended setup mode that can create or reuse a GitHub fork, configure repository variables, and guide credentials for provider authorization.
+          You can switch providers later, rerun setup, and optionally force a one-time full backfill.
         </p>
-        <ul>
-          <li>100% free to run and hosted on GitHub Pages.</li>
-          <li>Automatic daily refresh through GitHub Actions.</li>
-          <li>Responsive dashboard rendering for desktop and mobile browsing.</li>
-          <li>Configurable week start, units, activity links, and history backfill behavior.</li>
-          <li>Data hygiene defaults that keep raw detailed payloads out of published artifacts.</li>
-        </ul>
+        <p>
+          The dashboard is 100% free to set up and run, and is hosted on GitHub Pages.
+          It automatically refreshes daily via scheduled GitHub Actions. The dashboard is desktop and mobile friendly.
+        </p>
       </section>
 
       <section class="section glass">
@@ -188,12 +185,16 @@
           </button>
           <code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh)</code>
         </div>
-        <p>
-          The setup prompts walk through source selection, unit preference, and optional custom domain.
-          After the first run completes, your dashboard deploys on GitHub Pages and continues to refresh automatically.
-        </p>
+        <p class="list-intro-tight">During the initial setup, options include:</p>
+        <ul>
+          <li>Data source (Strava or Garmin)</li>
+          <li>Unit preference (US or metric)</li>
+          <li>Week start (Sunday or Monday)</li>
+          <li>Add your Strava or Garmin profile link to the dashboard</li>
+          <li>Add direct links to activities in the graph tooltips</li>
+        </ul>
 
-        <h2>Useful Links</h2>
+        <h2 class="links-heading">Useful Links</h2>
         <div class="quick-links">
           <a href="https://github.com/aspain/git-sweaty" target="_blank" rel="noopener noreferrer">Repository</a>
           <a href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
