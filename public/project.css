@@ -834,7 +834,7 @@ body.lightbox-open {
 
   .hero-title-row .hero-repo-stars {
     padding: 5px 9px;
-    transform: translateY(5px);
+    transform: translateY(3px);
   }
 
   .hero,
