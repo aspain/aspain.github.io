@@ -269,6 +269,8 @@
     { hex: '#faff00', rgb: { r: 250, g: 255, b: 0 } },   // neon yellow
     { hex: '#b026ff', rgb: { r: 176, g: 38, b: 255 } }   // neon purple
   ];
+  const SHOOTING_INTERVAL_SCALE = 0.8; // ~25% more frequent than baseline.
+  const LONG_SHOOTING_CHANCE = 0.28;
 
   function rand(a, b) { return a + Math.random() * (b - a); }
 
@@ -312,6 +314,7 @@
     const mode = Math.floor(rand(0, 4));
     const color = SHOOTING_COLORS[Math.floor(Math.random() * SHOOTING_COLORS.length)];
     const prominence = Math.random() < 0.38 ? rand(1.55, 2.45) : rand(0.85, 1.55);
+    const longRunner = Math.random() < LONG_SHOOTING_CHANCE;
     let startX = 0, startY = 0, angle = 0;
 
     if (mode === 0) {
@@ -332,7 +335,8 @@
       angle = rand(Math.PI * 0.92, Math.PI * 1.06);
     }
 
-    const speed = rand(2.0, 4.6) * DPR;
+    const speedScale = longRunner ? rand(0.68, 0.9) : 1;
+    const speed = rand(2.0, 4.6) * speedScale * DPR;
     const vx = Math.cos(angle) * speed;
     const vy = Math.sin(angle) * speed;
 
@@ -342,7 +346,7 @@
       color,
       prominence,
       life: 0,
-      ttl: rand(188, 320),
+      ttl: longRunner ? rand(320, 560) : rand(188, 320),
       len: rand(170, 340) * DPR * (0.80 + prominence * 0.24),
       w: rand(1.0, 2.1) * DPR * (0.76 + prominence * 0.62)
     });
@@ -361,7 +365,7 @@
     clearShootTimers();
     if (document.hidden) return;
 
-    const delay = rand(1700, 5200);
+    const delay = rand(1700, 5200) * SHOOTING_INTERVAL_SCALE;
     shootTimer = setTimeout(() => {
       shootTimer = null;
       if (document.hidden) return;

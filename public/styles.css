@@ -827,19 +827,6 @@ body.lightbox-open{
   }
 }
 
-/* Vignette */
-.vignette{
-  position: fixed;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  background: radial-gradient(circle at 70% 22%,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0) 46%,
-    rgba(0,0,0,0.26) 72%,
-    rgba(0,0,0,0.52) 100%);
-}
-
 @keyframes moonPulse{
   0%,100%{ transform: scale(1); }
   50%{ transform: scale(1.014); }
