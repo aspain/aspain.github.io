@@ -3,6 +3,78 @@
   const copyrightYear = document.getElementById('copyright-year');
   if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
 
+  const copyButtons = Array.from(document.querySelectorAll('[data-copy-btn]'));
+  const copyResetTimers = new WeakMap();
+
+  function getCopyText(button) {
+    const block = button.closest('[data-copy-text], .code-block');
+    if (!block) return '';
+    const explicit = block.getAttribute('data-copy-text');
+    if (explicit) return explicit.trim();
+    const codeNode = block.querySelector('code');
+    return codeNode ? (codeNode.textContent || '').trim() : '';
+  }
+
+  function fallbackCopyText(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '-9999px';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      return document.execCommand('copy');
+    } catch (_error) {
+      return false;
+    } finally {
+      textarea.remove();
+    }
+  }
+
+  function setCopyButtonState(button, label, copied) {
+    const labelNode = button.querySelector('[data-copy-label]');
+    if (labelNode) labelNode.textContent = label;
+    button.setAttribute('data-copied', copied ? 'true' : 'false');
+  }
+
+  function resetCopyButton(button) {
+    setCopyButtonState(button, 'Copy', false);
+  }
+
+  async function copySnippet(button) {
+    const text = getCopyText(button);
+    if (!text) return;
+
+    let copied = false;
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      try {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      } catch (_error) {
+        copied = fallbackCopyText(text);
+      }
+    } else {
+      copied = fallbackCopyText(text);
+    }
+
+    setCopyButtonState(button, copied ? 'Copied' : 'Copy failed', copied);
+
+    const existingTimer = copyResetTimers.get(button);
+    if (existingTimer) window.clearTimeout(existingTimer);
+    const resetTimer = window.setTimeout(() => resetCopyButton(button), 1800);
+    copyResetTimers.set(button, resetTimer);
+  }
+
+  for (const button of copyButtons) {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      copySnippet(button);
+    });
+  }
+
   const repoStarBadges = Array.from(document.querySelectorAll('.repo-stars[data-repo]'));
   const repoStarGroups = new Map();
   for (const badge of repoStarBadges) {

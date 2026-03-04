@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>git-sweaty | Strava and Garmin Dashboard Generator</title>
+  <meta name="description" content="git-sweaty is an open source project by Adam Spain that converts Strava and Garmin workouts into GitHub-style contribution heatmaps with an interactive dashboard." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#031733" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Adam Spain Projects" />
+  <meta property="og:url" content="https://adamspain.com/projects/git-sweaty/" />
+  <meta property="og:title" content="git-sweaty | Strava and Garmin Dashboard Generator" />
+  <meta property="og:description" content="Turn Strava and Garmin activities into an interactive GitHub-style dashboard with daily updates on GitHub Pages." />
+  <meta property="og:image" content="https://adamspain.com/images/git-sweaty-overview.png" />
+  <meta property="og:image:alt" content="git-sweaty dashboard heatmap preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="git-sweaty | Strava and Garmin Dashboard Generator" />
+  <meta name="twitter:description" content="Open source dashboard generator for Strava and Garmin activity history." />
+  <meta name="twitter:image" content="https://adamspain.com/images/git-sweaty-overview.png" />
+  <link rel="canonical" href="https://adamspain.com/projects/git-sweaty/" />
+  <link rel="icon" type="image/png" href="../../images/as_favicon.png" />
+  <link rel="stylesheet" href="../../project.css?v=20260304-4" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://adamspain.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Projects",
+              "item": "https://adamspain.com/projects/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "git-sweaty",
+              "item": "https://adamspain.com/projects/git-sweaty/"
+            }
+          ]
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "git-sweaty",
+          "author": {
+            "@type": "Person",
+            "name": "Adam Spain",
+            "url": "https://adamspain.com/"
+          },
+          "codeRepository": "https://github.com/aspain/git-sweaty",
+          "url": "https://adamspain.com/projects/git-sweaty/",
+          "description": "Generate an interactive GitHub-style dashboard from Strava or Garmin activity history.",
+          "runtimePlatform": "GitHub Actions",
+          "programmingLanguage": [
+            "Python",
+            "JavaScript",
+            "Shell"
+          ],
+          "license": "https://github.com/aspain/git-sweaty/blob/main/LICENSE"
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <div id="moon" aria-hidden="true">
+    <div class="moon-face">
+      <span class="track-eye moon-eye moon-eye-left"><span class="track-pupil moon-pupil"></span></span>
+      <span class="track-eye moon-eye moon-eye-right"><span class="track-pupil moon-pupil"></span></span>
+    </div>
+  </div>
+
+  <main class="site" aria-label="git-sweaty project page">
+    <header class="hero glass">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/projects/">Projects</a>
+        <span>/</span>
+        <span>git-sweaty</span>
+      </nav>
+      <h1>git-sweaty</h1>
+      <p>
+        git-sweaty turns your Strava or Garmin workout history into GitHub-style contribution graphs and an interactive dashboard.
+        Setup is quick and easy, and once configured, the dashboard updates daily automatically through GitHub Actions so your dashboard stays current.
+        All hosted on GitHub Pages for free.
+      </p>
+      <div class="meta-row" aria-label="Project metadata">
+        <span class="pill">Strava + Garmin data</span>
+        <span class="pill">GitHub Pages deployment</span>
+        <span class="pill">Daily sync automation</span>
+        <a
+          class="pill repo-stars"
+          href="https://github.com/aspain/git-sweaty"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-repo="aspain/git-sweaty"
+          aria-label="Open git-sweaty repository on GitHub"
+        >
+          <svg class="repo-star-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.28l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.79L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.192L.819 6.375a.75.75 0 0 1 .416-1.28l4.21-.612L7.327.668A.75.75 0 0 1 8 .25Z"></path>
+          </svg>
+          <span class="repo-star-count" data-star-count>-</span>
+        </a>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="https://github.com/aspain/git-sweaty" target="_blank" rel="noopener noreferrer">View Repository</a>
+        <a class="btn secondary" href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read Full README</a>
+        <a class="btn secondary" href="/projects/spainify/">See spainify Project</a>
+      </div>
+    </header>
+
+    <section class="gallery glass" aria-label="git-sweaty screenshots">
+      <h2>Dashboard Preview</h2>
+      <div
+        class="carousel"
+        data-carousel
+        data-images="../../images/git-sweaty-overview.png|../../images/git-sweaty-tooltip.png|../../images/git-sweaty-metrics.png"
+      >
+        <button class="carousel-btn carousel-prev" type="button" aria-label="Previous image">&lt;</button>
+        <a class="carousel-link thumb-link" href="../../images/git-sweaty-overview.png">
+          <img
+            class="carousel-image"
+            src="../../images/git-sweaty-overview.png"
+            alt="git-sweaty dashboard showing yearly contribution heatmap"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+        <button class="carousel-btn carousel-next" type="button" aria-label="Next image">&gt;</button>
+        <span class="carousel-indicator" aria-live="polite">1 / 3</span>
+      </div>
+    </section>
+
+    <div class="content-grid" aria-label="Project details">
+      <section class="section glass">
+        <h2>What git-sweaty Does</h2>
+        <p>
+          This project is built for people who track workouts and want a public activity dashboard without building their own data pipeline.
+          It supports Strava and Garmin as data sources, fetches activity history, normalizes activity types, and publishes a static dashboard to GitHub Pages.
+          The result is an indexable activity site that works on desktop and mobile with rich tooltip details and activity-level metrics.
+        </p>
+        <p>
+          The README workflow supports a recommended setup mode that can create or reuse a GitHub fork, configure repository variables,
+          and guide credentials for provider authorization. You can switch providers later, rerun setup, and optionally force a one-time full backfill.
+        </p>
+        <ul>
+          <li>100% free to run and hosted on GitHub Pages.</li>
+          <li>Automatic daily refresh through GitHub Actions.</li>
+          <li>Responsive dashboard rendering for desktop and mobile browsing.</li>
+          <li>Configurable week start, units, activity links, and history backfill behavior.</li>
+          <li>Data hygiene defaults that keep raw detailed payloads out of published artifacts.</li>
+        </ul>
+      </section>
+
+      <section class="section glass">
+        <h2>Quick Start Command</h2>
+        <p>From the project README, this is the main one-command setup path for macOS and Linux:</p>
+        <div
+          class="code-block code-block-copy"
+          data-copy-text="bash &lt;(curl -fsSL https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh)"
+        >
+          <button class="copy-btn" type="button" data-copy-btn aria-label="Copy quickstart command">
+            <svg class="copy-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
+              <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+            </svg>
+            <span data-copy-label>Copy</span>
+          </button>
+          <code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh)</code>
+        </div>
+        <p>
+          The setup prompts walk through source selection, unit preference, and optional custom domain.
+          After the first run completes, your dashboard deploys on GitHub Pages and continues to refresh automatically.
+        </p>
+
+        <h2>Useful Links</h2>
+        <div class="quick-links">
+          <a href="https://github.com/aspain/git-sweaty" target="_blank" rel="noopener noreferrer">Repository</a>
+          <a href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
+          <a href="https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh" target="_blank" rel="noopener noreferrer">Bootstrap Script</a>
+          <a href="https://github.com/aspain/git-sweaty/actions/workflows/sync.yml" target="_blank" rel="noopener noreferrer">Sync Workflow</a>
+        </div>
+      </section>
+    </div>
+
+    <footer class="site-footer glass">
+      <p>
+        Back to <a href="/">adamspain.com</a>.
+        Explore the companion project <a href="/projects/spainify/">spainify</a>.
+      </p>
+      <p>&copy; <span id="copyright-year"></span> Adam Spain</p>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true" tabindex="-1">
+    <button class="lightbox-close" type="button" aria-label="Close image preview">Close</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous lightbox image">&lt;</button>
+    <img class="lightbox-image" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next lightbox image">&gt;</button>
+    <span class="lightbox-indicator" aria-live="polite"></span>
+  </div>
+
+  <script src="../../script.js?v=20260304-2"></script>
+</body>
+</html>
