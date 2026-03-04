@@ -547,7 +547,7 @@ body.lightbox-open{
   border-radius: 12px;
   border: 0;
   box-shadow: 0 20px 48px rgba(0,0,0,0.52);
-  touch-action: none;
+  touch-action: pinch-zoom;
   grid-area: 1 / 1;
 }
 

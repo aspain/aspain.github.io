@@ -951,6 +951,11 @@
   if (lightbox && lightboxImage instanceof HTMLElement) {
     lightboxImage.addEventListener('touchstart', (event) => {
       if (!lightbox.classList.contains('is-open')) return;
+      if (event.touches.length > 1) {
+        resetLightboxGestureState();
+        clearLightboxSwipeStyles();
+        return;
+      }
       const touch = event.touches[0];
       if (!touch) return;
       lightboxState.touchActive = true;
@@ -963,6 +968,11 @@
     }, { passive: true });
 
     lightboxImage.addEventListener('touchmove', (event) => {
+      if (event.touches.length > 1) {
+        resetLightboxGestureState();
+        clearLightboxSwipeStyles();
+        return;
+      }
       if (!lightboxState.touchActive) return;
       const touch = event.touches[0];
       if (!touch) return;

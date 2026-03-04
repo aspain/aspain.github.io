@@ -732,6 +732,10 @@ body.lightbox-open {
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.44);
 }
 
+.lightbox-image {
+  touch-action: pinch-zoom;
+}
+
 .lightbox-peek-image {
   position: absolute;
   opacity: 0;
