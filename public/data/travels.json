@@ -1,0 +1,468 @@
+{
+  "trips": [
+    {
+      "id": "puerto-rico-2023",
+      "title": "Puerto Rico",
+      "summary": "",
+      "date_start": "2023-01-01",
+      "date_end": "2023-01-01",
+      "cover_image": "/images/travels/puerto-rico-2023/el-yunque-overlook.jpg",
+      "photos": [
+        {
+          "id": "el-yunque-overlook",
+          "src": "/images/travels/puerto-rico-2023/el-yunque-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.2952,
+          "lng": -65.7819
+        },
+        {
+          "id": "yokahu-tower-windows",
+          "src": "/images/travels/puerto-rico-2023/yokahu-tower-windows.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.2952,
+          "lng": -65.7819
+        },
+        {
+          "id": "palm-canopy-overlook",
+          "src": "/images/travels/puerto-rico-2023/palm-canopy-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.3006,
+          "lng": -65.7962
+        },
+        {
+          "id": "rainforest-orchid",
+          "src": "/images/travels/puerto-rico-2023/rainforest-orchid.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.3006,
+          "lng": -65.7962
+        },
+        {
+          "id": "jungle-falls",
+          "src": "/images/travels/puerto-rico-2023/jungle-falls.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.3161,
+          "lng": -65.7748
+        },
+        {
+          "id": "luquillo-beach",
+          "src": "/images/travels/puerto-rico-2023/luquillo-beach.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Costamar Beach Village, Loiza, Puerto Rico",
+          "lat": 18.43069,
+          "lng": -65.84639
+        },
+        {
+          "id": "img-2986",
+          "src": "/images/travels/puerto-rico-2023/img-2986.jpg",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.3161,
+          "lng": -65.7748,
+          "alt": "",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "st-lucia-2019",
+      "title": "St. Lucia",
+      "summary": "",
+      "date_start": "2019-04-24",
+      "date_end": "2019-04-29",
+      "cover_image": "/images/travels/st-lucia-2019/piton-ocean-view.jpg",
+      "photos": [
+        {
+          "id": "mangrove-channel",
+          "src": "/images/travels/st-lucia-2019/mangrove-channel.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Marigot Bay, St. Lucia",
+          "lat": 13.9669,
+          "lng": -61.0278
+        },
+        {
+          "id": "marigot-bay-sunset",
+          "src": "/images/travels/st-lucia-2019/marigot-bay-sunset.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Marigot Bay, St. Lucia",
+          "lat": 13.9669,
+          "lng": -61.0278
+        },
+        {
+          "id": "soufriere-valley",
+          "src": "/images/travels/st-lucia-2019/soufriere-valley.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Soufriere, St. Lucia",
+          "lat": 13.8566,
+          "lng": -61.0567
+        },
+        {
+          "id": "piton-ocean-view",
+          "src": "/images/travels/st-lucia-2019/piton-ocean-view.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Tet Paul Nature Trail, St. Lucia",
+          "lat": 13.8428,
+          "lng": -61.0643
+        },
+        {
+          "id": "rocky-shore",
+          "src": "/images/travels/st-lucia-2019/rocky-shore.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Anse Chastanet, St. Lucia",
+          "lat": 13.8646,
+          "lng": -61.0801
+        },
+        {
+          "id": "ginger-bloom",
+          "src": "/images/travels/st-lucia-2019/ginger-bloom.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Diamond Falls Botanical Gardens, St. Lucia",
+          "lat": 13.8523,
+          "lng": -61.0668
+        },
+        {
+          "id": "diamond-falls",
+          "src": "/images/travels/st-lucia-2019/diamond-falls.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Diamond Falls, St. Lucia",
+          "lat": 13.8523,
+          "lng": -61.0668
+        },
+        {
+          "id": "piton-sunset",
+          "src": "/images/travels/st-lucia-2019/piton-sunset.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Soufriere, St. Lucia",
+          "lat": 13.8566,
+          "lng": -61.0567
+        },
+        {
+          "id": "2019-04-25-09-18-18",
+          "src": "/images/travels/st-lucia-2019/2019-04-25-09-18-18.jpg",
+          "location_name": "Marigot Bay, St. Lucia",
+          "lat": 13.9669,
+          "lng": -61.0278,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-7847",
+          "src": "/images/travels/st-lucia-2019/img-7847.jpg",
+          "location_name": "Marigot Bay, St. Lucia",
+          "lat": 13.9669,
+          "lng": -61.0278,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-8047",
+          "src": "/images/travels/st-lucia-2019/img-8047.jpg",
+          "location_name": "Soufriere, St. Lucia",
+          "lat": 13.8566,
+          "lng": -61.0567,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-8086",
+          "src": "/images/travels/st-lucia-2019/img-8086.jpg",
+          "location_name": "Diamond Falls Botanical Gardens, St. Lucia",
+          "lat": 13.8523,
+          "lng": -61.0668,
+          "alt": "",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "mallorca-2018",
+      "title": "Mallorca",
+      "summary": "",
+      "date_start": "2018-10-03",
+      "date_end": "2018-10-07",
+      "cover_image": "/images/travels/mallorca-2018/port-de-soller-bay.jpg",
+      "photos": [
+        {
+          "id": "palma-harbor-overlook",
+          "src": "/images/travels/mallorca-2018/palma-harbor-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Palma, Mallorca",
+          "lat": 39.5696,
+          "lng": 2.6502
+        },
+        {
+          "id": "port-de-soller-dusk",
+          "src": "/images/travels/mallorca-2018/port-de-soller-dusk.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964
+        },
+        {
+          "id": "port-de-soller-overlook",
+          "src": "/images/travels/mallorca-2018/port-de-soller-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964
+        },
+        {
+          "id": "port-de-soller-bay",
+          "src": "/images/travels/mallorca-2018/port-de-soller-bay.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964
+        },
+        {
+          "id": "tramuntana-cliffs",
+          "src": "/images/travels/mallorca-2018/tramuntana-cliffs.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Serra de Tramuntana Coast, Mallorca",
+          "lat": 39.8528,
+          "lng": 2.7887
+        },
+        {
+          "id": "sa-calobra-coast",
+          "src": "/images/travels/mallorca-2018/sa-calobra-coast.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Sa Calobra, Mallorca",
+          "lat": 39.8507,
+          "lng": 2.8011
+        },
+        {
+          "id": "torrent-de-pareis",
+          "src": "/images/travels/mallorca-2018/torrent-de-pareis.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Torrent de Pareis, Mallorca",
+          "lat": 39.8499,
+          "lng": 2.7908
+        },
+        {
+          "id": "turquoise-cove",
+          "src": "/images/travels/mallorca-2018/turquoise-cove.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Cala Mondrago, Mallorca",
+          "lat": 39.3147,
+          "lng": 3.1775
+        },
+        {
+          "id": "img-7063",
+          "src": "/images/travels/mallorca-2018/img-7063.png",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964,
+          "alt": "Terrace and stucco buildings in Port de Soller, Mallorca",
+          "caption": ""
+        },
+        {
+          "id": "img-7096",
+          "src": "/images/travels/mallorca-2018/img-7096.jpg",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-7150",
+          "src": "/images/travels/mallorca-2018/img-7150.jpg",
+          "location_name": "Port de Pollenca, Mallorca",
+          "lat": 39.9072,
+          "lng": 3.0814,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-7170",
+          "src": "/images/travels/mallorca-2018/img-7170.jpg",
+          "location_name": "Mallorca, Spain",
+          "lat": 39.6953,
+          "lng": 3.0176,
+          "alt": "",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "yosemite-2017",
+      "title": "Yosemite National Park",
+      "summary": "",
+      "date_start": "2017-09-07",
+      "date_end": "2017-09-09",
+      "cover_image": "/images/travels/yosemite-2017/half-dome-overlook.jpg",
+      "photos": [
+        {
+          "id": "half-dome-overlook",
+          "src": "/images/travels/yosemite-2017/half-dome-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Glacier Point, Yosemite National Park",
+          "lat": 37.7276,
+          "lng": -119.5736
+        },
+        {
+          "id": "hazy-valley",
+          "src": "/images/travels/yosemite-2017/hazy-valley.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Glacier Point, Yosemite National Park",
+          "lat": 37.7276,
+          "lng": -119.5736
+        },
+        {
+          "id": "tent-sunrise",
+          "src": "/images/travels/yosemite-2017/tent-sunrise.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Little Yosemite Valley, Yosemite National Park",
+          "lat": 37.7328,
+          "lng": -119.5586
+        },
+        {
+          "id": "smoky-sunrise",
+          "src": "/images/travels/yosemite-2017/smoky-sunrise.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite Valley, Yosemite National Park",
+          "lat": 37.7459,
+          "lng": -119.5936
+        },
+        {
+          "id": "granite-waterfall-wall",
+          "src": "/images/travels/yosemite-2017/granite-waterfall-wall.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Mist Trail, Yosemite National Park",
+          "lat": 37.7325,
+          "lng": -119.5366
+        },
+        {
+          "id": "merced-river",
+          "src": "/images/travels/yosemite-2017/merced-river.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Merced River, Yosemite Valley",
+          "lat": 37.7392,
+          "lng": -119.5658
+        },
+        {
+          "id": "nevada-fall-close",
+          "src": "/images/travels/yosemite-2017/nevada-fall-close.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Nevada Fall, Yosemite National Park",
+          "lat": 37.7288,
+          "lng": -119.5357
+        },
+        {
+          "id": "2017-09-07-14-58-48",
+          "src": "/images/travels/yosemite-2017/2017-09-07-14-58-48.jpg",
+          "location_name": "Yosemite Valley, Yosemite National Park",
+          "lat": 37.7459,
+          "lng": -119.5936,
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "img-6014",
+          "src": "/images/travels/yosemite-2017/img-6014.jpg",
+          "location_name": "Merced River, Yosemite Valley",
+          "lat": 37.7392,
+          "lng": -119.5658,
+          "alt": "",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "id": "kings-canyon-2017",
+      "title": "Kings Canyon National Park",
+      "summary": "",
+      "date_start": "2017-09-02",
+      "date_end": "2017-09-04",
+      "cover_image": "/images/travels/kings-canyon-2017/alpine-lake-overlook.jpg",
+      "photos": [
+        {
+          "id": "alpine-lake-overlook",
+          "src": "/images/travels/kings-canyon-2017/alpine-lake-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.7934,
+          "lng": -118.4095
+        },
+        {
+          "id": "glacial-tarn",
+          "src": "/images/travels/kings-canyon-2017/glacial-tarn.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.7994,
+          "lng": -118.4149
+        },
+        {
+          "id": "camp-at-dusk",
+          "src": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.8075,
+          "lng": -118.4304
+        },
+        {
+          "id": "camp-basin-view",
+          "src": "/images/travels/kings-canyon-2017/camp-basin-view.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.8081,
+          "lng": -118.4311
+        },
+        {
+          "id": "rocky-climb",
+          "src": "/images/travels/kings-canyon-2017/rocky-climb.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.8018,
+          "lng": -118.4223
+        },
+        {
+          "id": "high-country-panorama",
+          "src": "/images/travels/kings-canyon-2017/high-country-panorama.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.7898,
+          "lng": -118.3998
+        }
+      ]
+    }
+  ]
+}

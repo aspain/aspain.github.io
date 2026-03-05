@@ -4,7 +4,7 @@ html, body { height: 100%; }
   --moon-size: clamp(96px, 11vw, 160px);
   --name-sign-size: clamp(24px, 3.3vw, 38px);
   --projects-sign-size: clamp(26px, 3.8vw, 42px);
-  --desktop-content-max: clamp(920px, 84vw, 1160px);
+  --desktop-content-max: clamp(980px, 92vw, 1380px);
   --header-stack-height: calc(var(--name-sign-size) + var(--projects-sign-size) + 16px);
   --header-cards-gap: clamp(6px, 0.7vw, 10px);
   --stack-side-pad: clamp(22px, 4.5vw, 56px);
@@ -248,7 +248,7 @@ body.lightbox-open{
 
 .cards{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(14px, 1.6vw, 24px);
 }
 
@@ -266,6 +266,13 @@ body.lightbox-open{
 }
 
 .thumb-link{
+  display: block;
+  margin: 12px 0 0;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.card-media-link{
   display: block;
   margin: 12px 0 0;
   border-radius: 10px;
@@ -485,6 +492,19 @@ body.lightbox-open{
   padding-top: 14px;
 }
 
+.card-actions-centered{
+  justify-content: center;
+}
+
+.card-actions-centered .btn{
+  flex: 0 0 auto;
+  min-width: 168px;
+}
+
+.card-media-link .card-thumb{
+  transition: transform 180ms ease;
+}
+
 .btn{
   display: inline-flex;
   align-items: center;
@@ -664,6 +684,16 @@ body.lightbox-open{
   .card p a:hover{
     color: #c5f2ff;
   }
+
+  .card-media-link:hover .card-thumb{
+    transform: scale(1.015);
+  }
+}
+
+@media (max-width: 1320px){
+  .cards{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1201px){
@@ -752,6 +782,13 @@ body.lightbox-open{
   }
 
   .thumb-link{
+    margin-top: 7px;
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-media-link{
     margin-top: 7px;
     width: 84%;
     margin-left: auto;

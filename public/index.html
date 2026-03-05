@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adam Spain | Open Source Software Projects (spainify, git-sweaty)</title>
-  <meta name="description" content="Software projects by Adam Spain, including spainify (Raspberry Pi Spotify and Sonos media hub) and git-sweaty (Strava and Garmin dashboard generator)." />
+  <title>Adam Spain | Projects and Travels</title>
+  <meta name="description" content="Explore software projects and travel photo stories by Adam Spain, including spainify, git-sweaty, and a map-synced travels gallery." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#031733" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Adam Spain Projects" />
+  <meta property="og:site_name" content="Adam Spain" />
   <meta property="og:url" content="https://adamspain.com/" />
-  <meta property="og:title" content="Adam Spain | Open Source Software Projects" />
-  <meta property="og:description" content="Explore spainify and git-sweaty, two open source projects by Adam Spain for home media automation and activity dashboards." />
-  <meta property="og:image" content="https://adamspain.com/images/git-sweaty-overview.png" />
-  <meta property="og:image:alt" content="git-sweaty project dashboard preview" />
+  <meta property="og:title" content="Adam Spain | Projects and Travels" />
+  <meta property="og:description" content="Explore software projects and map-synced travel photo stories by Adam Spain." />
+  <meta property="og:image" content="https://adamspain.com/images/travels/portugal-atlantic-loop/lisbon-sunset.svg" />
+  <meta property="og:image:alt" content="Illustrated Lisbon sunset cover scene" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Adam Spain | Open Source Software Projects" />
-  <meta name="twitter:description" content="Explore spainify and git-sweaty, two open source projects by Adam Spain." />
-  <meta name="twitter:image" content="https://adamspain.com/images/git-sweaty-overview.png" />
+  <meta name="twitter:title" content="Adam Spain | Projects and Travels" />
+  <meta name="twitter:description" content="Explore software projects and map-synced travel photo stories by Adam Spain." />
+  <meta name="twitter:image" content="https://adamspain.com/images/travels/portugal-atlantic-loop/lisbon-sunset.svg" />
   <link rel="canonical" href="https://adamspain.com/" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48x48.png" />
@@ -42,8 +42,8 @@
         },
         {
           "@type": "ItemList",
-          "@id": "https://adamspain.com/#project-list",
-          "name": "Featured software projects by Adam Spain",
+          "@id": "https://adamspain.com/#featured-work",
+          "name": "Featured work by Adam Spain",
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -56,6 +56,12 @@
               "position": 2,
               "url": "https://adamspain.com/projects/spainify/",
               "name": "spainify"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "url": "https://adamspain.com/travels/",
+              "name": "travels"
             }
           ]
         }
@@ -77,9 +83,9 @@
   <main class="content" aria-label="Portfolio">
     <div class="header-stack">
       <h1 class="name-sign">Adam Spain&apos;s</h1>
-      <h2 class="projects-sign">Personal Projects</h2>
+      <h2 class="projects-sign">Projects + Travels</h2>
     </div>
-    <section class="cards" aria-label="Featured projects">
+    <section class="cards" aria-label="Featured work">
       <article class="card">
         <h2 class="project-heading">
           <a class="title-link" href="/projects/git-sweaty/">git-sweaty</a>
@@ -167,6 +173,36 @@
           <a class="btn btn-secondary" href="https://github.com/aspain/spainify" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
       </article>
+
+      <article class="card">
+        <h2 class="project-heading">
+          <a class="title-link" href="/travels/">travels</a>
+        </h2>
+        <p>
+          Travel photo stories organized by trip, with one large photo at a time and a live map that follows each stop.
+        </p>
+        <div
+          class="carousel"
+          data-carousel
+          data-carousel-source="travels"
+        >
+          <button class="carousel-btn carousel-prev" type="button" aria-label="Previous travel photo">‹</button>
+          <a class="thumb-link carousel-link" href="images/travels/portugal-atlantic-loop/lisbon-sunset.svg" aria-label="Open travel photo lightbox">
+            <img
+              class="card-thumb carousel-image"
+              src="images/travels/portugal-atlantic-loop/lisbon-sunset.svg"
+              alt="Travel photo from the archive"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <button class="carousel-btn carousel-next" type="button" aria-label="Next travel photo">›</button>
+          <span class="carousel-indicator" aria-live="polite">1 / 1</span>
+        </div>
+        <div class="card-actions card-actions-centered">
+          <a class="btn btn-secondary" href="/travels/#trip-stage">View the Gallery</a>
+        </div>
+      </article>
     </section>
   </main>
 
@@ -211,6 +247,6 @@
     <span class="lightbox-indicator" aria-live="polite"></span>
   </div>
 
-  <script src="script.js?v=20260304-4"></script>
+  <script src="script.js?v=20260305-5"></script>
 </body>
 </html>

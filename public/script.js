@@ -437,23 +437,69 @@
   // Project carousels
   const carouselControllers = new Map();
   const carousels = Array.from(document.querySelectorAll('[data-carousel]'));
-  for (const carousel of carousels) {
-    const images = (carousel.getAttribute('data-images') || '')
+
+  function parseCarouselItems(value) {
+    return String(value || '')
       .split('|')
       .map((item) => item.trim())
       .filter(Boolean);
-    const positions = (carousel.getAttribute('data-positions') || '')
-      .split('|')
-      .map((item) => item.trim())
-      .filter(Boolean);
-    if (!images.length) continue;
+  }
+
+  function buildTravelCarouselData(payload) {
+    const trips = Array.isArray(payload && payload.trips) ? payload.trips.slice() : [];
+    trips.sort((left, right) => String(right.date_start || '').localeCompare(String(left.date_start || '')));
+
+    const photos = trips.flatMap((trip) => {
+      const tripPhotos = Array.isArray(trip && trip.photos) ? trip.photos : [];
+      return tripPhotos
+        .filter((photo) => photo && photo.src)
+        .map((photo) => ({
+          src: photo.src,
+          alt: String(photo.alt || photo.location_name || trip.title || 'Travel photo').trim()
+        }));
+    });
+
+    return {
+      images: photos.map((photo) => photo.src),
+      alts: photos.map((photo) => photo.alt)
+    };
+  }
+
+  async function loadTravelCarouselData() {
+    try {
+      const response = await fetch('/data/travels.json', {
+        cache: 'no-store',
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) return null;
+      const payload = await response.json();
+      const data = buildTravelCarouselData(payload);
+      return data.images.length ? data : null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function initCarousel(carousel, config = {}) {
+    if (carouselControllers.has(carousel)) return carouselControllers.get(carousel);
+
+    const images = Array.isArray(config.images) && config.images.length
+      ? config.images.slice()
+      : parseCarouselItems(carousel.getAttribute('data-images'));
+    const positions = Array.isArray(config.positions) && config.positions.length
+      ? config.positions.slice()
+      : parseCarouselItems(carousel.getAttribute('data-positions'));
+    const alts = Array.isArray(config.alts) && config.alts.length
+      ? config.alts.slice()
+      : parseCarouselItems(carousel.getAttribute('data-alts'));
+    if (!images.length) return null;
 
     const link = carousel.querySelector('.carousel-link');
     const image = carousel.querySelector('.carousel-image');
     const prevButton = carousel.querySelector('.carousel-prev');
     const nextButton = carousel.querySelector('.carousel-next');
     const indicator = carousel.querySelector('.carousel-indicator');
-    if (!link || !image) continue;
+    if (!link || !image) return null;
 
     const peekImage = document.createElement('img');
     peekImage.className = 'card-thumb carousel-image carousel-peek-image';
@@ -472,6 +518,7 @@
       const src = images[index];
       link.href = src;
       image.src = src;
+      image.alt = alts[index] || image.alt || 'Project preview image';
       image.style.objectPosition = positions[index] || 'center center';
       image.style.transition = '';
       image.style.transform = '';
@@ -698,14 +745,28 @@
 
     renderCarousel();
 
-    carouselControllers.set(carousel, {
+    const controller = {
       images,
       total,
       rotate,
       setIndex,
       getIndex: () => index,
-      getAlt: () => image.alt || 'Project preview image'
-    });
+      getAlt: () => alts[index] || image.alt || 'Project preview image'
+    };
+    carouselControllers.set(carousel, controller);
+    return controller;
+  }
+
+  for (const carousel of carousels) {
+    const source = String(carousel.getAttribute('data-carousel-source') || '').trim();
+    if (source === 'travels') {
+      loadTravelCarouselData().then((data) => {
+        if (data) initCarousel(carousel, data);
+      });
+      continue;
+    }
+
+    initCarousel(carousel);
   }
 
   // Thumbnail lightbox

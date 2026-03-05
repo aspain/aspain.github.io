@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Lake Como</title>
+  <desc id="desc">Stylized Lake Como scene with alpine slopes, villas, and reflective water.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#18365f"/>
+      <stop offset="45%" stop-color="#79a6c8"/>
+      <stop offset="100%" stop-color="#f0dfc5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#sky)"/>
+  <path d="M0 460 L190 310 L380 430 L530 260 L760 470 L940 250 L1140 430 L1340 290 L1600 500 L1600 1100 L0 1100 Z" fill="#324f6e"/>
+  <path d="M0 580 L210 430 L410 540 L570 360 L790 560 L980 330 L1180 520 L1370 380 L1600 590 L1600 1100 L0 1100 Z" fill="#456a84"/>
+  <rect y="600" width="1600" height="500" fill="#3f8bb2"/>
+  <path d="M0 760 C250 706, 410 792, 620 754 C860 712, 1040 646, 1260 700 C1380 730, 1490 728, 1600 710 L1600 1100 L0 1100 Z" fill="#6eb9d0"/>
+  <path d="M0 862 C180 836, 360 894, 580 868 C790 844, 980 784, 1200 820 C1360 846, 1480 846, 1600 830 L1600 1100 L0 1100 Z" fill="#a7dde8"/>
+  <g fill="#f5e8d2">
+    <rect x="310" y="575" width="150" height="150" rx="14"/>
+    <rect x="1090" y="560" width="170" height="170" rx="14"/>
+  </g>
+  <g fill="#d8745f">
+    <path d="M290 575 L385 500 L480 575 Z"/>
+    <path d="M1070 560 L1175 480 L1280 560 Z"/>
+  </g>
+  <path d="M760 800 C790 760, 850 760, 880 800 C850 818, 790 818, 760 800 Z" fill="#fff6eb"/>
+  <path d="M790 785 L835 740 L860 785 Z" fill="#f0c87d"/>
+  <text x="120" y="1040" fill="#f4f0ed" font-size="54" font-family="Georgia, serif" letter-spacing="4">LAKE COMO</text>
+</svg>

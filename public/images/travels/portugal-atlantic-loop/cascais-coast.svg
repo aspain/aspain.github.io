@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Cascais Coast</title>
+  <desc id="desc">Stylized Atlantic coastal scene with cliffs, waves, and a bright horizon.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#132d59"/>
+      <stop offset="40%" stop-color="#4f7ea7"/>
+      <stop offset="100%" stop-color="#f6c995"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#sky)"/>
+  <circle cx="1200" cy="260" r="102" fill="#ffe6a4" opacity="0.92"/>
+  <rect y="560" width="1600" height="540" fill="#2d7190"/>
+  <path d="M0 650 C120 620, 220 690, 360 662 C500 634, 600 586, 770 614 C910 638, 980 710, 1150 686 C1320 662, 1460 594, 1600 628 L1600 1100 L0 1100 Z" fill="#3c92b8"/>
+  <path d="M0 730 C160 708, 300 770, 450 740 C600 710, 790 646, 960 700 C1120 752, 1260 732, 1600 796 L1600 1100 L0 1100 Z" fill="#5fb7d4"/>
+  <path d="M0 880 C220 818, 430 876, 620 846 C760 824, 950 760, 1100 806 C1260 856, 1440 848, 1600 884 L1600 1100 L0 1100 Z" fill="#bfe6ef"/>
+  <path d="M0 1100 L0 520 L310 470 L390 540 L520 490 L620 610 L640 1100 Z" fill="#1b2d49"/>
+  <path d="M1180 1100 L1280 690 L1390 610 L1480 690 L1600 660 L1600 1100 Z" fill="#22395a"/>
+  <path d="M760 760 C840 690, 930 690, 1010 760" stroke="#ffffff" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M890 820 C970 748, 1060 748, 1140 820" stroke="#ffffff" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M1020 892 C1100 820, 1190 820, 1270 892" stroke="#ffffff" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <text x="120" y="1040" fill="#f7f2ec" font-size="54" font-family="Georgia, serif" letter-spacing="4">CASCAIS</text>
+</svg>

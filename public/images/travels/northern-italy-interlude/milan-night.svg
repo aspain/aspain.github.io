@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Milan Night</title>
+  <desc id="desc">Stylized Milan evening scene with the Duomo silhouette and city lights.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1737"/>
+      <stop offset="58%" stop-color="#395b8d"/>
+      <stop offset="100%" stop-color="#d6c0ad"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#sky)"/>
+  <circle cx="1210" cy="180" r="88" fill="#fff4d0" opacity="0.92"/>
+  <rect y="740" width="1600" height="360" fill="#10182f"/>
+  <path d="M180 770 L370 490 L470 640 L560 470 L680 770 Z" fill="#f0e6df"/>
+  <path d="M620 770 L760 420 L890 770 Z" fill="#f0e6df"/>
+  <path d="M780 770 L980 500 L1060 620 L1140 455 L1310 770 Z" fill="#f0e6df"/>
+  <g fill="#1c2e58">
+    <rect x="210" y="780" width="120" height="220"/>
+    <rect x="370" y="780" width="80" height="220"/>
+    <rect x="510" y="780" width="160" height="220"/>
+    <rect x="745" y="780" width="110" height="220"/>
+    <rect x="930" y="780" width="160" height="220"/>
+    <rect x="1160" y="780" width="130" height="220"/>
+  </g>
+  <g fill="#ffdfa0">
+    <rect x="238" y="825" width="26" height="36"/>
+    <rect x="278" y="825" width="26" height="36"/>
+    <rect x="548" y="840" width="30" height="40"/>
+    <rect x="592" y="840" width="30" height="40"/>
+    <rect x="770" y="832" width="24" height="38"/>
+    <rect x="970" y="842" width="28" height="40"/>
+    <rect x="1014" y="842" width="28" height="40"/>
+    <rect x="1190" y="836" width="28" height="40"/>
+  </g>
+  <path d="M0 915 C280 870, 560 950, 820 910 C1080 870, 1310 860, 1600 920 L1600 1100 L0 1100 Z" fill="#0d1224"/>
+  <text x="120" y="1040" fill="#f4f0ed" font-size="54" font-family="Georgia, serif" letter-spacing="4">MILAN</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Sintra Hills</title>
+  <desc id="desc">Stylized Sintra hillside scene with a bright palace above the forest.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#203463"/>
+      <stop offset="45%" stop-color="#6b87b0"/>
+      <stop offset="100%" stop-color="#dbe7d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#sky)"/>
+  <circle cx="1220" cy="210" r="92" fill="#fff2c5" opacity="0.85"/>
+  <path d="M0 520 C160 450, 300 480, 470 430 C620 385, 760 350, 930 420 C1070 478, 1240 430, 1405 500 C1490 535, 1545 550, 1600 548 L1600 1100 L0 1100 Z" fill="#33536d"/>
+  <path d="M0 630 C170 560, 300 580, 470 540 C620 505, 760 460, 940 530 C1070 585, 1260 550, 1410 610 C1490 642, 1545 664, 1600 664 L1600 1100 L0 1100 Z" fill="#25445b"/>
+  <path d="M0 730 C170 680, 340 700, 520 660 C680 626, 820 596, 980 654 C1150 716, 1320 692, 1600 760 L1600 1100 L0 1100 Z" fill="#193248"/>
+  <g transform="translate(610 365)">
+    <rect x="120" y="90" width="220" height="210" rx="12" fill="#f8d86d"/>
+    <rect x="0" y="140" width="150" height="160" rx="12" fill="#ef6c64"/>
+    <rect x="340" y="150" width="130" height="150" rx="12" fill="#7b78d4"/>
+    <path d="M104 90 L230 0 L356 90 Z" fill="#ef6c64"/>
+    <path d="M-15 140 L75 62 L165 140 Z" fill="#f8d86d"/>
+    <path d="M325 150 L405 88 L485 150 Z" fill="#f8d86d"/>
+    <rect x="195" y="125" width="70" height="175" fill="#f4f0ed"/>
+    <rect x="45" y="190" width="42" height="54" fill="#f4f0ed"/>
+    <rect x="385" y="190" width="34" height="48" fill="#f4f0ed"/>
+  </g>
+  <g fill="#406f55">
+    <circle cx="280" cy="770" r="118"/>
+    <circle cx="410" cy="805" r="102"/>
+    <circle cx="565" cy="764" r="132"/>
+    <circle cx="1010" cy="792" r="126"/>
+    <circle cx="1175" cy="824" r="114"/>
+    <circle cx="1330" cy="775" r="124"/>
+  </g>
+  <g fill="#2d5942">
+    <circle cx="220" cy="820" r="96"/>
+    <circle cx="510" cy="850" r="86"/>
+    <circle cx="915" cy="850" r="106"/>
+    <circle cx="1260" cy="865" r="92"/>
+  </g>
+  <text x="120" y="1040" fill="#f4f0ed" font-size="54" font-family="Georgia, serif" letter-spacing="4">SINTRA</text>
+</svg>
