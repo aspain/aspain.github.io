@@ -140,7 +140,7 @@ body.lightbox-open {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 14px;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 .breadcrumbs a {
@@ -154,7 +154,7 @@ body.lightbox-open {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(30px, 5vw, 48px);
+  font-size: clamp(18px, 2.4vw, 24px);
   line-height: 1.05;
   letter-spacing: 0.01em;
 }
@@ -168,29 +168,23 @@ body.lightbox-open {
 
 .hero p {
   margin: 14px 0 0;
-  max-width: 72ch;
+  max-width: none;
   color: var(--text-muted);
-  font-size: clamp(15px, 2vw, 18px);
-  line-height: 1.55;
+  font-size: clamp(12px, 1.45vw, 14px);
+  line-height: 1.5;
 }
 
-.meta-row {
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
+.hero ul {
+  margin: 10px 0 0;
+  max-width: none;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: clamp(12px, 1.45vw, 14px);
+  line-height: 1.5;
 }
 
-.pill {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(180, 215, 255, 0.3);
-  background: rgba(8, 23, 48, 0.72);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  color: rgba(232, 243, 255, 0.9);
+.hero li + li {
+  margin-top: 4px;
 }
 
 .repo-stars {
@@ -206,7 +200,7 @@ body.lightbox-open {
   border: 1px solid rgba(180, 215, 255, 0.3);
   background: rgba(8, 23, 48, 0.72);
   border-radius: 999px;
-  padding: 6px 10px;
+  padding: 5px 8px;
   line-height: 1;
   white-space: nowrap;
   transform: translateY(7px);
@@ -219,7 +213,7 @@ body.lightbox-open {
 }
 
 .repo-star-count {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -240,13 +234,18 @@ body.lightbox-open {
   border: 1px solid rgba(210, 235, 255, 0.2);
   text-decoration: none;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.94);
   background: rgba(210, 235, 255, 0.1);
 }
 
 .btn.secondary {
   background: rgba(114, 147, 190, 0.17);
+}
+
+.hero .btn {
+  padding: 8px 12px;
+  font-size: 11px;
 }
 
 .projects-archive .cards {
@@ -419,7 +418,7 @@ body.lightbox-open {
 .content-grid {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 14px;
   align-items: stretch;
 }
@@ -433,14 +432,31 @@ body.lightbox-open {
 
 .section h2 {
   margin: 0 0 10px;
-  font-size: clamp(20px, 2.6vw, 30px);
+  font-size: clamp(13px, 1.35vw, 16px);
 }
 
 .section p,
 .section li {
   color: var(--text-muted);
   line-height: 1.55;
-  font-size: 15px;
+  font-size: 14px;
+}
+
+.hero p a,
+.hero li a,
+.section p a,
+.section li a {
+  color: #89deff;
+  font-weight: 600;
+  text-decoration-color: rgba(137, 222, 255, 0.88);
+  text-underline-offset: 2px;
+}
+
+.hero p a:visited,
+.hero li a:visited,
+.section p a:visited,
+.section li a:visited {
+  color: #9be6ff;
 }
 
 .section p.list-intro-tight {
@@ -454,6 +470,10 @@ body.lightbox-open {
 .section ul {
   margin: 10px 0 0;
   padding-left: 18px;
+}
+
+.section li > ul {
+  margin-top: 0;
 }
 
 .section code {
@@ -479,6 +499,8 @@ body.lightbox-open {
 
 .code-block code {
   display: block;
+  font-size: 12px;
+  line-height: 1.4;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -551,7 +573,7 @@ body.lightbox-open {
 
 .gallery h2 {
   margin: 0 0 12px;
-  font-size: clamp(20px, 2.4vw, 28px);
+  font-size: clamp(13px, 1.25vw, 15px);
 }
 
 .carousel {
@@ -655,18 +677,23 @@ body.lightbox-open {
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(8, 16, 32, 0.72);
   color: rgba(255, 255, 255, 0.94);
-  font-size: 12px;
+  font-size: 11px;
   padding: 4px 10px;
 }
 
 .quick-links {
   margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .quick-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  white-space: nowrap;
   border-radius: 12px;
   border: 1px solid rgba(174, 214, 255, 0.24);
   background: rgba(8, 24, 50, 0.58);
@@ -674,7 +701,7 @@ body.lightbox-open {
   text-decoration: none;
   color: rgba(236, 247, 255, 0.92);
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .projects-archive .content-grid .section > p {
@@ -699,7 +726,7 @@ body.lightbox-open {
   padding: 14px;
   text-align: center;
   color: rgba(213, 231, 250, 0.78);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .site-footer a {
@@ -876,7 +903,12 @@ body.lightbox-open {
   }
 
   .quick-links {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quick-links a {
+    width: 100%;
   }
 
   .projects-archive .cards .card {
@@ -935,6 +967,10 @@ body.lightbox-open {
 
   .code-block.code-block-copy {
     grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .code-block code {
+    font-size: 11px;
   }
 
   .copy-btn {

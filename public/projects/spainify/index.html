@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="stylesheet" href="../../project.css?v=20260304-11" />
+  <link rel="stylesheet" href="../../project.css?v=20260305-9" />
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -112,17 +112,18 @@
           <span class="repo-star-count" data-star-count>-</span>
         </a>
       </div>
-      <p>
-        spainify is a Raspberry Pi home media hub that combines a Spotify and Sonos now-playing display, Sonos controls,
-        a local weather forecast, and iOS shortcut-friendly APIs for one-tap household automations.
-      </p>
-      <div class="meta-row" aria-label="Project metadata">
-        <span class="pill">Raspberry Pi home media hub</span>
-        <span class="pill">Spotify + Sonos control stack</span>
-        <span class="pill">Local network automations</span>
-      </div>
+      <p>spainify is a set of apps and services hosted locally on a Raspberry Pi, with features including:</p>
+      <ul>
+        <li>Sonos and Spotify now-playing LCD: shows artist, track title, and album art, with a dynamic background color pulled from the artwork</li>
+        <li>Local weather dashboard: shows the local forecast during a scheduled window using the free OpenWeather API</li>
+        <li>Custom local network endpoints: lets you add the currently playing song to a Spotify playlist from a one-tap iOS shortcut, with duplicate protection</li>
+        <li>Full Sonos controls: group and ungroup rooms, adjust volume, and play, pause, or skip tracks from iOS shortcuts</li>
+        <li>Sonos presets: bundles multi-step actions (group rooms, set volume, queue a playlist, enable shuffle, etc.) into a single iOS shortcut</li>
+        <li>Automatic display sleep and wake: triggered by playback state and schedule</li>
+      </ul>
       <div class="cta-row">
         <a class="btn" href="https://github.com/aspain/spainify" target="_blank" rel="noopener noreferrer">View Repository</a>
+        <a class="btn secondary" href="https://github.com/aspain/spainify/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read Full README</a>
         <a class="btn secondary" href="/projects/git-sweaty/">See git-sweaty Project</a>
       </div>
     </header>
@@ -152,22 +153,9 @@
 
     <div class="content-grid" aria-label="Project details">
       <section class="section glass">
-        <h2>What spainify Does</h2>
-        <p>spainify is a set of apps and services hosted locally on a Raspberry Pi, with features including:</p>
-        <ul>
-          <li>Sonos and Spotify now-playing LCD: shows artist, track title, and album art, with a dynamic background color pulled from the artwork</li>
-          <li>Local weather dashboard: shows the local forecast during a scheduled window using the free OpenWeather API</li>
-          <li>Custom local network endpoints: lets you add the currently playing song to a Spotify playlist from a one-tap iOS shortcut, with duplicate protection</li>
-          <li>Full Sonos controls: group and ungroup rooms, adjust volume, and play, pause, or skip tracks from iOS shortcuts</li>
-          <li>Sonos presets: bundles multi-step actions (group rooms, set volume, queue a playlist, enable shuffle, etc.) into a single iOS shortcut</li>
-          <li>Automatic display sleep and wake: triggered by playback state and schedule</li>
-        </ul>
-      </section>
-
-      <section class="section glass">
         <h2>Setup and Update Flow</h2>
         <p>
-          The README documents a first-time setup path that clones the repo and runs a remote setup script over SSH.
+          The <a href="https://github.com/aspain/spainify/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a> documents a first-time setup path that clones the repo and runs a remote setup script over SSH.
           During setup, you configure service choices, OpenWeather credentials, and optional Spotify app credentials for media-actions endpoints.
         </p>
         <div
@@ -205,7 +193,7 @@
         <div class="quick-links">
           <a href="https://github.com/aspain/spainify" target="_blank" rel="noopener noreferrer">Repository</a>
           <a href="https://github.com/aspain/spainify/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
-          <a href="https://github.com/aspain/spainify/tree/main/scripts" target="_blank" rel="noopener noreferrer">Scripts</a>
+          <a href="https://www.icloud.com/shortcuts/511ff5126be2452d8369935922f43e97" target="_blank" rel="noopener noreferrer">add song to playlist iOS shortcut</a>
           <a href="https://github.com/aspain/spainify?tab=readme-ov-file#hardware-requirements" target="_blank" rel="noopener noreferrer">Hardware Requirements</a>
         </div>
       </section>

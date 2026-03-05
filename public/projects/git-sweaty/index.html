@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="stylesheet" href="../../project.css?v=20260304-11" />
+  <link rel="stylesheet" href="../../project.css?v=20260305-9" />
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -113,18 +113,21 @@
         </a>
       </div>
       <p>
-        git-sweaty turns your Strava or Garmin workout history into GitHub-style contribution graphs and an interactive dashboard.
-        Setup is quick and easy, and once configured, the dashboard updates daily automatically through GitHub Actions so your dashboard stays current.
-        All hosted on GitHub Pages for free.
+        git-sweaty is for people who track workouts and want an interactive dashboard without building a custom data pipeline.
+        It supports importing activities from Strava or Garmin, normalizes activity types, and publishes to GitHub Pages with intuitive filters and detailed hover tooltips.
       </p>
-      <div class="meta-row" aria-label="Project metadata">
-        <span class="pill">Strava + Garmin data</span>
-        <span class="pill">GitHub Pages deployment</span>
-        <span class="pill">Daily sync automation</span>
-      </div>
+      <p><strong>Key features:</strong></p>
+      <ul>
+        <li>The quick-start flow can create or reuse an existing repository fork, configure repository variables, and guide provider authorization</li>
+        <li>You can switch between Strava or Garmin as the data source at any time</li>
+        <li>Works on desktop and mobile</li>
+        <li>Refreshes daily through scheduled GitHub Actions to pick up recent activities</li>
+        <li>Completely free: the dashboard is hosted on GitHub Pages</li>
+      </ul>
       <div class="cta-row">
         <a class="btn" href="https://github.com/aspain/git-sweaty" target="_blank" rel="noopener noreferrer">View Repository</a>
         <a class="btn secondary" href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read Full README</a>
+        <a class="btn secondary" href="https://adamspain.com/git-sweaty/" target="_blank" rel="noopener noreferrer">Example Dashboard</a>
         <a class="btn secondary" href="/projects/spainify/">See spainify Project</a>
       </div>
     </header>
@@ -153,25 +156,8 @@
 
     <div class="content-grid" aria-label="Project details">
       <section class="section glass">
-        <h2>What git-sweaty Does</h2>
-        <p>
-          This project is built for people who track workouts and want an interactive activity dashboard without building their own data pipeline.
-          It supports both Strava and Garmin as data sources, fetches activity history, normalizes activity types, and publishes an interactive dashboard to GitHub Pages.
-          The dashboard contains many clickable filter options, and hovering over the graphs displays tooltips with additional activity detail.
-        </p>
-        <p>
-          The quick start workflow supports a recommended setup mode that can create or reuse a GitHub fork, configure repository variables, and guide credentials for provider authorization.
-          You can switch providers later, rerun setup, and optionally force a one-time full backfill.
-        </p>
-        <p>
-          The dashboard is 100% free to set up and run, and is hosted on GitHub Pages.
-          It automatically refreshes daily via scheduled GitHub Actions. The dashboard is desktop and mobile friendly.
-        </p>
-      </section>
-
-      <section class="section glass">
         <h2>Quick Start Command</h2>
-        <p>From the project README, this is the main one-command setup path for macOS and Linux:</p>
+        <p>From the project <a href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>, this is the main one-command setup path for macOS and Linux:</p>
         <div
           class="code-block code-block-copy"
           data-copy-text="bash &lt;(curl -fsSL https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh)"
@@ -187,19 +173,27 @@
         </div>
         <p class="list-intro-tight">During the initial setup, options include:</p>
         <ul>
+          <li>
+            Setup mode:
+            <ul>
+              <li>Online-only - no local clone required, automatically creates or uses an existing fork</li>
+              <li>Advanced - use a local clone or fork + clone</li>
+            </ul>
+          </li>
+          <li>GitHub Pages custom domain (if you have one, for example yoursite.example.com)</li>
           <li>Data source (Strava or Garmin)</li>
           <li>Unit preference (US or metric)</li>
           <li>Week start (Sunday or Monday)</li>
-          <li>Add your Strava or Garmin profile link to the dashboard</li>
-          <li>Add direct links to activities in the graph tooltips</li>
+          <li>Add your Strava or Garmin profile link to the dashboard (Yes/No)</li>
+          <li>Add direct links to activities in the graph tooltips (Yes/No)</li>
         </ul>
 
         <h2 class="links-heading">Useful Links</h2>
         <div class="quick-links">
           <a href="https://github.com/aspain/git-sweaty" target="_blank" rel="noopener noreferrer">Repository</a>
           <a href="https://github.com/aspain/git-sweaty/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
-          <a href="https://raw.githubusercontent.com/aspain/git-sweaty/main/scripts/bootstrap.sh" target="_blank" rel="noopener noreferrer">Bootstrap Script</a>
-          <a href="https://github.com/aspain/git-sweaty/actions/workflows/sync.yml" target="_blank" rel="noopener noreferrer">Sync Workflow</a>
+          <a href="https://adamspain.com/git-sweaty/" target="_blank" rel="noopener noreferrer">Example Dashboard</a>
+          <a href="https://www.strava.com/settings/api" target="_blank" rel="noopener noreferrer">Set up Strava API App</a>
         </div>
       </section>
     </div>
