@@ -445,11 +445,20 @@
       .filter(Boolean);
   }
 
+  function shuffleItems(items) {
+    const shuffled = items.slice();
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+    }
+    return shuffled;
+  }
+
   function buildTravelCarouselData(payload) {
     const trips = Array.isArray(payload && payload.trips) ? payload.trips.slice() : [];
     trips.sort((left, right) => String(right.date_start || '').localeCompare(String(left.date_start || '')));
 
-    const photos = trips.flatMap((trip) => {
+    const photos = shuffleItems(trips.flatMap((trip) => {
       const tripPhotos = Array.isArray(trip && trip.photos) ? trip.photos : [];
       return tripPhotos
         .filter((photo) => photo && photo.src)
@@ -457,7 +466,7 @@
           src: photo.src,
           alt: String(photo.alt || photo.location_name || trip.title || 'Travel photo').trim()
         }));
-    });
+    }));
 
     return {
       images: photos.map((photo) => photo.src),

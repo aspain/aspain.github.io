@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/travels.css?v=20260305-10" />
+  <link rel="stylesheet" href="/travels.css?v=20260305-11" />
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -111,7 +111,6 @@
           <aside class="map-panel" aria-label="Map view">
             <div class="map-panel-header">
               <h3 id="map-title">Current stop</h3>
-              <p class="map-status" id="map-status">Map synced to current photo</p>
             </div>
             <div class="map-card">
               <div class="map-frame" id="map-frame">
@@ -138,11 +137,14 @@
     <button class="travel-lightbox-nav travel-lightbox-prev" id="travel-lightbox-prev" type="button" aria-label="Previous photo">Previous</button>
     <img class="travel-lightbox-image" id="travel-lightbox-image" src="" alt="" />
     <button class="travel-lightbox-nav travel-lightbox-next" id="travel-lightbox-next" type="button" aria-label="Next photo">Next</button>
-    <span class="travel-lightbox-indicator" id="travel-lightbox-indicator" aria-live="polite"></span>
+    <span class="travel-lightbox-indicator" id="travel-lightbox-indicator" aria-live="polite" hidden>
+      <span class="travel-lightbox-indicator-title" id="travel-lightbox-indicator-title"></span>
+      <span class="travel-lightbox-indicator-count" id="travel-lightbox-indicator-count"></span>
+    </span>
   </div>
 
-  <script src="/script.js?v=20260304-4"></script>
+  <script src="/script.js?v=20260305-6"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
-  <script src="/travels.js?v=20260305-9"></script>
+  <script src="/travels.js?v=20260305-10"></script>
 </body>
 </html>
