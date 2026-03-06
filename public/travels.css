@@ -419,6 +419,7 @@ body.lightbox-open {
   background: transparent;
   cursor: pointer;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .hero-image,
@@ -430,6 +431,7 @@ body.lightbox-open {
   display: block;
   object-fit: contain;
   object-position: center center;
+  touch-action: pan-y;
 }
 
 .hero-image-preview {
@@ -655,14 +657,22 @@ body.lightbox-open {
   display: block;
   border-radius: 16px;
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.52);
+  cursor: pointer;
   touch-action: pinch-zoom;
   grid-area: 1 / 1;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 .travel-lightbox-peek-image {
   pointer-events: none;
   box-shadow: none;
   opacity: 0;
+}
+
+.travel-lightbox.is-zoomed .travel-lightbox-image {
+  cursor: pointer;
 }
 
 .travel-lightbox-peek-image[hidden] {

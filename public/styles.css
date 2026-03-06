@@ -426,9 +426,10 @@ body.lightbox-open{
 .repo-stars{
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.333em;
   flex-shrink: 0;
-  padding: 6px 10px;
+  font-size: 12px;
+  padding: 0.5em 0.833em;
   border: 1px solid rgba(180, 215, 255, 0.3);
   background: rgba(8, 23, 48, 0.72);
   border-radius: 999px;
@@ -445,13 +446,13 @@ body.lightbox-open{
 }
 
 .repo-star-icon{
-  width: 12px;
-  height: 12px;
+  width: 1em;
+  height: 1em;
   fill: #f1e05a;
 }
 
 .repo-star-count{
-  font-size: 12px;
+  font-size: 1em;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -567,8 +568,12 @@ body.lightbox-open{
   border-radius: 12px;
   border: 0;
   box-shadow: 0 20px 48px rgba(0,0,0,0.52);
+  cursor: pointer;
   touch-action: pinch-zoom;
   grid-area: 1 / 1;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 .lightbox-peek-image{
@@ -577,6 +582,10 @@ body.lightbox-open{
   border: 0;
   box-shadow: none;
   opacity: 0;
+}
+
+.lightbox.is-zoomed .lightbox-image{
+  cursor: pointer;
 }
 
 .lightbox-peek-image[hidden]{

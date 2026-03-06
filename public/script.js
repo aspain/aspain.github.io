@@ -427,12 +427,9 @@
 
   const CAROUSEL_SWIPE_THRESHOLD = 44;
   const CAROUSEL_SWIPE_MAX_VERTICAL = 42;
-  const LIGHTBOX_CLOSE_SWIPE_THRESHOLD = 96;
   const SWIPE_DIRECTION_LOCK_PX = 10;
-  const LIGHTBOX_NAV_SWIPE_THRESHOLD = 56;
   const CAROUSEL_SWIPE_OUT_MS = 150;
   const CAROUSEL_SWIPE_IN_MS = 180;
-  const LIGHTBOX_SWIPE_MS = 180;
 
   // Project carousels
   const carouselControllers = new Map();
@@ -760,7 +757,19 @@
       rotate,
       setIndex,
       getIndex: () => index,
-      getAlt: () => alts[index] || image.alt || 'Project preview image'
+      getAlt: () => alts[index] || image.alt || 'Project preview image',
+      getCurrentItem: () => ({
+        src: images[index],
+        alt: alts[index] || image.alt || 'Project preview image'
+      }),
+      getAdjacentItem: (direction) => {
+        const nextIndex = ((index + direction) % total + total) % total;
+        return {
+          src: images[nextIndex],
+          alt: alts[nextIndex] || image.alt || 'Project preview image'
+        };
+      },
+      getIndicatorText: () => `${index + 1} / ${total}`
     };
     carouselControllers.set(carousel, controller);
     return controller;
@@ -785,193 +794,62 @@
   const lightboxPrev = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
   const lightboxNext = lightbox ? lightbox.querySelector('.lightbox-next') : null;
   const lightboxIndicator = lightbox ? lightbox.querySelector('.lightbox-indicator') : null;
-  const lightboxPeekImage = (lightbox && lightboxImage instanceof HTMLElement)
-    ? (() => {
-      const preview = document.createElement('img');
-      preview.className = 'lightbox-image lightbox-peek-image';
-      preview.alt = '';
-      preview.decoding = 'async';
-      preview.loading = 'eager';
-      preview.draggable = false;
-      preview.hidden = true;
-      preview.setAttribute('aria-hidden', 'true');
-      lightbox.append(preview);
-      return preview;
-    })()
-    : null;
-
-  const lightboxState = {
-    controller: null,
-    index: 0,
-    src: '',
-    alt: '',
-    previouslyFocused: null,
-    touchActive: false,
-    touchStartX: 0,
-    touchStartY: 0,
-    touchLastX: 0,
-    touchLastY: 0,
-    touchGesture: null,
-    touchPreviewIndex: -1
-  };
-
-  function clearLightboxSwipeStyles() {
-    if (!lightboxImage || !(lightboxImage instanceof HTMLElement)) return;
-    lightboxImage.style.transition = '';
-    lightboxImage.style.transform = '';
-    lightboxImage.style.opacity = '';
-    if (lightboxPeekImage instanceof HTMLElement) {
-      lightboxPeekImage.style.transition = '';
-      lightboxPeekImage.style.transform = '';
-      lightboxPeekImage.style.opacity = '';
-      lightboxPeekImage.hidden = true;
-      lightboxPeekImage.removeAttribute('src');
-      lightboxState.touchPreviewIndex = -1;
-    }
-  }
-
-  function resetLightboxGestureState() {
-    lightboxState.touchActive = false;
-    lightboxState.touchStartX = 0;
-    lightboxState.touchStartY = 0;
-    lightboxState.touchLastX = 0;
-    lightboxState.touchLastY = 0;
-    lightboxState.touchGesture = null;
-    lightboxState.touchPreviewIndex = -1;
-  }
-
-  function setLightboxPreviewImage(previewIndex) {
-    if (!lightboxPeekImage || !lightboxState.controller) return;
-    if (lightboxState.touchPreviewIndex === previewIndex && !lightboxPeekImage.hidden) return;
-    lightboxState.touchPreviewIndex = previewIndex;
-    lightboxPeekImage.src = lightboxState.controller.images[previewIndex];
-    lightboxPeekImage.alt = '';
-    lightboxPeekImage.hidden = false;
-  }
-
-  function applyLightboxHorizontalPreview(deltaX) {
-    if (!lightboxPeekImage || !lightboxState.controller || !lightboxImage) return;
-    if (lightboxState.controller.total <= 1) return;
-
-    const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
-    const swipeSign = deltaX < 0 ? -1 : 1;
-    const direction = swipeSign < 0 ? 1 : -1;
-    const previewIndex = ((lightboxState.index + direction) % lightboxState.controller.total + lightboxState.controller.total) % lightboxState.controller.total;
-    setLightboxPreviewImage(previewIndex);
-
-    const scale = Math.max(0.95, 1 - (Math.abs(deltaX) / 2400));
-    lightboxImage.style.transform = `translate3d(${deltaX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(3)})`;
-    lightboxPeekImage.style.transition = 'none';
-    lightboxPeekImage.style.transform = `translate3d(${(deltaX - (swipeSign * width)).toFixed(2)}px, 0, 0) scale(1)`;
-    lightboxPeekImage.style.opacity = '1';
-  }
-
-  function animateLightboxSnapBack(deltaX = 0) {
-    if (!lightboxImage) return;
-    const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
-    const swipeSign = deltaX < 0 ? -1 : 1;
-
-    if (lightboxPeekImage && !lightboxPeekImage.hidden) {
-      lightboxPeekImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
-      lightboxPeekImage.style.transform = `translate3d(${Math.round(-swipeSign * width)}px, 0, 0) scale(1)`;
-      lightboxPeekImage.style.opacity = '0';
-    }
-
-    lightboxImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease`;
-    lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
-    window.setTimeout(clearLightboxSwipeStyles, LIGHTBOX_SWIPE_MS + 25);
-  }
-
-  function getLightboxFocusableElements() {
-    if (!lightbox) return [];
-    return Array.from(lightbox.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])'))
-      .filter((element) => (
-        element instanceof HTMLElement
-        && !element.hasAttribute('disabled')
-        && element.getAttribute('aria-hidden') !== 'true'
-        && element.offsetParent !== null
-      ));
-  }
-
-  function syncLightbox() {
-    if (!lightbox || !lightboxImage) return;
-    clearLightboxSwipeStyles();
-
-    if (lightboxState.controller) {
-      const total = lightboxState.controller.total;
-      lightboxState.index = lightboxState.controller.setIndex(lightboxState.index);
-      const src = lightboxState.controller.images[lightboxState.index];
-      lightboxImage.src = src;
-      lightboxImage.alt = lightboxState.alt || lightboxState.controller.getAlt();
-
-      const hasMultiple = total > 1;
-      if (lightboxPrev) lightboxPrev.style.display = hasMultiple ? 'inline-flex' : 'none';
-      if (lightboxNext) lightboxNext.style.display = hasMultiple ? 'inline-flex' : 'none';
-      if (lightboxIndicator) {
-        lightboxIndicator.style.display = hasMultiple ? 'inline-block' : 'none';
-        lightboxIndicator.textContent = `${lightboxState.index + 1} / ${total}`;
+  const lightboxController = typeof window.createPortfolioLightbox === 'function'
+    ? window.createPortfolioLightbox({
+      root: lightbox,
+      image: lightboxImage,
+      closeButton: lightboxClose,
+      prevButton: lightboxPrev,
+      nextButton: lightboxNext,
+      indicator: lightboxIndicator,
+      peekImageClassName: 'lightbox-image lightbox-peek-image',
+      maxWidth: 1200,
+      renderIndicator: ({ indicator: node, source }) => {
+        if (!node) return;
+        node.textContent = typeof source.getIndicatorText === 'function'
+          ? source.getIndicatorText()
+          : '';
+      },
+      clearIndicator: () => {
+        if (lightboxIndicator) lightboxIndicator.textContent = '';
       }
-      return;
+    })
+    : { open() {}, close() {}, isOpen() { return false; } };
+
+  function createCarouselLightboxSource(controller, fallbackSrc, fallbackAlt) {
+    if (controller) {
+      return {
+        getCurrentItem: () => controller.getCurrentItem(),
+        getAdjacentItem: (direction) => controller.getAdjacentItem(direction),
+        getTotal: () => controller.total,
+        step: (delta) => {
+          controller.rotate(delta);
+        },
+        getIndicatorText: () => controller.getIndicatorText()
+      };
     }
 
-    lightboxImage.src = lightboxState.src;
-    lightboxImage.alt = lightboxState.alt || 'Project preview image';
-    if (lightboxPrev) lightboxPrev.style.display = 'none';
-    if (lightboxNext) lightboxNext.style.display = 'none';
-    if (lightboxIndicator) lightboxIndicator.style.display = 'none';
-  }
-
-  function openLightbox(src, altText, controller, index) {
-    if (!lightbox || !lightboxImage) return;
-    lightboxState.previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    lightboxState.controller = controller || null;
-    lightboxState.index = Number.isInteger(index) ? index : 0;
-    lightboxState.src = src;
-    lightboxState.alt = altText || 'Project preview image';
-    syncLightbox();
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lightbox-open');
-    if (lightboxClose instanceof HTMLElement) {
-      lightboxClose.focus();
-    } else {
-      lightbox.focus();
-    }
-  }
-
-  function closeLightbox() {
-    if (!lightbox || !lightboxImage) return;
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('lightbox-open');
-    clearLightboxSwipeStyles();
-    lightboxImage.removeAttribute('src');
-    lightboxImage.removeAttribute('alt');
-    lightboxState.controller = null;
-    lightboxState.index = 0;
-    lightboxState.src = '';
-    lightboxState.alt = '';
-    resetLightboxGestureState();
-    if (lightboxState.previouslyFocused && typeof lightboxState.previouslyFocused.focus === 'function') {
-      lightboxState.previouslyFocused.focus();
-    }
-    lightboxState.previouslyFocused = null;
+    const singleItem = {
+      src: fallbackSrc,
+      alt: fallbackAlt || 'Project preview image'
+    };
+    return {
+      getCurrentItem: () => singleItem,
+      getAdjacentItem: () => singleItem,
+      getTotal: () => 1,
+      step() {},
+      getIndicatorText: () => ''
+    };
   }
 
   function resetPageState() {
     window.scrollTo(0, 0);
     resetTrackEyes();
-    closeLightbox();
+    lightboxController.close();
 
     for (const controller of carouselControllers.values()) {
       controller.setIndex(0);
     }
-  }
-
-  function stepLightbox(delta) {
-    if (!lightboxState.controller) return;
-    lightboxState.index = lightboxState.controller.rotate(delta);
-    syncLightbox();
   }
 
   document.addEventListener('click', (e) => {
@@ -990,179 +868,10 @@
     e.preventDefault();
     const preview = thumbLink.querySelector('img');
     const controller = carousel ? carouselControllers.get(carousel) : null;
-    const currentIndex = controller ? controller.getIndex() : 0;
-    openLightbox(thumbLink.href, preview ? preview.alt : '', controller || null, currentIndex);
-  });
-
-  if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-  }
-
-  if (lightboxClose) {
-    lightboxClose.addEventListener('click', closeLightbox);
-  }
-
-  if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', (e) => {
-      e.preventDefault();
-      stepLightbox(-1);
-    });
-  }
-
-  if (lightboxNext) {
-    lightboxNext.addEventListener('click', (e) => {
-      e.preventDefault();
-      stepLightbox(1);
-    });
-  }
-
-  if (lightbox && lightboxImage instanceof HTMLElement) {
-    lightboxImage.addEventListener('touchstart', (event) => {
-      if (!lightbox.classList.contains('is-open')) return;
-      if (event.touches.length > 1) {
-        resetLightboxGestureState();
-        clearLightboxSwipeStyles();
-        return;
-      }
-      const touch = event.touches[0];
-      if (!touch) return;
-      lightboxState.touchActive = true;
-      lightboxState.touchStartX = touch.clientX;
-      lightboxState.touchStartY = touch.clientY;
-      lightboxState.touchLastX = touch.clientX;
-      lightboxState.touchLastY = touch.clientY;
-      lightboxState.touchGesture = null;
-      lightboxImage.style.transition = 'none';
-    }, { passive: true });
-
-    lightboxImage.addEventListener('touchmove', (event) => {
-      if (event.touches.length > 1) {
-        resetLightboxGestureState();
-        clearLightboxSwipeStyles();
-        return;
-      }
-      if (!lightboxState.touchActive) return;
-      const touch = event.touches[0];
-      if (!touch) return;
-      lightboxState.touchLastX = touch.clientX;
-      lightboxState.touchLastY = touch.clientY;
-      const deltaX = touch.clientX - lightboxState.touchStartX;
-      const deltaY = touch.clientY - lightboxState.touchStartY;
-
-      if (!lightboxState.touchGesture) {
-        if (Math.abs(deltaX) < SWIPE_DIRECTION_LOCK_PX && Math.abs(deltaY) < SWIPE_DIRECTION_LOCK_PX) return;
-        lightboxState.touchGesture = Math.abs(deltaX) > Math.abs(deltaY) * 1.1 ? 'horizontal' : 'vertical';
-      }
-
-      if (lightboxState.touchGesture === 'horizontal') {
-        event.preventDefault();
-        applyLightboxHorizontalPreview(deltaX);
-        return;
-      }
-
-      event.preventDefault();
-      const absY = Math.abs(deltaY);
-      const scale = Math.max(0.92, 1 - (absY / 1200));
-      lightboxImage.style.transform = `translate3d(0, ${deltaY}px, 0) scale(${scale.toFixed(3)})`;
-    }, { passive: false });
-
-    lightboxImage.addEventListener('touchend', (event) => {
-      if (!lightboxState.touchActive) return;
-      const touch = event.changedTouches[0];
-      const endX = touch ? touch.clientX : lightboxState.touchLastX;
-      const endY = touch ? touch.clientY : lightboxState.touchLastY;
-      const deltaX = endX - lightboxState.touchStartX;
-      const deltaY = endY - lightboxState.touchStartY;
-      const gesture = lightboxState.touchGesture;
-      resetLightboxGestureState();
-
-      if (gesture === 'horizontal') {
-        const hasCarousel = !!(lightboxState.controller && lightboxState.controller.total > 1);
-        if (hasCarousel && Math.abs(deltaX) >= LIGHTBOX_NAV_SWIPE_THRESHOLD) {
-          const width = lightboxImage.clientWidth || Math.min(window.innerWidth * 0.92, 1200);
-          const swipeSign = deltaX < 0 ? -1 : 1;
-          if (lightboxPeekImage && lightboxPeekImage.hidden) {
-            applyLightboxHorizontalPreview(deltaX);
-          }
-
-          lightboxImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
-          lightboxImage.style.transform = `translate3d(${Math.round(swipeSign * width)}px, 0, 0) scale(0.98)`;
-          lightboxImage.style.opacity = '0.6';
-
-          if (lightboxPeekImage && !lightboxPeekImage.hidden) {
-            lightboxPeekImage.style.transition = `transform ${LIGHTBOX_SWIPE_MS}ms ease, opacity ${LIGHTBOX_SWIPE_MS}ms ease`;
-            lightboxPeekImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
-            lightboxPeekImage.style.opacity = '1';
-          }
-
-          window.setTimeout(() => {
-            stepLightbox(deltaX < 0 ? 1 : -1);
-            clearLightboxSwipeStyles();
-          }, LIGHTBOX_SWIPE_MS + 10);
-          return;
-        }
-
-        animateLightboxSnapBack(deltaX);
-        return;
-      }
-
-      const isCloseSwipe = (
-        Math.abs(deltaY) >= LIGHTBOX_CLOSE_SWIPE_THRESHOLD
-        && Math.abs(deltaY) > Math.abs(deltaX) * 1.1
-      );
-
-      if (isCloseSwipe) {
-        closeLightbox();
-        return;
-      }
-
-      lightboxImage.style.transition = 'transform 180ms ease';
-      lightboxImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
-      window.setTimeout(clearLightboxSwipeStyles, 220);
-    }, { passive: true });
-
-    lightboxImage.addEventListener('touchcancel', () => {
-      if (!lightboxState.touchActive) return;
-      const deltaX = lightboxState.touchLastX - lightboxState.touchStartX;
-      resetLightboxGestureState();
-      animateLightboxSnapBack(deltaX);
-    }, { passive: true });
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if (!lightbox || !lightbox.classList.contains('is-open')) return;
-    if (e.key === 'Escape') {
-      closeLightbox();
-      return;
-    }
-    if (e.key === 'ArrowLeft') {
-      stepLightbox(-1);
-      return;
-    }
-    if (e.key === 'ArrowRight') {
-      stepLightbox(1);
-      return;
-    }
-    if (e.key === 'Tab') {
-      const focusable = getLightboxFocusableElements();
-      if (!focusable.length) {
-        e.preventDefault();
-        lightbox.focus();
-        return;
-      }
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement;
-      if (e.shiftKey && active === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
+    lightboxController.open(
+      createCarouselLightboxSource(controller, thumbLink.href, preview ? preview.alt : ''),
+      thumbLink
+    );
   });
 
   window.addEventListener('load', resetPageState, { once: true });

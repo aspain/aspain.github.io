@@ -6,8 +6,17 @@
       "summary": "",
       "date_start": "2023-01-01",
       "date_end": "2023-01-01",
-      "cover_image": "/images/travels/puerto-rico-2023/el-yunque-overlook.jpg",
+      "cover_image": "/images/travels/puerto-rico-2023/palm-canopy-overlook.jpg",
       "photos": [
+        {
+          "id": "palm-canopy-overlook",
+          "src": "/images/travels/puerto-rico-2023/palm-canopy-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "El Yunque National Forest, Puerto Rico",
+          "lat": 18.3006,
+          "lng": -65.7962
+        },
         {
           "id": "el-yunque-overlook",
           "src": "/images/travels/puerto-rico-2023/el-yunque-overlook.jpg",
@@ -25,15 +34,6 @@
           "location_name": "El Yunque National Forest, Puerto Rico",
           "lat": 18.2952,
           "lng": -65.7819
-        },
-        {
-          "id": "palm-canopy-overlook",
-          "src": "/images/travels/puerto-rico-2023/palm-canopy-overlook.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "El Yunque National Forest, Puerto Rico",
-          "lat": 18.3006,
-          "lng": -65.7962
         },
         {
           "id": "rainforest-orchid",
@@ -79,8 +79,17 @@
       "summary": "",
       "date_start": "2019-04-24",
       "date_end": "2019-04-29",
-      "cover_image": "/images/travels/st-lucia-2019/piton-ocean-view.jpg",
+      "cover_image": "/images/travels/st-lucia-2019/piton-sunset.jpg",
       "photos": [
+        {
+          "id": "piton-sunset",
+          "src": "/images/travels/st-lucia-2019/piton-sunset.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Soufriere, St. Lucia",
+          "lat": 13.8566,
+          "lng": -61.0567
+        },
         {
           "id": "mangrove-channel",
           "src": "/images/travels/st-lucia-2019/mangrove-channel.jpg",
@@ -145,15 +154,6 @@
           "lng": -61.0668
         },
         {
-          "id": "piton-sunset",
-          "src": "/images/travels/st-lucia-2019/piton-sunset.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Soufriere, St. Lucia",
-          "lat": 13.8566,
-          "lng": -61.0567
-        },
-        {
           "id": "2019-04-25-09-18-18",
           "src": "/images/travels/st-lucia-2019/2019-04-25-09-18-18.jpg",
           "location_name": "Marigot Bay, St. Lucia",
@@ -197,8 +197,17 @@
       "summary": "",
       "date_start": "2018-10-03",
       "date_end": "2018-10-07",
-      "cover_image": "/images/travels/mallorca-2018/port-de-soller-bay.jpg",
+      "cover_image": "/images/travels/mallorca-2018/port-de-soller-overlook.jpg",
       "photos": [
+        {
+          "id": "port-de-soller-overlook",
+          "src": "/images/travels/mallorca-2018/port-de-soller-overlook.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Port de Soller, Mallorca",
+          "lat": 39.7973,
+          "lng": 2.6964
+        },
         {
           "id": "palma-harbor-overlook",
           "src": "/images/travels/mallorca-2018/palma-harbor-overlook.jpg",
@@ -211,15 +220,6 @@
         {
           "id": "port-de-soller-dusk",
           "src": "/images/travels/mallorca-2018/port-de-soller-dusk.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Port de Soller, Mallorca",
-          "lat": 39.7973,
-          "lng": 2.6964
-        },
-        {
-          "id": "port-de-soller-overlook",
-          "src": "/images/travels/mallorca-2018/port-de-soller-overlook.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Port de Soller, Mallorca",
@@ -315,8 +315,17 @@
       "summary": "",
       "date_start": "2017-09-07",
       "date_end": "2017-09-09",
-      "cover_image": "/images/travels/yosemite-2017/half-dome-overlook.jpg",
+      "cover_image": "/images/travels/yosemite-2017/tent-sunrise.jpg",
       "photos": [
+        {
+          "id": "tent-sunrise",
+          "src": "/images/travels/yosemite-2017/tent-sunrise.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Little Yosemite Valley, Yosemite National Park",
+          "lat": 37.7328,
+          "lng": -119.5586
+        },
         {
           "id": "half-dome-overlook",
           "src": "/images/travels/yosemite-2017/half-dome-overlook.jpg",
@@ -334,15 +343,6 @@
           "location_name": "Glacier Point, Yosemite National Park",
           "lat": 37.7276,
           "lng": -119.5736
-        },
-        {
-          "id": "tent-sunrise",
-          "src": "/images/travels/yosemite-2017/tent-sunrise.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Little Yosemite Valley, Yosemite National Park",
-          "lat": 37.7328,
-          "lng": -119.5586
         },
         {
           "id": "smoky-sunrise",
@@ -406,8 +406,17 @@
       "summary": "",
       "date_start": "2017-09-02",
       "date_end": "2017-09-04",
-      "cover_image": "/images/travels/kings-canyon-2017/alpine-lake-overlook.jpg",
+      "cover_image": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
       "photos": [
+        {
+          "id": "camp-at-dusk",
+          "src": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.8075,
+          "lng": -118.4304
+        },
         {
           "id": "alpine-lake-overlook",
           "src": "/images/travels/kings-canyon-2017/alpine-lake-overlook.jpg",
@@ -425,24 +434,6 @@
           "location_name": "Kings Canyon National Park, California",
           "lat": 36.7994,
           "lng": -118.4149
-        },
-        {
-          "id": "camp-at-dusk",
-          "src": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Kings Canyon National Park, California",
-          "lat": 36.8075,
-          "lng": -118.4304
-        },
-        {
-          "id": "camp-basin-view",
-          "src": "/images/travels/kings-canyon-2017/camp-basin-view.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Kings Canyon National Park, California",
-          "lat": 36.8081,
-          "lng": -118.4311
         },
         {
           "id": "rocky-climb",
