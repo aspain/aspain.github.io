@@ -784,6 +784,7 @@ body.lightbox-open {
 
 .travel-lightbox-indicator-count {
   white-space: nowrap;
+  justify-self: end;
 }
 
 .leaflet-container {
@@ -1031,6 +1032,29 @@ a:focus-visible {
   }
 
   .travel-lightbox-indicator {
-    max-width: calc(100vw - 20px);
+    display: inline-flex;
+    width: auto;
+    max-width: calc(100vw - 36px);
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+  }
+
+  .travel-lightbox-indicator-title {
+    min-width: 0;
+    text-align: center;
+    flex: 0 1 auto;
+  }
+
+  .travel-lightbox-indicator-count {
+    position: static;
+    transform: none;
+    flex: 0 0 auto;
+  }
+
+  .travel-lightbox-indicator.is-stacked {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
   }
 }

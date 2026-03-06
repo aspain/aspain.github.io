@@ -39,8 +39,12 @@
     activePhotoIndex: 0,
     map: null,
     tileLayer: null,
+    routeGlowLayer: null,
+    routeLayer: null,
     markers: [],
     markerLayer: null,
+    routeCache: new Map(),
+    routeRequestToken: 0,
     hasCenteredTripListOnce: false
   };
 
@@ -60,6 +64,8 @@
     timeoutId: 0,
     settleTimeoutId: 0
   };
+
+  const compactTripCarouselQuery = window.matchMedia('(max-width: 780px)');
 
   const heroPreviewImage = (elements.heroButton && elements.heroImage)
     ? (() => {
@@ -132,6 +138,13 @@
   function getPhoto(index = state.activePhotoIndex) {
     const trip = getTrip();
     return trip && trip.photos[index] ? trip.photos[index] : null;
+  }
+
+  function getCoverPhotoIndex(trip) {
+    if (!trip || !Array.isArray(trip.photos) || !trip.photos.length) return 0;
+    const coverImage = String(trip.cover_image || '').trim();
+    const coverIndex = trip.photos.findIndex((photo) => photo && photo.src === coverImage);
+    return coverIndex >= 0 ? coverIndex : 0;
   }
 
   function wrapIndex(index, total) {
@@ -333,8 +346,71 @@
     });
     state.tileLayer.addTo(state.map);
 
+    state.routeGlowLayer = window.L.geoJSON(null, {
+      interactive: false,
+      style: {
+        color: '#b000ff',
+        weight: 12,
+        opacity: 0.34,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }
+    }).addTo(state.map);
+    state.routeLayer = window.L.geoJSON(null, {
+      interactive: false,
+      style: {
+        color: '#f03cff',
+        weight: 5,
+        opacity: 0.98,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }
+    }).addTo(state.map);
     state.markerLayer = window.L.layerGroup().addTo(state.map);
     window.L.control.zoom({ position: 'bottomright' }).addTo(state.map);
+  }
+
+  function applyMapBounds(bounds) {
+    if (!state.map || !bounds || !bounds.isValid()) return;
+    state.map.fitBounds(bounds, {
+      padding: [24, 24],
+      maxZoom: 11
+    });
+  }
+
+  function getTripRouteUrls(trip) {
+    const value = trip ? trip.route_geojson : null;
+    if (Array.isArray(value)) {
+      return value.map((entry) => String(entry || '').trim()).filter(Boolean);
+    }
+    const routeUrl = String(value || '').trim();
+    return routeUrl ? [routeUrl] : [];
+  }
+
+  function loadRouteGeoJson(routeUrl) {
+    if (!state.routeCache.has(routeUrl)) {
+      const request = fetch(routeUrl, {
+        headers: { Accept: 'application/geo+json, application/json' },
+        cache: 'force-cache'
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Route request failed with ${response.status}`);
+        }
+        return response.json();
+      }).catch((error) => {
+        state.routeCache.delete(routeUrl);
+        throw error;
+      });
+      state.routeCache.set(routeUrl, request);
+    }
+
+    return state.routeCache.get(routeUrl);
+  }
+
+  async function loadTripRouteGeoJson(trip) {
+    const routeUrls = getTripRouteUrls(trip);
+    if (!routeUrls.length) return [];
+    return Promise.all(routeUrls.map((routeUrl) => loadRouteGeoJson(routeUrl)));
   }
 
   function updateMarkerSelection() {
@@ -372,16 +448,23 @@
     clearMapFallback();
 
     const validPhotos = trip.photos.filter((photo) => Number.isFinite(photo.lat) && Number.isFinite(photo.lng));
-    if (!validPhotos.length) {
+    const routeUrls = getTripRouteUrls(trip);
+    const hasRoute = routeUrls.length > 0;
+    if (!validPhotos.length && !hasRoute) {
       setMapFallback('No map points for this trip');
       if (state.markerLayer) state.markerLayer.clearLayers();
+      if (state.routeGlowLayer) state.routeGlowLayer.clearLayers();
+      if (state.routeLayer) state.routeLayer.clearLayers();
       state.markers = [];
       return;
     }
 
-    if (!state.markerLayer || !state.map) return;
+    if (!state.markerLayer || !state.routeGlowLayer || !state.routeLayer || !state.map) return;
 
+    const routeRequestToken = ++state.routeRequestToken;
     state.markerLayer.clearLayers();
+    state.routeGlowLayer.clearLayers();
+    state.routeLayer.clearLayers();
     state.markers = validPhotos.map((photo) => {
       const marker = window.L.marker([photo.lat, photo.lng], {
         icon: createTravelMarkerIcon(),
@@ -404,10 +487,31 @@
     });
 
     const bounds = window.L.latLngBounds(validPhotos.map((photo) => [photo.lat, photo.lng]));
-    if (bounds.isValid()) {
-      state.map.fitBounds(bounds, {
-        padding: [24, 24],
-        maxZoom: 11
+    applyMapBounds(bounds);
+
+    if (hasRoute) {
+      loadTripRouteGeoJson(trip).then((routeGeoJsonList) => {
+        if (state.routeRequestToken !== routeRequestToken || !state.routeGlowLayer || !state.routeLayer || !state.map) return;
+        state.routeGlowLayer.clearLayers();
+        state.routeLayer.clearLayers();
+        for (const routeGeoJson of routeGeoJsonList) {
+          state.routeGlowLayer.addData(routeGeoJson);
+          state.routeLayer.addData(routeGeoJson);
+        }
+        const routeBounds = state.routeLayer.getBounds();
+        if (routeBounds.isValid()) {
+          if (bounds.isValid()) {
+            bounds.extend(routeBounds);
+          } else {
+            applyMapBounds(routeBounds);
+            return;
+          }
+        }
+        applyMapBounds(bounds);
+      }).catch(() => {
+        if (state.routeRequestToken !== routeRequestToken) return;
+        if (state.routeGlowLayer) state.routeGlowLayer.clearLayers();
+        state.routeLayer.clearLayers();
       });
     }
 
@@ -446,6 +550,49 @@
     });
   }
 
+  function revealActiveTripCard(behavior = 'auto') {
+    if (!elements.tripList) return;
+
+    const activeCard = elements.tripList.querySelector('.trip-card.is-active');
+    if (!(activeCard instanceof HTMLElement)) return;
+
+    const maxScrollLeft = Math.max(0, elements.tripList.scrollWidth - elements.tripList.clientWidth);
+    if (maxScrollLeft <= 0) {
+      elements.tripList.scrollLeft = 0;
+      return;
+    }
+
+    const viewportLeft = elements.tripList.scrollLeft;
+    const viewportRight = viewportLeft + elements.tripList.clientWidth;
+    const cardLeft = activeCard.offsetLeft;
+    const cardRight = cardLeft + activeCard.offsetWidth;
+    const edgePadding = 12;
+    let nextScrollLeft = viewportLeft;
+
+    if (cardLeft < viewportLeft + edgePadding) {
+      nextScrollLeft = cardLeft - edgePadding;
+    } else if (cardRight > viewportRight - edgePadding) {
+      nextScrollLeft = cardRight - elements.tripList.clientWidth + edgePadding;
+    } else {
+      return;
+    }
+
+    const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, nextScrollLeft));
+    elements.tripList.scrollTo({
+      left: clampedScrollLeft,
+      behavior
+    });
+  }
+
+  function positionActiveTripCard(behavior = 'auto') {
+    if (compactTripCarouselQuery.matches) {
+      centerActiveTripCard(behavior);
+      return;
+    }
+
+    revealActiveTripCard(behavior);
+  }
+
   function scheduleActiveTripCardCenter(behavior = 'auto') {
     if (!elements.tripList) return;
 
@@ -460,7 +607,7 @@
 
     const runCenter = (nextBehavior = 'auto') => {
       updateTripListAlignment();
-      centerActiveTripCard(nextBehavior);
+      positionActiveTripCard(nextBehavior);
     };
 
     window.requestAnimationFrame(() => {
@@ -483,8 +630,10 @@
   function renderTripList(scrollBehavior = 'auto') {
     if (!elements.tripList) return;
 
-    if (!state.hasCenteredTripListOnce && elements.tripCarousel) {
+    if (!state.hasCenteredTripListOnce && elements.tripCarousel && compactTripCarouselQuery.matches) {
       elements.tripCarousel.classList.add('is-positioning');
+    } else if (elements.tripCarousel) {
+      elements.tripCarousel.classList.remove('is-positioning');
     }
     elements.tripList.innerHTML = '';
 
@@ -521,7 +670,7 @@
     });
 
     updateTripListAlignment();
-    centerActiveTripCard(scrollBehavior);
+    positionActiveTripCard(scrollBehavior);
   }
 
   function syncPhoto() {
@@ -563,7 +712,7 @@
 
   function setActiveTrip(index) {
     state.activeTripIndex = wrapIndex(index, state.trips.length);
-    state.activePhotoIndex = 0;
+    state.activePhotoIndex = getCoverPhotoIndex(getTrip());
     syncTripCardSelection();
     renderMap();
     syncPhoto();
@@ -614,6 +763,7 @@
         return;
       }
 
+      state.activePhotoIndex = getCoverPhotoIndex(getTrip(0));
       renderTripList();
       renderMap();
       syncPhoto();
@@ -747,10 +897,21 @@
   window.addEventListener('keydown', (event) => {
     if (!state.trips.length) return;
     if (lightboxController.isOpen()) return;
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
 
     if (event.key === 'ArrowLeft') {
+      const focusedElement = document.activeElement;
+      if (elements.tripList && focusedElement instanceof HTMLElement && elements.tripList.contains(focusedElement)) {
+        focusedElement.blur();
+      }
+      event.preventDefault();
       setActivePhoto(state.activePhotoIndex - 1);
     } else if (event.key === 'ArrowRight') {
+      const focusedElement = document.activeElement;
+      if (elements.tripList && focusedElement instanceof HTMLElement && elements.tripList.contains(focusedElement)) {
+        focusedElement.blur();
+      }
+      event.preventDefault();
       setActivePhoto(state.activePhotoIndex + 1);
     }
   });
