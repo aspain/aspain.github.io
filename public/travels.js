@@ -341,17 +341,22 @@
     const activePhoto = getPhoto();
     for (const entry of state.markers) {
       const isActive = activePhoto && entry.photo.id === activePhoto.id;
-      entry.marker.setStyle({
-        radius: isActive ? 10 : 7,
-        weight: isActive ? 2.5 : 1.5,
-        color: isActive ? '#ffe39a' : 'rgba(255,255,255,0.68)',
-        fillColor: isActive ? '#ff8f7a' : '#7bc7ff',
-        fillOpacity: isActive ? 1 : 0.78
-      });
-      if (isActive) {
-        entry.marker.bringToFront();
+      const markerElement = entry.marker.getElement();
+      if (markerElement) {
+        markerElement.classList.toggle('is-active', Boolean(isActive));
       }
+      entry.marker.setZIndexOffset(isActive ? 1200 : 0);
     }
+  }
+
+  function createTravelMarkerIcon() {
+    return window.L.divIcon({
+      className: 'travel-map-marker-wrap',
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
+      tooltipAnchor: [0, -14],
+      html: '<span class="travel-map-marker"></span>'
+    });
   }
 
   function renderMap() {
@@ -378,12 +383,9 @@
 
     state.markerLayer.clearLayers();
     state.markers = validPhotos.map((photo) => {
-      const marker = window.L.circleMarker([photo.lat, photo.lng], {
-        radius: 7,
-        weight: 1.5,
-        color: 'rgba(255,255,255,0.68)',
-        fillColor: '#7bc7ff',
-        fillOpacity: 0.78
+      const marker = window.L.marker([photo.lat, photo.lng], {
+        icon: createTravelMarkerIcon(),
+        keyboard: false
       });
 
       marker.bindTooltip(photo.location_name, {
