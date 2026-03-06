@@ -6,6 +6,7 @@
   const CAROUSEL_SWIPE_IN_MS = 180;
 
   const elements = {
+    tripCarousel: document.querySelector('.trip-carousel'),
     tripList: document.getElementById('trip-list'),
     tripPrev: document.getElementById('trip-prev'),
     tripNext: document.getElementById('trip-next'),
@@ -39,7 +40,8 @@
     map: null,
     tileLayer: null,
     markers: [],
-    markerLayer: null
+    markerLayer: null,
+    hasCenteredTripListOnce: false
   };
 
   const heroSwipeState = {
@@ -52,6 +54,11 @@
     animating: false,
     previewIndex: -1,
     intentDirection: 0
+  };
+
+  const tripCenterState = {
+    timeoutId: 0,
+    settleTimeoutId: 0
   };
 
   const heroPreviewImage = (elements.heroButton && elements.heroImage)
@@ -417,9 +424,66 @@
     if (!hasOverflow) elements.tripList.scrollLeft = 0;
   }
 
-  function renderTripList() {
+  function centerActiveTripCard(behavior = 'auto') {
     if (!elements.tripList) return;
 
+    const activeCard = elements.tripList.querySelector('.trip-card.is-active');
+    if (!(activeCard instanceof HTMLElement)) return;
+
+    const maxScrollLeft = Math.max(0, elements.tripList.scrollWidth - elements.tripList.clientWidth);
+    if (maxScrollLeft <= 0) {
+      elements.tripList.scrollLeft = 0;
+      return;
+    }
+
+    const targetScrollLeft = activeCard.offsetLeft - ((elements.tripList.clientWidth - activeCard.offsetWidth) / 2);
+    const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, targetScrollLeft));
+    elements.tripList.scrollTo({
+      left: clampedScrollLeft,
+      behavior
+    });
+  }
+
+  function scheduleActiveTripCardCenter(behavior = 'auto') {
+    if (!elements.tripList) return;
+
+    if (tripCenterState.timeoutId) {
+      window.clearTimeout(tripCenterState.timeoutId);
+      tripCenterState.timeoutId = 0;
+    }
+    if (tripCenterState.settleTimeoutId) {
+      window.clearTimeout(tripCenterState.settleTimeoutId);
+      tripCenterState.settleTimeoutId = 0;
+    }
+
+    const runCenter = (nextBehavior = 'auto') => {
+      updateTripListAlignment();
+      centerActiveTripCard(nextBehavior);
+    };
+
+    window.requestAnimationFrame(() => {
+      runCenter(behavior);
+      tripCenterState.timeoutId = window.setTimeout(() => {
+        runCenter('auto');
+        tripCenterState.timeoutId = 0;
+      }, 90);
+      tripCenterState.settleTimeoutId = window.setTimeout(() => {
+        runCenter('auto');
+        if (!state.hasCenteredTripListOnce && elements.tripCarousel) {
+          elements.tripCarousel.classList.remove('is-positioning');
+          state.hasCenteredTripListOnce = true;
+        }
+        tripCenterState.settleTimeoutId = 0;
+      }, 220);
+    });
+  }
+
+  function renderTripList(scrollBehavior = 'auto') {
+    if (!elements.tripList) return;
+
+    if (!state.hasCenteredTripListOnce && elements.tripCarousel) {
+      elements.tripCarousel.classList.add('is-positioning');
+    }
     elements.tripList.innerHTML = '';
 
     state.trips.forEach((trip, index) => {
@@ -441,16 +505,20 @@
       elements.tripList.append(button);
     });
 
-    window.requestAnimationFrame(updateTripListAlignment);
+    scheduleActiveTripCardCenter(scrollBehavior);
+  }
 
-    const activeCard = elements.tripList.querySelector('.trip-card.is-active');
-    if (activeCard instanceof HTMLElement) {
-      activeCard.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      });
-    }
+  function syncTripCardSelection(scrollBehavior = 'auto') {
+    if (!elements.tripList) return;
+
+    const tripCards = elements.tripList.querySelectorAll('.trip-card');
+    tripCards.forEach((card, index) => {
+      const isActive = index === state.activeTripIndex;
+      card.classList.toggle('is-active', isActive);
+      card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    scheduleActiveTripCardCenter(scrollBehavior);
   }
 
   function syncPhoto() {
@@ -493,7 +561,7 @@
   function setActiveTrip(index) {
     state.activeTripIndex = wrapIndex(index, state.trips.length);
     state.activePhotoIndex = 0;
-    renderTripList();
+    syncTripCardSelection('smooth');
     renderMap();
     syncPhoto();
   }
@@ -685,7 +753,7 @@
   });
 
   window.addEventListener('resize', () => {
-    updateTripListAlignment();
+    scheduleActiveTripCardCenter();
     if (state.map) state.map.invalidateSize();
     if (lightboxController.isOpen()) updateLightboxIndicatorLayout();
   }, { passive: true });

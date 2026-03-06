@@ -4,8 +4,12 @@ body {
 }
 
 :root {
+  --moon-left: clamp(18px, 3.2vw, 52px);
   --moon-top: clamp(16px, 3vw, 44px);
   --moon-size: clamp(96px, 11vw, 160px);
+  --page-inline-pad: clamp(14px, 3vw, 34px);
+  --archive-sign-size: clamp(26px, 3.8vw, 42px);
+  --moon-breadcrumb-gap: 18px;
   --page-max: 1080px;
   --glass-bg: rgba(6, 12, 26, 0.56);
   --glass-border: rgba(255, 255, 255, 0.11);
@@ -51,7 +55,7 @@ body.lightbox-open {
 
 #moon {
   position: fixed;
-  left: clamp(18px, 3.2vw, 52px);
+  left: var(--moon-left);
   top: var(--moon-top);
   width: var(--moon-size);
   height: var(--moon-size);
@@ -119,7 +123,43 @@ body.lightbox-open {
   z-index: 2;
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: calc(var(--moon-top) + 2px) clamp(14px, 3vw, 34px) 26px;
+  padding: calc(var(--moon-top) + 2px) var(--page-inline-pad) 26px;
+}
+
+.projects-archive .site {
+  z-index: 4;
+}
+
+.projects-archive .archive-topbar {
+  position: relative;
+  min-height: var(--archive-sign-size);
+  margin-bottom: 2px;
+}
+
+.projects-archive .archive-header-stack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.projects-archive .archive-sign {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: var(--archive-sign-size);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #c8f2ff;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px rgba(132, 224, 255, 0.85),
+    0 0 16px rgba(88, 198, 255, 0.82),
+    0 0 34px rgba(48, 148, 255, 0.68),
+    0 0 56px rgba(24, 86, 212, 0.42);
 }
 
 .glass {
@@ -608,6 +648,11 @@ body.lightbox-open {
   display: block;
 }
 
+.carousel-link,
+.carousel-image {
+  touch-action: pan-y;
+}
+
 .carousel-peek-image {
   position: absolute;
   inset: 0;
@@ -896,11 +941,21 @@ body.lightbox-open {
   }
 
   .site {
-    padding-top: 26px;
+    padding-top: 16px;
   }
+
+  .projects-archive .archive-topbar {
+    min-height: var(--archive-sign-size);
+    margin-bottom: 8px;
+  }
+
 }
 
 @media (max-width: 640px) {
+  :root {
+    --archive-sign-size: clamp(19px, 7.4vw, 26px);
+  }
+
   .hero .cta-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

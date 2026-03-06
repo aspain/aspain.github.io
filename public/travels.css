@@ -4,8 +4,12 @@ body {
 }
 
 :root {
+  --moon-left: clamp(18px, 3.2vw, 52px);
   --moon-top: clamp(16px, 3vw, 44px);
   --moon-size: clamp(96px, 11vw, 160px);
+  --page-inline-pad: clamp(14px, 2.4vw, 28px);
+  --moon-breadcrumb-gap: 18px;
+  --travels-sign-size: clamp(26px, 3.8vw, 42px);
   --page-max: 1340px;
   --stage-media-height: clamp(320px, 40vh, 420px);
   --glass-bg: rgba(6, 12, 26, 0.58);
@@ -29,10 +33,6 @@ body {
   color: var(--text-main);
   background: #061022;
   overflow-x: hidden;
-}
-
-.travels-page #moon {
-  display: none;
 }
 
 body.lightbox-open {
@@ -60,7 +60,7 @@ body.lightbox-open {
 
 #moon {
   position: fixed;
-  left: clamp(18px, 3.2vw, 52px);
+  left: var(--moon-left);
   top: var(--moon-top);
   width: var(--moon-size);
   height: var(--moon-size);
@@ -124,14 +124,46 @@ body.lightbox-open {
 
 .travels-site {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 10px clamp(14px, 2.4vw, 28px) 16px;
+  padding: calc(var(--moon-top) + 2px) var(--page-inline-pad) 16px;
   min-height: 100svh;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 8px;
+}
+
+.travels-topbar {
+  position: relative;
+  min-height: var(--travels-sign-size);
+  margin-bottom: 2px;
+}
+
+.travels-header-stack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.travels-sign {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: var(--travels-sign-size);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #c8f2ff;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px rgba(132, 224, 255, 0.85),
+    0 0 16px rgba(88, 198, 255, 0.82),
+    0 0 34px rgba(48, 148, 255, 0.68),
+    0 0 56px rgba(24, 86, 212, 0.42);
 }
 
 .glass {
@@ -147,8 +179,9 @@ body.lightbox-open {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 14px;
   font-size: 10px;
+  line-height: 1;
 }
 
 .breadcrumbs a {
@@ -265,6 +298,7 @@ body.lightbox-open {
   color: transparent;
   cursor: pointer;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .trip-strip-nav::before {
@@ -312,6 +346,10 @@ body.lightbox-open {
   display: none;
 }
 
+.trip-carousel.is-positioning {
+  visibility: hidden;
+}
+
 .trip-list.is-centered {
   justify-content: center;
 }
@@ -330,7 +368,8 @@ body.lightbox-open {
   text-align: left;
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .trip-card.is-active {
@@ -816,6 +855,12 @@ a:focus-visible {
     display: block;
   }
 
+  .travels-topbar {
+    display: block;
+    min-height: var(--travels-sign-size);
+    margin-bottom: 8px;
+  }
+
   .stage-grid {
     grid-template-columns: 1fr;
   }
@@ -869,14 +914,20 @@ a:focus-visible {
   }
 
   .trip-list {
+    --trip-card-width: 180px;
+    --trip-list-side-pad: max(0px, calc((100% - var(--trip-card-width)) / 2));
     max-width: none;
     grid-auto-columns: minmax(180px, 180px);
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--trip-list-side-pad);
+    padding-inline: var(--trip-list-side-pad);
   }
 }
 
 @media (max-width: 560px) {
   :root {
     --stage-media-height: 240px;
+    --travels-sign-size: clamp(19px, 7.4vw, 26px);
   }
 
   .trip-summary {
@@ -884,6 +935,7 @@ a:focus-visible {
   }
 
   .trip-list {
+    --trip-card-width: 160px;
     width: 100%;
     grid-auto-columns: minmax(160px, 160px);
   }
