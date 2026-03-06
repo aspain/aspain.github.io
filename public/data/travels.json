@@ -2137,13 +2137,20 @@
       "cover_image": "/images/travels/yosemite-2017/tent-sunrise.jpg",
       "photos": [
         {
-          "id": "tent-sunrise",
-          "src": "/images/travels/yosemite-2017/tent-sunrise.jpg",
+          "id": "smoky-sunrise",
+          "src": "/images/travels/yosemite-2017/smoky-sunrise.jpg",
           "alt": "",
           "caption": "",
-          "location_name": "Little Yosemite Valley, Yosemite National Park",
-          "lat": 37.7328,
-          "lng": -119.5586
+          "location_name": "Yosemite Valley, Yosemite National Park",
+          "lat": 37.7459,
+          "lng": -119.5936
+        },
+        {
+          "id": "img-5945",
+          "src": "/images/travels/yosemite-2017/img-5945.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite National Park, California"
         },
         {
           "id": "half-dome-overlook",
@@ -2155,6 +2162,45 @@
           "lng": -119.5736
         },
         {
+          "id": "img-5961",
+          "src": "/images/travels/yosemite-2017/img-5961.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite National Park, California"
+        },
+        {
+          "id": "2017-09-07-14-58-48",
+          "src": "/images/travels/yosemite-2017/2017-09-07-14-58-48.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite Valley, Yosemite National Park",
+          "lat": 37.7459,
+          "lng": -119.5936
+        },
+        {
+          "id": "img-5979",
+          "src": "/images/travels/yosemite-2017/img-5979.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite National Park, California"
+        },
+        {
+          "id": "img-5984",
+          "src": "/images/travels/yosemite-2017/img-5984.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Yosemite National Park, California"
+        },
+        {
+          "id": "tent-sunrise",
+          "src": "/images/travels/yosemite-2017/tent-sunrise.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Little Yosemite Valley, Yosemite National Park",
+          "lat": 37.7328,
+          "lng": -119.5586
+        },
+        {
           "id": "hazy-valley",
           "src": "/images/travels/yosemite-2017/hazy-valley.jpg",
           "alt": "",
@@ -2164,13 +2210,11 @@
           "lng": -119.5736
         },
         {
-          "id": "smoky-sunrise",
-          "src": "/images/travels/yosemite-2017/smoky-sunrise.jpg",
+          "id": "img-6001",
+          "src": "/images/travels/yosemite-2017/img-6001.jpg",
           "alt": "",
           "caption": "",
-          "location_name": "Yosemite Valley, Yosemite National Park",
-          "lat": 37.7459,
-          "lng": -119.5936
+          "location_name": "Yosemite National Park, California"
         },
         {
           "id": "granite-waterfall-wall",
@@ -2191,6 +2235,15 @@
           "lng": -119.5658
         },
         {
+          "id": "img-6014",
+          "src": "/images/travels/yosemite-2017/img-6014.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Merced River, Yosemite Valley",
+          "lat": 37.7392,
+          "lng": -119.5658
+        },
+        {
           "id": "nevada-fall-close",
           "src": "/images/travels/yosemite-2017/nevada-fall-close.jpg",
           "alt": "",
@@ -2198,24 +2251,6 @@
           "location_name": "Nevada Fall, Yosemite National Park",
           "lat": 37.7288,
           "lng": -119.5357
-        },
-        {
-          "id": "2017-09-07-14-58-48",
-          "src": "/images/travels/yosemite-2017/2017-09-07-14-58-48.jpg",
-          "location_name": "Yosemite Valley, Yosemite National Park",
-          "lat": 37.7459,
-          "lng": -119.5936,
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "img-6014",
-          "src": "/images/travels/yosemite-2017/img-6014.jpg",
-          "location_name": "Merced River, Yosemite Valley",
-          "lat": 37.7392,
-          "lng": -119.5658,
-          "alt": "",
-          "caption": ""
         }
       ]
     },
@@ -2228,13 +2263,41 @@
       "cover_image": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
       "photos": [
         {
-          "id": "camp-at-dusk",
-          "src": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
+          "id": "2017-09-02-10-49-04",
+          "src": "/images/travels/kings-canyon-2017/2017-09-02-10-49-04.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "img-5857",
+          "src": "/images/travels/kings-canyon-2017/img-5857.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "img-5859",
+          "src": "/images/travels/kings-canyon-2017/img-5859.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "high-country-panorama",
+          "src": "/images/travels/kings-canyon-2017/high-country-panorama.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Kings Canyon National Park, California",
-          "lat": 36.8075,
-          "lng": -118.4304
+          "lat": 36.7898,
+          "lng": -118.3998
+        },
+        {
+          "id": "2017-09-02-13-34-31",
+          "src": "/images/travels/kings-canyon-2017/2017-09-02-13-34-31.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
         },
         {
           "id": "alpine-lake-overlook",
@@ -2246,6 +2309,34 @@
           "lng": -118.4095
         },
         {
+          "id": "img-5873",
+          "src": "/images/travels/kings-canyon-2017/img-5873.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "2017-09-02-18-37-17",
+          "src": "/images/travels/kings-canyon-2017/2017-09-02-18-37-17.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "img-5875",
+          "src": "/images/travels/kings-canyon-2017/img-5875.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "2017-09-03-09-41-07",
+          "src": "/images/travels/kings-canyon-2017/2017-09-03-09-41-07.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
           "id": "glacial-tarn",
           "src": "/images/travels/kings-canyon-2017/glacial-tarn.jpg",
           "alt": "",
@@ -2255,6 +2346,50 @@
           "lng": -118.4149
         },
         {
+          "id": "img-5882",
+          "src": "/images/travels/kings-canyon-2017/img-5882.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "img-5891",
+          "src": "/images/travels/kings-canyon-2017/img-5891.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "img-5892",
+          "src": "/images/travels/kings-canyon-2017/img-5892.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "camp-at-dusk",
+          "src": "/images/travels/kings-canyon-2017/camp-at-dusk.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California",
+          "lat": 36.8075,
+          "lng": -118.4304
+        },
+        {
+          "id": "img-5899",
+          "src": "/images/travels/kings-canyon-2017/img-5899.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
+          "id": "camp-basin-view",
+          "src": "/images/travels/kings-canyon-2017/camp-basin-view.jpg",
+          "alt": "",
+          "caption": "",
+          "location_name": "Kings Canyon National Park, California"
+        },
+        {
           "id": "rocky-climb",
           "src": "/images/travels/kings-canyon-2017/rocky-climb.jpg",
           "alt": "",
@@ -2262,15 +2397,6 @@
           "location_name": "Kings Canyon National Park, California",
           "lat": 36.8018,
           "lng": -118.4223
-        },
-        {
-          "id": "high-country-panorama",
-          "src": "/images/travels/kings-canyon-2017/high-country-panorama.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Kings Canyon National Park, California",
-          "lat": 36.7898,
-          "lng": -118.3998
         }
       ]
     },
@@ -2356,15 +2482,6 @@
           "lng": 170.1807
         },
         {
-          "id": "2007-01-10-16-15-51",
-          "src": "/images/travels/new-zealand-2010/2007-01-10-16-15-51.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Bridge of Remembrance, Christchurch",
-          "lat": -43.5321,
-          "lng": 172.6362
-        },
-        {
           "id": "2007-01-10-16-23-16",
           "src": "/images/travels/new-zealand-2010/2007-01-10-16-23-16.jpg",
           "alt": "",
@@ -2437,15 +2554,6 @@
           "lng": 172.6362
         },
         {
-          "id": "2007-01-12-22-03-17",
-          "src": "/images/travels/new-zealand-2010/2007-01-12-22-03-17.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "New Brighton Beach, Christchurch",
-          "lat": -43.5078,
-          "lng": 172.7315
-        },
-        {
           "id": "2007-01-13-17-09-32",
           "src": "/images/travels/new-zealand-2010/2007-01-13-17-09-32.jpg",
           "alt": "",
@@ -2462,15 +2570,6 @@
           "location_name": "Sheep farm near Christchurch, Canterbury",
           "lat": -43.45,
           "lng": 171.9
-        },
-        {
-          "id": "2007-01-14-16-40-20",
-          "src": "/images/travels/new-zealand-2010/2007-01-14-16-40-20.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Canterbury high country, South Island",
-          "lat": -43.2,
-          "lng": 171.3
         },
         {
           "id": "2007-01-14-17-13-42",
