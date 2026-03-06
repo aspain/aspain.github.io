@@ -367,7 +367,7 @@ body.lightbox-open {
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: transform 180ms ease;
   scroll-snap-align: center;
   -webkit-tap-highlight-color: transparent;
 }

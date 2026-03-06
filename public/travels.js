@@ -518,7 +518,8 @@
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
-    scheduleActiveTripCardCenter(scrollBehavior);
+    updateTripListAlignment();
+    centerActiveTripCard(scrollBehavior);
   }
 
   function syncPhoto() {
@@ -561,7 +562,7 @@
   function setActiveTrip(index) {
     state.activeTripIndex = wrapIndex(index, state.trips.length);
     state.activePhotoIndex = 0;
-    syncTripCardSelection('smooth');
+    syncTripCardSelection();
     renderMap();
     syncPhoto();
   }
