@@ -542,7 +542,11 @@
       return;
     }
 
-    const targetScrollLeft = activeCard.offsetLeft - ((elements.tripList.clientWidth - activeCard.offsetWidth) / 2);
+    const listRect = elements.tripList.getBoundingClientRect();
+    const cardRect = activeCard.getBoundingClientRect();
+    const targetScrollLeft = elements.tripList.scrollLeft + (
+      (cardRect.left + (cardRect.width / 2)) - (listRect.left + (listRect.width / 2))
+    );
     const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, targetScrollLeft));
     elements.tripList.scrollTo({
       left: clampedScrollLeft,
@@ -562,17 +566,15 @@
       return;
     }
 
-    const viewportLeft = elements.tripList.scrollLeft;
-    const viewportRight = viewportLeft + elements.tripList.clientWidth;
-    const cardLeft = activeCard.offsetLeft;
-    const cardRight = cardLeft + activeCard.offsetWidth;
+    const listRect = elements.tripList.getBoundingClientRect();
+    const cardRect = activeCard.getBoundingClientRect();
     const edgePadding = 12;
-    let nextScrollLeft = viewportLeft;
+    let nextScrollLeft = elements.tripList.scrollLeft;
 
-    if (cardLeft < viewportLeft + edgePadding) {
-      nextScrollLeft = cardLeft - edgePadding;
-    } else if (cardRight > viewportRight - edgePadding) {
-      nextScrollLeft = cardRight - elements.tripList.clientWidth + edgePadding;
+    if (cardRect.left < listRect.left + edgePadding) {
+      nextScrollLeft += cardRect.left - (listRect.left + edgePadding);
+    } else if (cardRect.right > listRect.right - edgePadding) {
+      nextScrollLeft += cardRect.right - (listRect.right - edgePadding);
     } else {
       return;
     }
@@ -669,8 +671,7 @@
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
-    updateTripListAlignment();
-    positionActiveTripCard(scrollBehavior);
+    scheduleActiveTripCardCenter(scrollBehavior);
   }
 
   function syncPhoto() {
