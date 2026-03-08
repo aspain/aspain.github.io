@@ -4,6 +4,12 @@
   const SWIPE_DIRECTION_LOCK_PX = 10;
   const CAROUSEL_SWIPE_OUT_MS = 150;
   const CAROUSEL_SWIPE_IN_MS = 180;
+  const WEB_MERCATOR_LAT_LIMIT = 85.05112878;
+  const INITIAL_TILE_ERROR_FALLBACK_MS = 1800;
+  const WORLD_MAP_BOUNDS = [
+    [-WEB_MERCATOR_LAT_LIMIT, -180],
+    [WEB_MERCATOR_LAT_LIMIT, 180]
+  ];
 
   const elements = {
     tripCarousel: document.querySelector('.trip-carousel'),
@@ -45,7 +51,10 @@
     markerLayer: null,
     routeCache: new Map(),
     routeRequestToken: 0,
-    hasCenteredTripListOnce: false
+    hasCenteredTripListOnce: false,
+    hasLoadedBaseTiles: false,
+    pendingBaseTileError: false,
+    tileFallbackTimeoutId: 0
   };
 
   const heroSwipeState = {
@@ -325,6 +334,29 @@
     elements.mapFrame.classList.remove('is-unavailable');
   }
 
+  function clearTileFallbackTimer() {
+    if (!state.tileFallbackTimeoutId) return;
+    window.clearTimeout(state.tileFallbackTimeoutId);
+    state.tileFallbackTimeoutId = 0;
+  }
+
+  function scheduleTileFallback() {
+    clearTileFallbackTimer();
+    state.tileFallbackTimeoutId = window.setTimeout(() => {
+      state.tileFallbackTimeoutId = 0;
+      if (!state.hasLoadedBaseTiles && state.pendingBaseTileError) {
+        setMapFallback('Map tiles unavailable');
+      }
+    }, INITIAL_TILE_ERROR_FALLBACK_MS);
+  }
+
+  function markBaseTilesLoaded() {
+    state.hasLoadedBaseTiles = true;
+    state.pendingBaseTileError = false;
+    clearTileFallbackTimer();
+    clearMapFallback();
+  }
+
   function ensureMap() {
     if (state.map || !elements.map || !window.L) return;
 
@@ -334,15 +366,21 @@
       scrollWheelZoom: true,
       touchZoom: true,
       tap: true,
-      attributionControl: true
+      attributionControl: true,
+      maxBounds: WORLD_MAP_BOUNDS,
+      maxBoundsViscosity: 1
     });
 
     state.tileLayer = window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap contributors'
     });
+    state.tileLayer.on('tileload', markBaseTilesLoaded);
+    state.tileLayer.on('load', markBaseTilesLoaded);
     state.tileLayer.on('tileerror', () => {
-      setMapFallback('Map tiles unavailable');
+      if (state.hasLoadedBaseTiles) return;
+      state.pendingBaseTileError = true;
+      scheduleTileFallback();
     });
     state.tileLayer.addTo(state.map);
 
