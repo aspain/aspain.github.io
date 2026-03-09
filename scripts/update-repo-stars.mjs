@@ -6,7 +6,8 @@ import process from 'node:process';
 
 const REPOS = [
   'aspain/git-sweaty',
-  'aspain/spainify'
+  'aspain/spainify',
+  'aspain/heatmap-logo'
 ];
 
 const API_BASE_URL = 'https://api.github.com/repos';

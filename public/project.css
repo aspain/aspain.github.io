@@ -245,7 +245,6 @@ body.lightbox-open {
   padding: 0.5em 0.833em;
   line-height: 1;
   white-space: nowrap;
-  transform: translateY(1px);
 }
 
 .repo-star-icon {
@@ -293,7 +292,7 @@ body.lightbox-open {
 .projects-archive .cards {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(14px, 1.6vw, 24px);
 }
 
@@ -976,7 +975,6 @@ body.lightbox-open {
 
   .hero-title-row .hero-repo-stars {
     padding: 0.5em 0.833em;
-    transform: translateY(1px);
   }
 
   .hero,

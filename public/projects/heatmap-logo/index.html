@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>heatmap-logo | GitHub Contribution-Style Text Logo Builder</title>
+  <meta name="description" content="heatmap-logo is an open source browser-based tool by Adam Spain for creating GitHub contribution-style text logos with live editing, commit levels, 3D effects, and SVG export." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#031733" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Adam Spain Projects" />
+  <meta property="og:url" content="https://adamspain.com/projects/heatmap-logo/" />
+  <meta property="og:title" content="heatmap-logo | GitHub Contribution-Style Text Logo Builder" />
+  <meta property="og:description" content="Create GitHub heatmap contribution-style text logos with live editing, commit levels, 3D effects, and SVG export." />
+  <meta property="og:image" content="https://adamspain.com/images/heatmap-logo-readme.png" />
+  <meta property="og:image:alt" content="heatmap-logo editor with contribution heatmap logo preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="heatmap-logo | GitHub Contribution-Style Text Logo Builder" />
+  <meta name="twitter:description" content="Open source browser tool for designing GitHub contribution-style text logos." />
+  <meta name="twitter:image" content="https://adamspain.com/images/heatmap-logo-readme.png" />
+  <link rel="canonical" href="https://adamspain.com/projects/heatmap-logo/" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="../../project.css?v=20260309-17" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://adamspain.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Projects",
+              "item": "https://adamspain.com/projects/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "heatmap-logo",
+              "item": "https://adamspain.com/projects/heatmap-logo/"
+            }
+          ]
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "heatmap-logo",
+          "author": {
+            "@type": "Person",
+            "name": "Adam Spain",
+            "url": "https://adamspain.com/"
+          },
+          "codeRepository": "https://github.com/aspain/heatmap-logo",
+          "url": "https://adamspain.com/projects/heatmap-logo/",
+          "description": "Browser-based tool for generating GitHub contribution-style text logos with manual editing controls and SVG export.",
+          "runtimePlatform": "Web Browser",
+          "programmingLanguage": [
+            "JavaScript",
+            "CSS",
+            "HTML"
+          ]
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <div id="moon" aria-hidden="true">
+    <div class="moon-face">
+      <span class="track-eye moon-eye moon-eye-left"><span class="track-pupil moon-pupil"></span></span>
+      <span class="track-eye moon-eye moon-eye-right"><span class="track-pupil moon-pupil"></span></span>
+    </div>
+  </div>
+
+  <main class="site" aria-label="heatmap-logo project page">
+    <header class="hero glass">
+      <div class="hero-title-row">
+        <h1>heatmap-logo</h1>
+        <a
+          class="repo-stars hero-repo-stars"
+          href="https://github.com/aspain/heatmap-logo"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-repo="aspain/heatmap-logo"
+          aria-label="Open heatmap-logo repository on GitHub"
+        >
+          <svg class="repo-star-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.28l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.79L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.192L.819 6.375a.75.75 0 0 1 .416-1.28l4.21-.612L7.327.668A.75.75 0 0 1 8 .25Z"></path>
+          </svg>
+          <span class="repo-star-count" data-star-count>-</span>
+        </a>
+      </div>
+      <p>
+        heatmap-logo is a browser-based builder for turning text into GitHub contribution-style artwork.
+        It starts with live text rendering, then lets you refine the result by painting individual cells, adjusting commit intensity, resizing the canvas, and exporting a finished SVG.
+      </p>
+      <ul>
+        <li>Live text-to-heatmap generation with font, weight, color, and canvas size controls</li>
+        <li>Manual editing tools for stepping cells up or down, drag painting, and max-intensity shortcuts</li>
+        <li>Optional 3D text depth effect for more dimensional logo treatments</li>
+        <li><code>Add Commits</code> fills surrounding cells to mimic a more organic contribution graph</li>
+        <li>Runs entirely in the browser and exports clean SVG output with no backend required</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn secondary" href="https://adamspain.com/heatmap-logo/" target="_blank" rel="noopener noreferrer">Live Tool</a>
+        <a class="btn secondary" href="https://github.com/aspain/heatmap-logo" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </header>
+
+    <section class="gallery glass" aria-label="heatmap-logo preview">
+      <h2>Interface Preview</h2>
+      <a class="thumb-link carousel-link" href="../../images/heatmap-logo-readme.png">
+        <img
+          class="carousel-image"
+          src="../../images/heatmap-logo-readme.png"
+          alt="heatmap-logo editor showing text controls and contribution heatmap logo preview"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+    </section>
+
+    <div class="content-grid" aria-label="Project details">
+      <section class="section glass">
+        <h2>Project Notes</h2>
+        <p>
+          The app is shipped as a lightweight static site with plain HTML, CSS, and JavaScript, which keeps it fast to load and easy to host on GitHub Pages.
+          The editing model combines text generation with direct manipulation so you can use the generated lettering as a starting point and then tune individual cells until the logo looks right.
+        </p>
+        <p>
+          Because the export target is SVG, the final logo stays portable for README headers, social graphics, and other project branding without locking the output to a bitmap screenshot.
+        </p>
+
+        <h2 class="links-heading">Useful Links</h2>
+        <div class="quick-links">
+          <a href="https://adamspain.com/heatmap-logo/" target="_blank" rel="noopener noreferrer">Live Tool</a>
+          <a href="https://github.com/aspain/heatmap-logo" target="_blank" rel="noopener noreferrer">Repository</a>
+        </div>
+      </section>
+    </div>
+
+    <footer class="site-footer glass">
+      <p><a href="/">Home</a> / <a href="/projects/">Projects</a> / <span>heatmap-logo</span></p>
+      <p>&copy; <span id="copyright-year"></span> Adam Spain</p>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true" tabindex="-1">
+    <button class="lightbox-close" type="button" aria-label="Close image preview">Close</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous lightbox image">&lt;</button>
+    <img class="lightbox-image" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next lightbox image">&gt;</button>
+    <span class="lightbox-indicator" aria-live="polite"></span>
+  </div>
+
+  <script src="../../lightbox.js?v=20260306-1"></script>
+  <script src="../../script.js?v=20260306-8"></script>
+</body>
+</html>
