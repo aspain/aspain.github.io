@@ -105,15 +105,15 @@
         </a>
       </div>
       <p>
-        heatmap-logo is a browser-based builder for turning text into GitHub contribution-style artwork.
-        It starts with live text rendering, then lets you refine the result by painting individual cells, adjusting commit intensity, resizing the canvas, and exporting a finished SVG.
+        heatmap-logo is a browser tool for creating GitHub contribution graph-style text logos.
+        Type your text, adjust the grid, clean up cells by hand if needed, and export the result as SVG.
       </p>
       <ul>
-        <li>Live text-to-heatmap generation with font, weight, color, and canvas size controls</li>
-        <li>Manual editing tools for stepping cells up or down, drag painting, and max-intensity shortcuts</li>
-        <li>Optional 3D text depth effect for more dimensional logo treatments</li>
-        <li><code>Add Commits</code> fills surrounding cells to mimic a more organic contribution graph</li>
-        <li>Runs entirely in the browser and exports clean SVG output with no backend required</li>
+        <li>Generate heatmap-style text with font, color, weight, and canvas controls</li>
+        <li>Edit cells directly with click, drag, and intensity controls</li>
+        <li>Use <code>Add Commits</code> to make the result look less rigid</li>
+        <li>Add an optional depth effect</li>
+        <li>Runs entirely in the browser and exports SVG</li>
       </ul>
       <div class="cta-row">
         <a class="btn secondary" href="https://adamspain.com/heatmap-logo/" target="_blank" rel="noopener noreferrer">Live Tool</a>
@@ -133,25 +133,6 @@
         />
       </a>
     </section>
-
-    <div class="content-grid" aria-label="Project details">
-      <section class="section glass">
-        <h2>Project Notes</h2>
-        <p>
-          The app is shipped as a lightweight static site with plain HTML, CSS, and JavaScript, which keeps it fast to load and easy to host on GitHub Pages.
-          The editing model combines text generation with direct manipulation so you can use the generated lettering as a starting point and then tune individual cells until the logo looks right.
-        </p>
-        <p>
-          Because the export target is SVG, the final logo stays portable for README headers, social graphics, and other project branding without locking the output to a bitmap screenshot.
-        </p>
-
-        <h2 class="links-heading">Useful Links</h2>
-        <div class="quick-links">
-          <a href="https://adamspain.com/heatmap-logo/" target="_blank" rel="noopener noreferrer">Live Tool</a>
-          <a href="https://github.com/aspain/heatmap-logo" target="_blank" rel="noopener noreferrer">Repository</a>
-        </div>
-      </section>
-    </div>
 
     <footer class="site-footer glass">
       <p><a href="/">Home</a> / <a href="/projects/">Projects</a> / <span>heatmap-logo</span></p>
