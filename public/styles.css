@@ -261,12 +261,16 @@ body.lightbox-open{
 }
 
 .cards{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: clamp(14px, 1.6vw, 24px);
 }
 
 .card{
+  flex: 0 1 clamp(300px, 24vw, 330px);
+  max-width: 330px;
   border-radius: 18px;
   padding: 14px 16px 14px;
   background: rgba(6, 12, 26, 0.52);
@@ -528,6 +532,7 @@ body.lightbox-open{
   flex: 1 1 0;
   width: auto;
   text-decoration: none;
+  white-space: nowrap;
   padding: 10px 12px;
   border-radius: 12px;
   background: rgba(210, 235, 255, 0.10);
@@ -716,8 +721,66 @@ body.lightbox-open{
 
 @media (min-width: 1281px){
   .content{
-    padding-top: calc(var(--moon-top) + var(--moon-size) - var(--name-sign-size) - 58px);
+    padding-top: calc(var(--moon-top) + var(--moon-size) - var(--name-sign-size) - 60px);
     padding-bottom: 4px;
+  }
+
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    justify-content: stretch;
+    align-items: stretch;
+    gap: clamp(10px, 1vw, 16px);
+  }
+
+  .card{
+    flex: none;
+    max-width: none;
+    min-height: 0;
+    padding: 12px 12px 12px;
+  }
+
+  .card h2{
+    margin: 0 0 6px;
+    font-size: clamp(15px, 1.15vw, 17px);
+    min-height: calc(1.2em + 4px);
+  }
+
+  .project-heading{
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .repo-stars{
+    font-size: 11px;
+    padding: 0.42em 0.7em;
+  }
+
+  .card p{
+    margin: 0 0 8px;
+    min-height: calc(1.28em * 4);
+    font-size: clamp(12px, 0.84vw, 13px);
+    line-height: 1.28;
+  }
+
+  .carousel{
+    margin: 8px 0 0;
+  }
+
+  .card p + .carousel,
+  .card p + .card-media-link{
+    margin-top: 8px;
+  }
+
+  .card-actions{
+    margin-top: auto;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .btn{
+    padding: 8px 8px;
+    font-size: 10px;
   }
 }
 
@@ -761,12 +824,15 @@ body.lightbox-open{
   }
 
   .cards{
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 10px;
     margin: 0 auto;
   }
 
   .card{
+    flex: none;
+    width: 100%;
+    max-width: none;
     min-height: 0;
     padding: 11px 11px 10px;
   }
