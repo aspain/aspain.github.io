@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StrumForge | Guitar Practice Tool</title>
+  <meta name="description" content="StrumForge is a simple practice tool for guitar players with playable 4-chord loops, chord diagrams, and a built-in groove." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#031733" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Adam Spain Projects" />
+  <meta property="og:url" content="https://adamspain.com/projects/strumforge/" />
+  <meta property="og:title" content="StrumForge | Guitar Practice Tool" />
+  <meta property="og:description" content="A simple practice tool for guitar players with playable 4-chord loops, chord diagrams, and a built-in groove." />
+  <meta property="og:image" content="https://adamspain.com/images/strumforge-preview.png?v=20260313-1" />
+  <meta property="og:image:alt" content="StrumForge showing a guitar chord progression with chord diagrams and groove controls" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="StrumForge | Guitar Practice Tool" />
+  <meta name="twitter:description" content="A simple guitar practice tool with playable 4-chord loops, diagrams, and a built-in groove." />
+  <meta name="twitter:image" content="https://adamspain.com/images/strumforge-preview.png?v=20260313-1" />
+  <link rel="canonical" href="https://adamspain.com/projects/strumforge/" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="../../project.css?v=20260309-17" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://adamspain.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Projects",
+              "item": "https://adamspain.com/projects/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "StrumForge",
+              "item": "https://adamspain.com/projects/strumforge/"
+            }
+          ]
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "StrumForge",
+          "author": {
+            "@type": "Person",
+            "name": "Adam Spain",
+            "url": "https://adamspain.com/"
+          },
+          "codeRepository": "https://github.com/aspain/strumforge",
+          "url": "https://adamspain.com/projects/strumforge/",
+          "description": "Simple guitar practice tool with playable 4-chord loops, chord diagrams, and a built-in groove."
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <div id="moon" aria-hidden="true">
+    <div class="moon-face">
+      <span class="track-eye moon-eye moon-eye-left"><span class="track-pupil moon-pupil"></span></span>
+      <span class="track-eye moon-eye moon-eye-right"><span class="track-pupil moon-pupil"></span></span>
+    </div>
+  </div>
+
+  <main class="site" aria-label="StrumForge project page">
+    <header class="hero glass">
+      <div class="hero-title-row">
+        <h1>StrumForge</h1>
+        <a
+          class="repo-stars hero-repo-stars"
+          href="https://github.com/aspain/strumforge"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-repo="aspain/strumforge"
+          aria-label="Open StrumForge repository on GitHub"
+        >
+          <svg class="repo-star-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.28l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.79L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.192L.819 6.375a.75.75 0 0 1 .416-1.28l4.21-.612L7.327.668A.75.75 0 0 1 8 .25Z"></path>
+          </svg>
+          <span class="repo-star-count" data-star-count>-</span>
+        </a>
+      </div>
+      <p>StrumForge is a simple practice tool for guitar players.</p>
+      <p>It gives you a playable 4-chord loop, shows you chord diagrams, and lets you practice with a built-in groove.</p>
+      <ul>
+        <li>Generate a new chord progression with one button</li>
+        <li>Keep the key fixed or let the app choose one for you</li>
+        <li>Stick to easier shapes like open chords, or add barre, triad, and power chord shapes</li>
+        <li>Turn on sevenths or suspended/add9 chords for more color</li>
+        <li>Play along with drums and a tempo control</li>
+        <li>Flip the diagrams for left-handed players</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn secondary" href="https://github.com/aspain/strumforge" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </header>
+
+    <section class="gallery glass" aria-label="StrumForge preview">
+      <h2>Preview</h2>
+      <a class="thumb-link carousel-link" href="../../images/strumforge-preview.png?v=20260313-1">
+        <img
+          class="carousel-image"
+          src="../../images/strumforge-preview.png?v=20260313-1"
+          alt="StrumForge showing a guitar chord progression with chord diagrams and groove controls"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+    </section>
+
+    <footer class="site-footer glass">
+      <p><a href="/">Home</a> / <a href="/projects/">Projects</a> / <span>StrumForge</span></p>
+      <p>&copy; <span id="copyright-year"></span> Adam Spain</p>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true" tabindex="-1">
+    <button class="lightbox-close" type="button" aria-label="Close image preview">Close</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous lightbox image">&lt;</button>
+    <img class="lightbox-image" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next lightbox image">&gt;</button>
+    <span class="lightbox-indicator" aria-live="polite"></span>
+  </div>
+
+  <script src="../../lightbox.js?v=20260306-1"></script>
+  <script src="../../script.js?v=20260306-8"></script>
+</body>
+</html>

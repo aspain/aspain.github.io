@@ -8,7 +8,7 @@ const REPOS = [
   'aspain/git-sweaty',
   'aspain/spainify',
   'aspain/heatmap-logo',
-  'aspain/chord-muse'
+  'aspain/strumforge'
 ];
 
 const API_BASE_URL = 'https://api.github.com/repos';
