@@ -120,35 +120,8 @@
           "lng": -110.8024
         },
         {
-          "id": "img-1891",
-          "src": "/images/travels/grand-teton-2022/img-1891.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grand Teton, Wyoming",
-          "lat": 43.7419,
-          "lng": -110.8024
-        },
-        {
-          "id": "img-1902",
-          "src": "/images/travels/grand-teton-2022/img-1902.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grand Teton, Wyoming",
-          "lat": 43.7419,
-          "lng": -110.8024
-        },
-        {
           "id": "img-1908",
           "src": "/images/travels/grand-teton-2022/img-1908.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grand Teton, Wyoming",
-          "lat": 43.7419,
-          "lng": -110.8024
-        },
-        {
-          "id": "img-1919",
-          "src": "/images/travels/grand-teton-2022/img-1919.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Grand Teton, Wyoming",
@@ -266,15 +239,6 @@
         {
           "id": "img-2015",
           "src": "/images/travels/grand-teton-2022/img-2015.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grand Teton, Wyoming",
-          "lat": 43.7419,
-          "lng": -110.8024
-        },
-        {
-          "id": "img-2056",
-          "src": "/images/travels/grand-teton-2022/img-2056.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Grand Teton, Wyoming",
@@ -410,15 +374,6 @@
           "lng": -77.7389
         },
         {
-          "id": "img-0094",
-          "src": "/images/travels/harpers-ferry-penmar-2021/img-0094.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Appalachian Trail, Harpers Ferry to Pen Mar",
-          "lat": 39.3256,
-          "lng": -77.7389
-        },
-        {
           "id": "img-0103",
           "src": "/images/travels/harpers-ferry-penmar-2021/img-0103.jpg",
           "alt": "",
@@ -507,15 +462,6 @@
           "location_name": "Appalachian Trail, Harpers Ferry to Pen Mar",
           "lat": 39.3256,
           "lng": -77.7389
-        },
-        {
-          "id": "img-0160",
-          "src": "/images/travels/harpers-ferry-penmar-2021/img-0160.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Appalachian Trail, Harpers Ferry to Pen Mar",
-          "lat": 39.3256,
-          "lng": -77.7389
         }
       ]
     },
@@ -531,15 +477,6 @@
         "/data/routes/jones-run-2021-big-flat.geojson"
       ],
       "photos": [
-        {
-          "id": "img-0473",
-          "src": "/images/travels/jones-run-2021/img-0473.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Big Flat Mountain, Virginia",
-          "lat": 38.220686,
-          "lng": -78.736433
-        },
         {
           "id": "img-0475",
           "src": "/images/travels/jones-run-2021/img-0475.jpg",
@@ -814,24 +751,6 @@
           "lng": -83.5508
         },
         {
-          "id": "2019-09-09-10-40-12",
-          "src": "/images/travels/standing-indian-2019/2019-09-09-10-40-12.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Southern Nantahala Wilderness, North Carolina",
-          "lat": 35.0503,
-          "lng": -83.5508
-        },
-        {
-          "id": "2019-09-09-10-41-31",
-          "src": "/images/travels/standing-indian-2019/2019-09-09-10-41-31.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Southern Nantahala Wilderness, North Carolina",
-          "lat": 35.0503,
-          "lng": -83.5508
-        },
-        {
           "id": "2019-09-09-12-22-51",
           "src": "/images/travels/standing-indian-2019/2019-09-09-12-22-51.jpg",
           "alt": "",
@@ -940,15 +859,6 @@
           "lng": -83.5508
         },
         {
-          "id": "2019-09-13-09-06-20",
-          "src": "/images/travels/standing-indian-2019/2019-09-13-09-06-20.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Southern Nantahala Wilderness, North Carolina",
-          "lat": 35.0503,
-          "lng": -83.5508
-        },
-        {
           "id": "2019-09-13-09-07-52",
           "src": "/images/travels/standing-indian-2019/2019-09-13-09-07-52.jpg",
           "alt": "",
@@ -1016,24 +926,6 @@
         {
           "id": "2020-10-25-10-46-51",
           "src": "/images/travels/grayson-highlands-2020/2020-10-25-10-46-51.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grayson Highlands State Park, Virginia",
-          "lat": 36.6282,
-          "lng": -81.5007
-        },
-        {
-          "id": "2020-10-25-11-21-40",
-          "src": "/images/travels/grayson-highlands-2020/2020-10-25-11-21-40.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Grayson Highlands State Park, Virginia",
-          "lat": 36.6282,
-          "lng": -81.5007
-        },
-        {
-          "id": "2020-10-26-09-59-31",
-          "src": "/images/travels/grayson-highlands-2020/2020-10-26-09-59-31.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Grayson Highlands State Park, Virginia",
@@ -1376,15 +1268,6 @@
       "cover_image": "/images/travels/black-ridge-canyons-2018/2018-05-02-10-04-04.jpg",
       "photos": [
         {
-          "id": "2018-04-29-16-12-42",
-          "src": "/images/travels/black-ridge-canyons-2018/2018-04-29-16-12-42.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Black Ridge Canyons Wilderness, Colorado",
-          "lat": 39.1453,
-          "lng": -108.8618
-        },
-        {
           "id": "2018-04-29-17-54-26",
           "src": "/images/travels/black-ridge-canyons-2018/2018-04-29-17-54-26.jpg",
           "alt": "",
@@ -1421,15 +1304,6 @@
           "lng": -108.8618
         },
         {
-          "id": "2018-04-29-19-52-43",
-          "src": "/images/travels/black-ridge-canyons-2018/2018-04-29-19-52-43.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Black Ridge Canyons Wilderness, Colorado",
-          "lat": 39.1453,
-          "lng": -108.8618
-        },
-        {
           "id": "2018-04-30-10-07-26",
           "src": "/images/travels/black-ridge-canyons-2018/2018-04-30-10-07-26.jpg",
           "alt": "",
@@ -1459,15 +1333,6 @@
         {
           "id": "2018-04-30-10-19-30",
           "src": "/images/travels/black-ridge-canyons-2018/2018-04-30-10-19-30.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Black Ridge Canyons Wilderness, Colorado",
-          "lat": 39.1453,
-          "lng": -108.8618
-        },
-        {
-          "id": "2018-04-30-10-49-22",
-          "src": "/images/travels/black-ridge-canyons-2018/2018-04-30-10-49-22.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Black Ridge Canyons Wilderness, Colorado",
@@ -1557,15 +1422,6 @@
           "lng": -82.8812
         },
         {
-          "id": "2016-10-11-17-37-18",
-          "src": "/images/travels/art-loeb-trail-2016/2016-10-11-17-37-18.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Art Loeb Trail, North Carolina",
-          "lat": 35.3115,
-          "lng": -82.8812
-        },
-        {
           "id": "2016-10-11-18-55-47",
           "src": "/images/travels/art-loeb-trail-2016/2016-10-11-18-55-47.jpg",
           "alt": "",
@@ -1618,15 +1474,6 @@
           "location_name": "Art Loeb Trail, North Carolina",
           "lat": 35.3115,
           "lng": -82.8812
-        },
-        {
-          "id": "2016-10-12-12-32-42",
-          "src": "/images/travels/art-loeb-trail-2016/2016-10-12-12-32-42.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Art Loeb Trail, North Carolina",
-          "lat": 35.3115,
-          "lng": -82.8812
         }
       ]
     },
@@ -1641,15 +1488,6 @@
         {
           "id": "2016-05-28-06-37-37",
           "src": "/images/travels/seneca-rocks-2016/2016-05-28-06-37-37.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Seneca Rocks, West Virginia",
-          "lat": 38.8342,
-          "lng": -79.3756
-        },
-        {
-          "id": "2016-05-28-06-57-19",
-          "src": "/images/travels/seneca-rocks-2016/2016-05-28-06-57-19.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Seneca Rocks, West Virginia",
@@ -1686,15 +1524,6 @@
         {
           "id": "2016-05-28-14-17-28",
           "src": "/images/travels/seneca-rocks-2016/2016-05-28-14-17-28.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Seneca Rocks, West Virginia",
-          "lat": 38.8342,
-          "lng": -79.3756
-        },
-        {
-          "id": "2016-05-28-14-36-23",
-          "src": "/images/travels/seneca-rocks-2016/2016-05-28-14-36-23.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Seneca Rocks, West Virginia",
@@ -1739,15 +1568,6 @@
       "cover_image": "/images/travels/dolly-sods-2016/2016-04-17-07-01-26.jpg",
       "photos": [
         {
-          "id": "2016-04-15-13-38-55",
-          "src": "/images/travels/dolly-sods-2016/2016-04-15-13-38-55.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Dolly Sods Wilderness, West Virginia",
-          "lat": 39.0362,
-          "lng": -79.3564
-        },
-        {
           "id": "2016-04-15-15-29-43",
           "src": "/images/travels/dolly-sods-2016/2016-04-15-15-29-43.jpg",
           "alt": "",
@@ -1777,15 +1597,6 @@
         {
           "id": "2016-04-16-12-26-52",
           "src": "/images/travels/dolly-sods-2016/2016-04-16-12-26-52.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Dolly Sods Wilderness, West Virginia",
-          "lat": 39.0362,
-          "lng": -79.3564
-        },
-        {
-          "id": "2016-04-16-16-42-33",
-          "src": "/images/travels/dolly-sods-2016/2016-04-16-16-42-33.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Dolly Sods Wilderness, West Virginia",
@@ -1829,15 +1640,6 @@
       "date_end": "2015-09-30",
       "cover_image": "/images/travels/iceland-2015/2015-09-25-17-38-02.jpg",
       "photos": [
-        {
-          "id": "2015-09-21-11-57-49",
-          "src": "/images/travels/iceland-2015/2015-09-21-11-57-49.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Iceland",
-          "lat": 64.9631,
-          "lng": -19.0208
-        },
         {
           "id": "2015-09-21-16-10-52",
           "src": "/images/travels/iceland-2015/2015-09-21-16-10-52.jpg",
@@ -2055,15 +1857,6 @@
           "lng": -19.0208
         },
         {
-          "id": "2015-09-27-11-45-01",
-          "src": "/images/travels/iceland-2015/2015-09-27-11-45-01.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Iceland",
-          "lat": 64.9631,
-          "lng": -19.0208
-        },
-        {
           "id": "2015-09-28-11-47-54",
           "src": "/images/travels/iceland-2015/2015-09-28-11-47-54.jpg",
           "alt": "",
@@ -2107,15 +1900,6 @@
           "location_name": "Iceland",
           "lat": 64.9631,
           "lng": -19.0208
-        },
-        {
-          "id": "2015-09-30-08-50-25",
-          "src": "/images/travels/iceland-2015/2015-09-30-08-50-25.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Iceland",
-          "lat": 64.9631,
-          "lng": -19.0208
         }
       ]
     },
@@ -2137,22 +1921,6 @@
           "lng": -119.5936
         },
         {
-          "id": "img-5945",
-          "src": "/images/travels/yosemite-2017/img-5945.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Yosemite National Park, California"
-        },
-        {
-          "id": "half-dome-overlook",
-          "src": "/images/travels/yosemite-2017/half-dome-overlook.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Glacier Point, Yosemite National Park",
-          "lat": 37.7276,
-          "lng": -119.5736
-        },
-        {
           "id": "img-5961",
           "src": "/images/travels/yosemite-2017/img-5961.jpg",
           "alt": "",
@@ -2167,13 +1935,6 @@
           "location_name": "Yosemite Valley, Yosemite National Park",
           "lat": 37.7459,
           "lng": -119.5936
-        },
-        {
-          "id": "img-5979",
-          "src": "/images/travels/yosemite-2017/img-5979.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Yosemite National Park, California"
         },
         {
           "id": "img-5984",
@@ -2256,13 +2017,6 @@
         {
           "id": "2017-09-02-10-49-04",
           "src": "/images/travels/kings-canyon-2017/2017-09-02-10-49-04.jpg",
-          "alt": "",
-          "caption": "",
-          "location_name": "Kings Canyon National Park, California"
-        },
-        {
-          "id": "img-5857",
-          "src": "/images/travels/kings-canyon-2017/img-5857.jpg",
           "alt": "",
           "caption": "",
           "location_name": "Kings Canyon National Park, California"
