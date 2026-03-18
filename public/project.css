@@ -266,6 +266,23 @@ body.lightbox-open {
   align-items: stretch;
 }
 
+.cta-row-with-badge {
+  align-items: center;
+}
+
+.app-store-badge-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.app-store-badge {
+  display: block;
+  width: auto;
+  height: 31px;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -967,6 +984,21 @@ body.lightbox-open {
     min-height: 38px;
     text-align: center;
     line-height: 1.2;
+  }
+
+  .hero .cta-row.cta-row-with-badge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .hero .cta-row.cta-row-with-badge .btn {
+    width: auto;
+    min-height: 38px;
+  }
+
+  .hero .cta-row.cta-row-with-badge .app-store-badge {
+    height: 38px;
   }
 
   .hero-title-row {
