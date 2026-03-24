@@ -309,7 +309,7 @@ body.lightbox-open {
 .projects-archive .cards {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(14px, 1.6vw, 24px);
 }
 
